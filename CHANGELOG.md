@@ -5,6 +5,17 @@ loosely based on [Keep a Changelog](https://keepachangelog.com/). Releases
 before 1.0.0 were `MATURITY_ALPHA` (`0.x`); 1.0.0 is the first `MATURITY_BETA`
 release.
 
+## [1.3.0] - 2026-10-15
+
+- **New: Maximum simultaneous conversions** setting (*Site administration > Plugins > Admin
+  tools > CourseUplift*), default 2. It caps how many analyse jobs, and separately how many
+  build jobs, run at once, so a bulk import of hundreds of courses no longer takes every cron
+  worker and holds up the rest of the site's background work (such as notifications). Jobs
+  beyond the limit wait in the queue and start as others finish. A per-task
+  `$CFG->task_concurrency_limit` in `config.php` still takes precedence.
+- **Docs:** the README now explains how to install or upgrade from the command line without
+  putting the site into maintenance mode.
+
 ## [1.2.0] - 2026-10-15
 
 - **New: Conversion jobs page** (*Site administration > Courses > Conversion jobs*, also linked

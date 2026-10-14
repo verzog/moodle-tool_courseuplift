@@ -89,8 +89,25 @@ No extra plugins are required. The upload form includes a built-in
 **Large package (chunked upload)** field for packages bigger than the
 server's PHP upload limit; its chunked uploader is bundled with this plugin
 (folded in from `local_chunkupload`), so there is no separate dependency.
-Chunk size and retention are configured at *Site administration > Plugins >
-Admin tools > CourseUplift*.
+Chunk size, retention and the number of conversions that may run at once are
+configured at *Site administration > Plugins > Admin tools > CourseUplift*.
+
+### Installing or upgrading without blocking the site
+
+While any plugin installs or upgrades through *Notifications*, Moodle locks the
+whole site ("Site is being upgraded, please retry later") and pauses cron until
+it finishes. Most of that time is Moodle's own work (applying default settings
+and rebuilding theme caches), not this plugin's. To avoid the lock, run the
+upgrade from the command line instead:
+
+```
+php admin/cli/upgrade.php --is-maintenance-required   # exit code 3 = not required
+php admin/cli/upgrade.php --non-interactive --maintenance=false
+```
+
+When the first command reports that maintenance mode is not required (as it is
+for installing or upgrading this plugin), the second performs the upgrade while
+users carry on working.
 
 ## Using it
 
@@ -219,10 +236,12 @@ feeds in packages from either or both of:
 Each package becomes one background CourseUplift adhoc task, so nothing is
 converted inside the web request — a directory or URL list of hundreds of
 courses is queued instantly and then worked through by cron rather than timing
-out the page. The tasks run under Moodle's ordinary site-wide adhoc-task
-scheduling; the plugin does **not** add its own concurrency cap, so how many run
-at once is governed by your `Site administration > Server > Tasks` worker
-configuration. Each job is either **built now** (a new course per package) or
+out the page. The tasks run under Moodle's ordinary adhoc-task scheduling, capped
+by the **Maximum simultaneous conversions** setting (default 2 analyse jobs and 2
+build jobs at once), so a large batch never takes every cron worker and the rest
+of the site's background work (notifications, for example) keeps flowing. Raise
+it on a server with spare capacity to finish a batch sooner; a per-task
+`$CFG->task_concurrency_limit` in `config.php` takes precedence. Each job is either **built now** (a new course per package) or
 **analysed for later** (a conversion report an admin reviews before building the
 course from CourseUplift's status page).
 

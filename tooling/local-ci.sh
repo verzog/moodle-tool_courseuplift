@@ -178,6 +178,13 @@ install_moodle() {
 sync_plugin() {
   local dest="$WORKSPACE/moodle/admin/tool/courseuplift"
   [ -d "$WORKSPACE/moodle" ] || return 0
+  # A workspace provisioned before the rename to CourseUplift still holds the plugin
+  # under its old name; remove it so Moodle sees one clean copy of the plugin.
+  local legacy="$WORKSPACE/moodle/admin/tool/canvasuplifter"
+  if [ -e "$legacy" ] || [ -L "$legacy" ]; then
+    log "Removing the pre-rename copy at admin/tool/canvasuplifter."
+    rm -rf "$legacy"
+  fi
   # If the installer symlinked the plugin, edits are already live.
   [ -L "$dest" ] && return 0
   log "Syncing plugin source into the Moodle tree."

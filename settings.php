@@ -32,6 +32,13 @@ if ($hassiteconfig) {
         new moodle_url('/admin/tool/courseuplift/index.php'),
         'tool/courseuplift:use'
     ));
+    // Every analyse and build job on the site, with progress, totals and a printable error log.
+    $ADMIN->add('courses', new admin_externalpage(
+        'tool_courseuplift_jobs',
+        get_string('jobsheading', 'tool_courseuplift'),
+        new moodle_url('/admin/tool/courseuplift/jobs.php'),
+        'tool/courseuplift:use'
+    ));
 
     // Group everything for this plugin under a "CourseUplift" category in Admin
     // tools, so its settings (and any future admin pages) sit one level under the

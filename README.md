@@ -282,6 +282,14 @@ plugin's public namespace, a caller should guard it with `class_exists()` /
 `method_exists()` (as Automate does) rather than a hard plugin dependency, so the
 caller keeps working when CourseUplift is absent or older.
 
+### Following a bulk conversion — *Conversion jobs* page
+
+*Site administration > Courses > Conversion jobs* (`jobs.php`, also linked from the upload page)
+lists every analyse and build job on the site with live progress for each, totals across them
+(queued, running, done, failed, items created and skipped, warnings), filters by time, person,
+type and status, and a **printable error log** of every failure and warning. It refreshes
+itself while jobs are queued or running, and needs `tool/courseuplift:use`.
+
 ### Job status from the command line — `cli/jobs.php`
 
 Scripts that queue imports in bulk (for example through Automate's

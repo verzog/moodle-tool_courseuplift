@@ -113,29 +113,41 @@ class job_manager {
      * @param string|null $kind One of the KIND_* constants, or null for all.
      * @param string|null $status One of the STATUS_* constants, or null for all.
      * @param int $limit Maximum rows to return; 0 for no limit.
+     * @param int $since Only jobs changed at or after this Unix time; 0 for any time.
      * @return array Job records keyed by id, newest first.
      */
     public function list_jobs(
         ?int $userid = null,
         ?string $kind = null,
         ?string $status = null,
-        int $limit = 0
+        int $limit = 0,
+        int $since = 0
     ): array {
         global $DB;
-        $conditions = [];
-        if ($userid !== null) {
-            $conditions['userid'] = $userid;
+        $where = [];
+        $params = [];
+        foreach (['userid' => $userid, 'kind' => $kind, 'status' => $status] as $field => $value) {
+            if ($value !== null) {
+                $where[] = $field . ' = :' . $field;
+                $params[$field] = $value;
+            }
         }
-        if ($kind !== null) {
-            $conditions['kind'] = $kind;
-        }
-        if ($status !== null) {
-            $conditions['status'] = $status;
+        if ($since > 0) {
+            $where[] = 'timemodified >= :since';
+            $params['since'] = $since;
         }
         // Tie-break on id so jobs sharing a timecreated second (common in a bulk
         // import) still order deterministically newest-first, rather than in a
         // database-dependent order.
-        return $DB->get_records(self::TABLE, $conditions, 'timecreated DESC, id DESC', '*', 0, $limit);
+        return $DB->get_records_select(
+            self::TABLE,
+            implode(' AND ', $where),
+            $params,
+            'timecreated DESC, id DESC',
+            '*',
+            0,
+            $limit
+        );
     }
 
     /**

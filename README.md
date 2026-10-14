@@ -282,6 +282,21 @@ plugin's public namespace, a caller should guard it with `class_exists()` /
 `method_exists()` (as Automate does) rather than a hard plugin dependency, so the
 caller keeps working when CourseUplift is absent or older.
 
+### Job status from the command line — `cli/jobs.php`
+
+Scripts that queue imports in bulk (for example through Automate's
+`cli/import_canvas.php`) can follow the jobs to completion without touching the
+plugin's database tables:
+
+    $ php admin/tool/courseuplift/cli/jobs.php                      # recent jobs as a table
+    $ php admin/tool/courseuplift/cli/jobs.php --job=42 --json      # one job, as JSON
+    $ php admin/tool/courseuplift/cli/jobs.php --status=failed --since=1760400000 --limit=0 --json
+
+Each job shows its kind, status, progress, the course a build created, and the
+headline numbers from its report (items, created, skipped, sections) with its
+warnings as plain text. Add `--full` to include the whole stored report. The
+script is read-only; run `--help` for every filter.
+
 ## How it's built
 
 A pipeline kept in separate, testable pieces:

@@ -5,6 +5,15 @@ loosely based on [Keep a Changelog](https://keepachangelog.com/). Releases
 before 1.0.0 were `MATURITY_ALPHA` (`0.x`); 1.0.0 is the first `MATURITY_BETA`
 release.
 
+## [1.1.0] - 2026-10-14
+
+- **New: job status from the command line.** `cli/jobs.php` lists CourseUplift's analyse and
+  build jobs, or one job, as a table or as JSON. It shows each job's status, progress, the
+  course a build created, the headline numbers from its report and its warnings as plain text.
+  Scripts that queue imports in bulk can use it to follow the jobs to completion, without
+  reading the plugin's database tables. It is read-only; `--help` lists the filters (job, user,
+  kind, status, since, limit).
+
 ## [1.0.0] - 2026-10-14
 
 First beta release. All five "Path to beta" validation builds passed (issue #182): New

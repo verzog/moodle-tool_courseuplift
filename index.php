@@ -160,6 +160,15 @@ if ($buildfromreport > 0) {
 
 echo $OUTPUT->header();
 
+echo html_writer::div(
+    html_writer::link(
+        new moodle_url('/admin/tool/courseuplift/jobs.php'),
+        get_string('jobspagelink', 'tool_courseuplift'),
+        ['class' => 'btn btn-outline-secondary']
+    ),
+    'mb-3'
+);
+
 if ($error !== null) {
     echo $OUTPUT->notification($error, \core\output\notification::NOTIFY_ERROR);
 }

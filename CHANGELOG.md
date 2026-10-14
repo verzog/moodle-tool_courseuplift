@@ -5,6 +5,23 @@ loosely based on [Keep a Changelog](https://keepachangelog.com/). Releases
 before 1.0.0 were `MATURITY_ALPHA` (`0.x`); 1.0.0 is the first `MATURITY_BETA`
 release.
 
+## [1.2.0] - 2026-10-15
+
+- **New: Conversion jobs page** (*Site administration > Courses > Conversion jobs*, also linked
+  from the upload page). It lists every analyse and build job on the site, so a team can follow
+  a bulk migration in one place:
+  - **Totals** across the listed jobs: queued, running, done and failed, plus items created,
+    items skipped and warnings.
+  - **Live progress for each job**: a progress bar with the current step, the course a build
+    created and its created, skipped and warning counts. The page refreshes itself every 10
+    seconds while any job is queued or running.
+  - **Filters** by time (last 24 hours, 7 days, month, or all time), who started the job,
+    type and status. Each view has its own address, so it can be bookmarked or shared.
+  - **Printable error log**: every failed job and every warning from the listed jobs, with the
+    date, site, totals and filter, laid out for printing or saving as a PDF.
+  It needs the `tool/courseuplift:use` capability. A job's details page still opens only for
+  the person who started it.
+
 ## [1.1.0] - 2026-10-14
 
 - **New: job status from the command line.** `cli/jobs.php` lists CourseUplift's analyse and

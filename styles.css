@@ -339,3 +339,49 @@
 .tool_courseuplift-chunkupload .chunkupload-filesize {
     float: right;
 }
+
+/* Conversion jobs page (jobs.php) and its printable error log. */
+.tool_courseuplift-jobs-counters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+}
+
+.tool_courseuplift-jobs-counter {
+    min-width: 7rem;
+    padding: 0.5rem 0.75rem;
+    border: 1px solid #dee2e6;
+    border-radius: 0.375rem;
+    text-align: center;
+}
+
+.tool_courseuplift-jobs-count {
+    font-size: 1.5rem;
+    font-weight: 600;
+    line-height: 1.2;
+}
+
+.tool_courseuplift-jobs-label {
+    font-size: 0.85rem;
+    color: #6c757d;
+}
+
+.tool_courseuplift-jobs-counter-failed .tool_courseuplift-jobs-count {
+    color: #ca3120;
+}
+
+.tool_courseuplift-jobs .progress {
+    min-width: 8rem;
+    height: 0.75rem;
+}
+
+@media print {
+    .tool_courseuplift-noprint {
+        display: none;
+    }
+
+    .tool_courseuplift-errorlog tr {
+        break-inside: avoid;
+    }
+}

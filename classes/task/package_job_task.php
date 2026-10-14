@@ -34,6 +34,26 @@ use tool_courseuplift\local\job_manager;
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 abstract class package_job_task extends adhoc_task {
+    /** Default for the "maxconcurrent" setting: simultaneous jobs of each type (analyse, build). */
+    public const DEFAULT_MAX_CONCURRENT = 2;
+
+    /**
+     * Cap how many jobs of this type run at once, so a bulk import can't take every cron
+     * worker and leave the rest of the site's background work queued behind long builds.
+     *
+     * Reads the tool_courseuplift/maxconcurrent setting (default 2). Moodle applies the limit
+     * per task class, so analyse and build jobs are each capped separately. A site can still
+     * override either class in config.php through $CFG->task_concurrency_limit, which wins
+     * over this default. Overrides get_default_concurrency_limit() because core's
+     * get_concurrency_limit() is final.
+     *
+     * @return int The maximum number of this task running at once.
+     */
+    protected function get_default_concurrency_limit(): int {
+        $configured = (int) get_config('tool_courseuplift', 'maxconcurrent');
+        return $configured > 0 ? $configured : self::DEFAULT_MAX_CONCURRENT;
+    }
+
     /**
      * Resolve a job to a readable package path on disk. When the job carries a
      * URL and no stored file yet, download it, store it (recording the file id

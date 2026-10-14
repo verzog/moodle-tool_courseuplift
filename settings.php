@@ -88,6 +88,14 @@ if ($hassiteconfig) {
         86400,
         86400
     ));
+    // Cap simultaneous conversions so a bulk import can't take every cron worker.
+    $settings->add(new admin_setting_configtext(
+        'tool_courseuplift/maxconcurrent',
+        new lang_string('setting:maxconcurrent', 'tool_courseuplift'),
+        new lang_string('setting:maxconcurrent_desc', 'tool_courseuplift'),
+        \tool_courseuplift\task\package_job_task::DEFAULT_MAX_CONCURRENT,
+        PARAM_INT
+    ));
     // A legitimate multi-gigabyte package download must not be killed by a fixed
     // overall timeout — abort only when the connection has actually stalled. The
     // ingest url_fetcher enforces this and reads the value here (with a floor of

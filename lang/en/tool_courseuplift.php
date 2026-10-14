@@ -281,6 +281,11 @@ $string['setting:ltimoodlepatterns_desc'] = 'Extra patterns for recognising exte
     . 'Prefix a line with "stack:" or "moodle:" to set how it is reported (default "moodle"); e.g. '
     . '"stack:stackassessment.example.edu" or "moodle:/enrol/lti/". Links whose URL already points at a Moodle '
     . 'enrol_lti or mod/lti endpoint, or that mention "stack", are detected without any configuration here.';
+$string['setting:maxconcurrent'] = 'Maximum simultaneous conversions';
+$string['setting:maxconcurrent_desc'] = 'How many conversion jobs of each type (analyse, build) may run at the same time. '
+    . 'Lower values leave more of the site\'s background task capacity for other work, such as sending notifications, '
+    . 'during a bulk import; higher values finish a large batch sooner on a server with spare capacity. Jobs beyond the '
+    . 'limit wait in the queue and start as others finish.';
 $string['setting:state0duration'] = 'Keep unused upload tokens for';
 $string['setting:state0duration_desc'] = 'How long an upload token that was generated but never used is kept before the cleanup task removes it.';
 $string['setting:state1duration'] = 'Keep unfinished uploads for';

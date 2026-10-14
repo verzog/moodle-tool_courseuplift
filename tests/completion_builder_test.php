@@ -14,20 +14,20 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <https://www.gnu.org/licenses/>.
 
-namespace tool_canvasuplifter;
+namespace tool_courseuplift;
 
-use tool_canvasuplifter\local\build\course_builder;
-use tool_canvasuplifter\local\parser\manifest_parser;
+use tool_courseuplift\local\build\course_builder;
+use tool_courseuplift\local\parser\manifest_parser;
 use PHPUnit\Framework\Attributes\CoversClass;
 
 /**
  * End-to-end test for Canvas module prerequisites -> Moodle availability + completion.
  *
- * @package    tool_canvasuplifter
+ * @package    tool_courseuplift
  * @copyright  2026 Vernon Spain
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-#[CoversClass(\tool_canvasuplifter\local\build\completion_builder::class)]
+#[CoversClass(\tool_courseuplift\local\build\completion_builder::class)]
 final class completion_builder_test extends \advanced_testcase {
     /**
      * Write a two-module package where module B lists module A as a prerequisite, and module A's
@@ -122,7 +122,7 @@ XML;
 
         // The build report notes the gating.
         $this->assertStringContainsString(
-            get_string('notegatingimported', 'tool_canvasuplifter', 1),
+            get_string('notegatingimported', 'tool_courseuplift', 1),
             implode("\n", $report['warnings'])
         );
     }
@@ -182,7 +182,7 @@ XML;
         $bsectionid = (int) $modinfo->get_section_info(2)->id;
         $this->assertEmpty($DB->get_field('course_sections', 'availability', ['id' => $bsectionid]));
         $this->assertStringContainsString(
-            get_string('warngatingunresolved', 'tool_canvasuplifter', 1),
+            get_string('warngatingunresolved', 'tool_courseuplift', 1),
             implode("\n", $report['warnings'])
         );
     }
@@ -209,7 +209,7 @@ XML;
         $bsectionid = (int) get_fast_modinfo($courseid)->get_section_info(2)->id;
         $this->assertEmpty($DB->get_field('course_sections', 'availability', ['id' => $bsectionid]));
         $this->assertStringContainsString(
-            get_string('warngatingsitecompletion', 'tool_canvasuplifter'),
+            get_string('warngatingsitecompletion', 'tool_courseuplift'),
             implode("\n", $report['warnings'])
         );
     }
@@ -379,7 +379,7 @@ XML;
         $bsectionid = (int) $modinfo->get_section_info(2)->id;
         $this->assertEmpty($DB->get_field('course_sections', 'availability', ['id' => $bsectionid]));
         $this->assertStringContainsString(
-            get_string('warngatingunresolved', 'tool_canvasuplifter', 1),
+            get_string('warngatingunresolved', 'tool_courseuplift', 1),
             implode("\n", $report['warnings'])
         );
     }
@@ -452,7 +452,7 @@ XML;
         $bsectionid = (int) $modinfo->get_section_info(2)->id;
         $this->assertEmpty($DB->get_field('course_sections', 'availability', ['id' => $bsectionid]));
         $this->assertStringContainsString(
-            get_string('warngatingunresolved', 'tool_canvasuplifter', 1),
+            get_string('warngatingunresolved', 'tool_courseuplift', 1),
             implode("\n", $report['warnings'])
         );
     }
@@ -520,7 +520,7 @@ XML;
         $bsectionid = (int) $modinfo->get_section_info(2)->id;
         $this->assertEmpty($DB->get_field('course_sections', 'availability', ['id' => $bsectionid]));
         $this->assertStringContainsString(
-            get_string('warngatingunresolved', 'tool_canvasuplifter', 1),
+            get_string('warngatingunresolved', 'tool_courseuplift', 1),
             implode("\n", $report['warnings'])
         );
     }
@@ -595,7 +595,7 @@ XML;
         $bsectionid = (int) $modinfo->get_section_info(2)->id;
         $this->assertEmpty($DB->get_field('course_sections', 'availability', ['id' => $bsectionid]));
         $this->assertStringContainsString(
-            get_string('warngatingunresolved', 'tool_canvasuplifter', 1),
+            get_string('warngatingunresolved', 'tool_courseuplift', 1),
             implode("\n", $report['warnings'])
         );
     }
@@ -668,7 +668,7 @@ XML;
         $bsectionid = (int) $modinfo->get_section_info(2)->id;
         $this->assertEmpty($DB->get_field('course_sections', 'availability', ['id' => $bsectionid]));
         $this->assertStringContainsString(
-            get_string('warngatingunresolved', 'tool_canvasuplifter', 1),
+            get_string('warngatingunresolved', 'tool_courseuplift', 1),
             implode("\n", $report['warnings'])
         );
     }
@@ -735,7 +735,7 @@ XML;
         $bsectionid = (int) $modinfo->get_section_info(2)->id;
         $this->assertEmpty($DB->get_field('course_sections', 'availability', ['id' => $bsectionid]));
         $this->assertStringContainsString(
-            get_string('warngatingunresolved', 'tool_canvasuplifter', 1),
+            get_string('warngatingunresolved', 'tool_courseuplift', 1),
             implode("\n", $report['warnings'])
         );
     }
@@ -798,7 +798,7 @@ XML;
         // No partial restriction: module A alone must not gate the section when module Z is missing.
         $this->assertEmpty($DB->get_field('course_sections', 'availability', ['id' => $bsectionid]));
         $this->assertStringContainsString(
-            get_string('warngatingunresolved', 'tool_canvasuplifter', 1),
+            get_string('warngatingunresolved', 'tool_courseuplift', 1),
             implode("\n", $report['warnings'])
         );
     }

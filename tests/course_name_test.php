@@ -14,22 +14,22 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <https://www.gnu.org/licenses/>.
 
-namespace tool_canvasuplifter;
+namespace tool_courseuplift;
 
-use tool_canvasuplifter\local\build\course_builder;
-use tool_canvasuplifter\local\parser\manifest_parser;
+use tool_courseuplift\local\build\course_builder;
+use tool_courseuplift\local\parser\manifest_parser;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\CoversMethod;
 
 /**
  * Tests for deriving a course name when the package has no embedded title.
  *
- * @package    tool_canvasuplifter
+ * @package    tool_courseuplift
  * @copyright  2026 Vernon Spain
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-#[CoversMethod(\tool_canvasuplifter\local\build\course_builder::class, 'name_from_filename')]
-#[CoversClass(\tool_canvasuplifter\local\parser\manifest_parser::class)]
+#[CoversMethod(\tool_courseuplift\local\build\course_builder::class, 'name_from_filename')]
+#[CoversClass(\tool_courseuplift\local\parser\manifest_parser::class)]
 final class course_name_test extends \advanced_testcase {
     /**
      * Write a manifest into a fresh package dir and return that dir.

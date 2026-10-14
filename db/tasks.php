@@ -15,9 +15,9 @@
 // along with Moodle.  If not, see <https://www.gnu.org/licenses/>.
 
 /**
- * Scheduled task definitions for tool_canvasuplifter.
+ * Scheduled task definitions for tool_courseuplift.
  *
- * @package    tool_canvasuplifter
+ * @package    tool_courseuplift
  * @copyright  2026 Vernon Spain
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -26,7 +26,7 @@ defined('MOODLE_INTERNAL') || die();
 
 $tasks = [
     [
-        'classname' => 'tool_canvasuplifter\task\cleanup_chunks',
+        'classname' => 'tool_courseuplift\task\cleanup_chunks',
         'blocking' => 0,
         'minute' => 'R',
         'hour' => '*',

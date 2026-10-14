@@ -17,15 +17,15 @@
 /**
  * Plugin version and metadata.
  *
- * @package    tool_canvasuplifter
+ * @package    tool_courseuplift
  * @copyright  2026 Vernon Spain
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 defined('MOODLE_INTERNAL') || die();
 
-$plugin->component = 'tool_canvasuplifter';
-$plugin->version   = 2026100903;      // YYYYMMDDXX. This release.
+$plugin->component = 'tool_courseuplift';
+$plugin->version   = 2026101400;      // YYYYMMDDXX. This release.
 $plugin->requires  = 2025041400;      // Moodle 5.0.0 (the lowest supported release).
 $plugin->supported = [500, 503];      // Supports Moodle 5.0 to 5.3 LTS inclusive.
 $plugin->maturity  = MATURITY_BETA;   // All five path-to-beta validation builds passed (issue #182).

@@ -14,10 +14,10 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <https://www.gnu.org/licenses/>.
 
-namespace tool_canvasuplifter\local\build;
+namespace tool_courseuplift\local\build;
 
 use stdClass;
-use tool_canvasuplifter\local\model\item;
+use tool_courseuplift\local\model\item;
 
 /**
  * Creates a mod_resource activity from a file item.
@@ -27,7 +27,7 @@ use tool_canvasuplifter\local\model\item;
  * {@see add_moduleinfo()} which moves the file into mod_resource's content
  * area as part of creating the activity.
  *
- * @package    tool_canvasuplifter
+ * @package    tool_courseuplift
  * @copyright  2026 Vernon Spain
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -67,7 +67,7 @@ class file_builder {
         if ($sourcepath === null) {
             if (!defined('PHPUNIT_TEST') || !PHPUNIT_TEST) {
                 mtrace(sprintf(
-                    'tool_canvasuplifter: file "%s" skipped — no readable payload (href=%s, files=%s)',
+                    'tool_courseuplift: file "%s" skipped — no readable payload (href=%s, files=%s)',
                     $modelitem->title,
                     $modelitem->href,
                     implode(',', $modelitem->files)

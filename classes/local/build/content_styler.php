@@ -14,7 +14,7 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <https://www.gnu.org/licenses/>.
 
-namespace tool_canvasuplifter\local\build;
+namespace tool_courseuplift\local\build;
 
 /**
  * Wraps imported HTML in a styled container.
@@ -24,13 +24,13 @@ namespace tool_canvasuplifter\local\build;
  * inert everywhere else in Moodle — can style imported content without touching
  * the rest of the site. Pure string logic with no Moodle dependency.
  *
- * @package    tool_canvasuplifter
+ * @package    tool_courseuplift
  * @copyright  2026 Vernon Spain
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 final class content_styler {
     /** @var string The wrapper class that styles.css targets. */
-    public const WRAPPER_CLASS = 'canvasuplifter-content';
+    public const WRAPPER_CLASS = 'courseuplift-content';
 
     /**
      * Wrap imported HTML in the styled container, leaving empty or already

@@ -14,20 +14,20 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <https://www.gnu.org/licenses/>.
 
-namespace tool_canvasuplifter;
+namespace tool_courseuplift;
 
-use tool_canvasuplifter\local\job_manager;
+use tool_courseuplift\local\job_manager;
 use PHPUnit\Framework\Attributes\CoversMethod;
 
 /**
  * Tests the job listing helper used by import-history views (e.g. tool_automate's
  * "Staged Canvas imports" page).
  *
- * @package    tool_canvasuplifter
+ * @package    tool_courseuplift
  * @copyright  2026 Vernon Spain
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-#[CoversMethod(\tool_canvasuplifter\local\job_manager::class, 'list_jobs')]
+#[CoversMethod(\tool_courseuplift\local\job_manager::class, 'list_jobs')]
 final class job_manager_test extends \advanced_testcase {
     /**
      * list_jobs filters by user, kind and status, and returns newest first.

@@ -14,19 +14,19 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <https://www.gnu.org/licenses/>.
 
-namespace tool_canvasuplifter;
+namespace tool_courseuplift;
 
-use tool_canvasuplifter\local\build\outcome_builder;
+use tool_courseuplift\local\build\outcome_builder;
 use PHPUnit\Framework\Attributes\CoversClass;
 
 /**
  * Tests importing Canvas learning outcomes as Moodle course grade outcomes.
  *
- * @package    tool_canvasuplifter
+ * @package    tool_courseuplift
  * @copyright  2026 Vernon Spain
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-#[CoversClass(\tool_canvasuplifter\local\build\outcome_builder::class)]
+#[CoversClass(\tool_courseuplift\local\build\outcome_builder::class)]
 final class outcome_builder_test extends \advanced_testcase {
     /**
      * Write a package with the given learning_outcomes.xml body.
@@ -333,7 +333,7 @@ final class outcome_builder_test extends \advanced_testcase {
 
         $this->assertSame(1, $created);
         $outcome = $DB->get_record('grade_outcomes', ['courseid' => $course->id], '*', MUST_EXIST);
-        $this->assertSame(get_string('outcomeuntitled', 'tool_canvasuplifter'), $outcome->fullname);
+        $this->assertSame(get_string('outcomeuntitled', 'tool_courseuplift'), $outcome->fullname);
     }
 
     /**

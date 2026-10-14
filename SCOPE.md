@@ -1,6 +1,6 @@
 # Canvas → Moodle Course Converter — Project Scope
 
-**Plugin:** `tool_canvasuplifter` ("Canvas Uplifter")
+**Plugin:** `tool_courseuplift` ("CourseUplift")
 **Target:** Moodle 5.0+ · PHP 8.2+ · published, supported plugin · GPL-3.0
 **Run model:** Administrator uploads a Canvas `.imscc` export inside Moodle; the plugin builds the course in place using Moodle's own APIs.
 **Locale:** Australian (AU/UK English in language strings, DD/MM/YYYY, AUD).
@@ -22,8 +22,8 @@ The plugin reads the Canvas package, understands it, and rebuilds it as a proper
 | Item | Recommendation |
 |---|---|
 | **Plugin type** | `tool` (admin tool) — the idiomatic home for a site-level import/migration utility |
-| **Frankenstyle component** | `tool_canvasuplifter` (display name: "Canvas Uplifter") |
-| **Directory** | `admin/tool/canvasuplifter/` |
+| **Frankenstyle component** | `tool_courseuplift` (display name: "CourseUplift") |
+| **Directory** | `admin/tool/courseuplift/` |
 | **Min Moodle** | 5.0 (`$plugin->requires = 2025041400`), because question banks become `mod_qbank` here |
 | **PHP** | 8.2, 8.3, 8.4 (Moodle 5.0's minimum is 8.2; `sodium` extension required) |
 | **Licence** | GPL-3.0 (matches Moodle plugin directory rules) |
@@ -127,7 +127,9 @@ You picked the experience that maps to **(B)** — and it's the more robust choi
 
 ## 9. Open decisions (your steer needed)
 
-1. **Plugin name** — ✅ decided: `tool_canvasuplifter` ("Canvas Uplifter").
+1. **Plugin name** — ✅ decided: `tool_courseuplift` ("CourseUplift"). Originally
+   `tool_canvasuplifter` ("Canvas Uplifter"); renamed before the first public release
+   so the plugin's name doesn't use the Canvas trademark.
 2. **Target course** — always create a *new* course, or let the admin pick an existing empty course to build into? (New course is simpler and safer for v1.)
 3. **qformat_canvas** — bundle/depend on the existing question-import plugin, or fold an equivalent importer into this plugin so it's self-contained?
 4. **Unmappable content** — skip-and-report (recommended) vs best-effort-and-warn?

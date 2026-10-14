@@ -14,17 +14,17 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <https://www.gnu.org/licenses/>.
 
-namespace tool_canvasuplifter\local\report;
+namespace tool_courseuplift\local\report;
 
-use tool_canvasuplifter\local\model\course_model;
-use tool_canvasuplifter\local\model\item;
-use tool_canvasuplifter\local\model\qti_question;
-use tool_canvasuplifter\local\parser\events_parser;
-use tool_canvasuplifter\local\parser\lti_cartridge;
-use tool_canvasuplifter\local\parser\lti_classifier;
-use tool_canvasuplifter\local\parser\outcomes_parser;
-use tool_canvasuplifter\local\parser\qti_parser;
-use tool_canvasuplifter\local\parser\source_detector;
+use tool_courseuplift\local\model\course_model;
+use tool_courseuplift\local\model\item;
+use tool_courseuplift\local\model\qti_question;
+use tool_courseuplift\local\parser\events_parser;
+use tool_courseuplift\local\parser\lti_cartridge;
+use tool_courseuplift\local\parser\lti_classifier;
+use tool_courseuplift\local\parser\outcomes_parser;
+use tool_courseuplift\local\parser\qti_parser;
+use tool_courseuplift\local\parser\source_detector;
 
 /**
  * Builds a read-only "what is in this package" report from a course model.
@@ -37,7 +37,7 @@ use tool_canvasuplifter\local\parser\source_detector;
  * no Moodle dependency and stays unit-testable; the rendering page resolves
  * them with get_string().
  *
- * @package    tool_canvasuplifter
+ * @package    tool_courseuplift
  * @copyright  2026 Vernon Spain
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */

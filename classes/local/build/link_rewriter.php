@@ -14,7 +14,7 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <https://www.gnu.org/licenses/>.
 
-namespace tool_canvasuplifter\local\build;
+namespace tool_courseuplift\local\build;
 
 /**
  * Rewrites the Canvas placeholder links found in exported page HTML.
@@ -32,7 +32,7 @@ namespace tool_canvasuplifter\local\build;
  *
  * It has no Moodle dependencies so it can be unit-tested in isolation.
  *
- * @package    tool_canvasuplifter
+ * @package    tool_courseuplift
  * @copyright  2026 Vernon Spain
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */

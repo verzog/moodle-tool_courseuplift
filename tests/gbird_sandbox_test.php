@@ -14,12 +14,12 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <https://www.gnu.org/licenses/>.
 
-namespace tool_canvasuplifter;
+namespace tool_courseuplift;
 
-use tool_canvasuplifter\local\model\item;
-use tool_canvasuplifter\local\parser\manifest_parser;
-use tool_canvasuplifter\local\parser\outcomes_parser;
-use tool_canvasuplifter\local\report\conversion_report;
+use tool_courseuplift\local\model\item;
+use tool_courseuplift\local\parser\manifest_parser;
+use tool_courseuplift\local\parser\outcomes_parser;
+use tool_courseuplift\local\report\conversion_report;
 use PHPUnit\Framework\Attributes\CoversClass;
 
 /**
@@ -50,12 +50,12 @@ use PHPUnit\Framework\Attributes\CoversClass;
  * hidden (#131). questionbank_builder's native-QTI fallback (#127) is exercised by
  * questionbank_builder_test; here the two orphan banks still report as mod_qbank.
  *
- * @package    tool_canvasuplifter
+ * @package    tool_courseuplift
  * @copyright  2026 Vernon Spain
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-#[CoversClass(\tool_canvasuplifter\local\parser\manifest_parser::class)]
-#[CoversClass(\tool_canvasuplifter\local\report\conversion_report::class)]
+#[CoversClass(\tool_courseuplift\local\parser\manifest_parser::class)]
+#[CoversClass(\tool_courseuplift\local\report\conversion_report::class)]
 final class gbird_sandbox_test extends \advanced_testcase {
     /**
      * Parse the fixture once and return the built conversion report array.
@@ -69,9 +69,9 @@ final class gbird_sandbox_test extends \advanced_testcase {
     /**
      * Parse the fixture and return the neutral course model.
      *
-     * @return \tool_canvasuplifter\local\model\course_model The parsed model.
+     * @return \tool_courseuplift\local\model\course_model The parsed model.
      */
-    private function fixture_course(): \tool_canvasuplifter\local\model\course_model {
+    private function fixture_course(): \tool_courseuplift\local\model\course_model {
         return (new manifest_parser(__DIR__ . '/fixtures/gbird_sandbox'))->parse();
     }
 

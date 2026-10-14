@@ -1,6 +1,11 @@
-# Canvas Uplifter (`tool_canvasuplifter`)
+# CourseUplift (`tool_courseuplift`)
 
-Imports Canvas LMS course exports (IMS Common Cartridge `.imscc`) into Moodle.
+**A Canvas to Moodle Course Converter.** Imports Canvas LMS course exports (IMS Common
+Cartridge `.imscc`) into Moodle.
+
+> Formerly *Canvas Uplifter* (`tool_canvasuplifter`). The plugin was renamed in 1.0.0 so
+> its name doesn't use the Canvas trademark; see the CHANGELOG for what that means for a
+> site that installed it under the old name.
 
 > **Status: beta (1.0), Phases 0–8 complete.** This release can both *analyse* a
 > Canvas package (report what it contains and how cleanly each part maps to
@@ -24,7 +29,7 @@ Imported page and description HTML is stored and displayed **as authored** —
 Moodle renders it without re-cleaning — so a Common Cartridge package from an
 untrusted source could carry active content (for example `<script>`) that runs
 for anyone who views the course. **Only import packages you trust.** The
-capability that gates the tool (`tool/canvasuplifter:use`) is restricted to
+capability that gates the tool (`tool/courseuplift:use`) is restricted to
 managers and declares an XSS risk to reflect this; the upload page shows the
 same warning.
 
@@ -75,22 +80,22 @@ includes or calls the other's code — so each stays a separate work.
 
 ## Install
 
-1. Copy this folder to `admin/tool/canvasuplifter/` in your Moodle tree
+1. Copy this folder to `admin/tool/courseuplift/` in your Moodle tree
    (or upload the zip via *Site administration > Plugins > Install plugins*).
 2. Visit *Site administration > Notifications* to complete installation.
-3. Open *Site administration > Courses > Canvas Uplifter*.
+3. Open *Site administration > Courses > CourseUplift*.
 
 No extra plugins are required. The upload form includes a built-in
 **Large package (chunked upload)** field for packages bigger than the
 server's PHP upload limit; its chunked uploader is bundled with this plugin
 (folded in from `local_chunkupload`), so there is no separate dependency.
 Chunk size and retention are configured at *Site administration > Plugins >
-Admin tools > Canvas Uplifter*.
+Admin tools > CourseUplift*.
 
 ## Using it
 
 1. In Canvas, export the course as a Common Cartridge (`.imscc`).
-2. Upload that file (or paste a download URL) on the Canvas Uplifter page,
+2. Upload that file (or paste a download URL) on the CourseUplift page,
    and choose a target course category.
 3. **Analyse package** shows a conversion report: section/item counts, the
    planned Moodle target for each content type, mapping confidence, and any
@@ -196,11 +201,11 @@ Background on how Canvas ships quizzes — and why some arrive without questions
   GUI import. This doesn't affect importing *into Moodle*, but matters if you ever
   round-trip content back to Canvas.
 
-## Bulk migrations (driving Canvas Uplifter from Automate)
+## Bulk migrations (driving CourseUplift from Automate)
 
 For sites moving **many** courses off Canvas at once, the sibling
 [`tool_automate`](https://github.com/verzog/moodle-tool_automate) ("Automate")
-plugin can drive Canvas Uplifter in bulk. Canvas Uplifter still works entirely
+plugin can drive CourseUplift in bulk. CourseUplift still works entirely
 on its own — this is an optional integration that Automate switches on only when
 this plugin is installed.
 
@@ -211,7 +216,7 @@ feeds in packages from either or both of:
   in the background through the same SSRF-aware `\curl` layer described above; and
 - a **server directory of `.imscc`/`.zip` packages** (a staging area).
 
-Each package becomes one background Canvas Uplifter adhoc task, so nothing is
+Each package becomes one background CourseUplift adhoc task, so nothing is
 converted inside the web request — a directory or URL list of hundreds of
 courses is queued instantly and then worked through by cron rather than timing
 out the page. The tasks run under Moodle's ordinary site-wide adhoc-task
@@ -219,7 +224,7 @@ scheduling; the plugin does **not** add its own concurrency cap, so how many run
 at once is governed by your `Site administration > Server > Tasks` worker
 configuration. Each job is either **built now** (a new course per package) or
 **analysed for later** (a conversion report an admin reviews before building the
-course from Canvas Uplifter's status page).
+course from CourseUplift's status page).
 
 Packages staged with *Analyse for later* are listed under *Automate > Staged
 Canvas imports*, which shows how much space the stored packages occupy and lets
@@ -234,14 +239,14 @@ feature, preparing packages, running a bulk import, and reviewing/building the
 staged jobs — is in
 [`docs/bulk-canvas-migration-howto.pdf`](docs/bulk-canvas-migration-howto.pdf).
 
-### Integration API — `\tool_canvasuplifter\launcher`
+### Integration API — `\tool_courseuplift\launcher`
 
 That whole flow rides on a small **public facade**,
-`\tool_canvasuplifter\launcher`, which is the supported entry point for other
+`\tool_courseuplift\launcher`, which is the supported entry point for other
 code to drive the pipeline without reaching into the plugin's `local\` classes.
 The upload page (`index.php`) uses it too, so callers get exactly the same
 create-a-job-and-queue-a-task contract. Callers are responsible for their own
-capability checks first — every caller must enforce `tool/canvasuplifter:use`,
+capability checks first — every caller must enforce `tool/courseuplift:use`,
 and a *build* additionally needs `moodle/course:create` on the target category.
 
 | Method | Purpose |
@@ -258,7 +263,7 @@ and a *build* additionally needs `moodle/course:create` on the target category.
 
 `$kind` is `job_manager::KIND_ANALYSE` (`'analyse'`) or `KIND_BUILD` (`'build'`).
 The three **queue** methods (`queue_from_url`, `queue_from_path`, `queue_job`)
-each return a new **job id**; poll `\tool_canvasuplifter\launcher::get_job($jobid)`
+each return a new **job id**; poll `\tool_courseuplift\launcher::get_job($jobid)`
 for that job's status (`queued` / `running` / `done` / `failed`), progress and, for
 a completed build, the created `courseid`. The other methods return their own
 types, as the table shows (`list_jobs` an array of job records, `delete_job` and
@@ -275,7 +280,7 @@ page returns immediately even for a large directory. `delete_job()` and
 job's stored package can never race that package's deletion. Because the facade lives in the
 plugin's public namespace, a caller should guard it with `class_exists()` /
 `method_exists()` (as Automate does) rather than a hard plugin dependency, so the
-caller keeps working when Canvas Uplifter is absent or older.
+caller keeps working when CourseUplift is absent or older.
 
 ## How it's built
 
@@ -323,7 +328,7 @@ Everything lives under `~/.moodle-plugin-ci` (outside the repo).
 | 4 | Gradebook categories with Canvas weights, LTI placeholders, in-section labels, Canvas rubrics → `gradingform_rubric`, CC 1.3 IMS Assignment profile | Done |
 | 5 | Asynchronous **analyse**: run extract + parse + report as an adhoc task behind the existing polled status page, and move the remote-URL fetch into the task too, so large packages don't time out the web request (the build is already async; this closes the server-side gap that complements the built-in chunked-upload support) | Done |
 | 6 | Learning outcomes → course grade outcomes (scales from mastery ratings) | Done |
-| 7 | Bulk-migration integration: the public `\tool_canvasuplifter\launcher` facade (queue / list / get / delete / storage) and the `tool_automate` bulk driver — URL-list and server-directory sources, build-now or analyse-for-later, and a *Staged Canvas imports* review page with a storage counter and selective delete | Done |
+| 7 | Bulk-migration integration: the public `\tool_courseuplift\launcher` facade (queue / list / get / delete / storage) and the `tool_automate` bulk driver — URL-list and server-directory sources, build-now or analyse-for-later, and a *Staged Canvas imports* review page with a storage counter and selective delete | Done |
 | 8 | Remaining QTI question types (numerical ✓, calculated ✓, free-text multi-blank ✓) | Done |
 
 ## Path to beta
@@ -430,10 +435,10 @@ To cut a release:
 2. Update `CHANGELOG.md` — add a dated section for the new `release`.
 3. Land those on `main` green, then tag it — substituting the same version you
    set in `$plugin->release` in step 1 for `X.Y.Z` (e.g. `v0.45.0`):
-   `git tag -a vX.Y.Z -m 'tool_canvasuplifter X.Y.Z' && git push origin vX.Y.Z`.
-4. Package the ZIP with a **top-level folder named `canvasuplifter`** (not
-   `moodle-tool_canvasuplifter`), which is the directory name Moodle installs it
-   under (`admin/tool/canvasuplifter`).
+   `git tag -a vX.Y.Z -m 'tool_courseuplift X.Y.Z' && git push origin vX.Y.Z`.
+4. Package the ZIP with a **top-level folder named `courseuplift`** (not
+   `moodle-tool_courseuplift`), which is the directory name Moodle installs it
+   under (`admin/tool/courseuplift`).
 
 Since 1.0.0 the plugin is `MATURITY_BETA` (the **Path to beta** boxes above are
 met) and releases follow semantic versioning: a patch release for fixes, a minor

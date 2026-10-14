@@ -14,19 +14,19 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <https://www.gnu.org/licenses/>.
 
-namespace tool_canvasuplifter;
+namespace tool_courseuplift;
 
-use tool_canvasuplifter\local\build\content_styler;
+use tool_courseuplift\local\build\content_styler;
 use PHPUnit\Framework\Attributes\CoversClass;
 
 /**
  * Tests wrapping imported HTML in the styled container.
  *
- * @package    tool_canvasuplifter
+ * @package    tool_courseuplift
  * @copyright  2026 Vernon Spain
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-#[CoversClass(\tool_canvasuplifter\local\build\content_styler::class)]
+#[CoversClass(\tool_courseuplift\local\build\content_styler::class)]
 final class content_styler_test extends \basic_testcase {
     /**
      * Content is wrapped in the scoped container div.
@@ -35,7 +35,7 @@ final class content_styler_test extends \basic_testcase {
      */
     public function test_wraps_content(): void {
         $this->assertSame(
-            '<div class="canvasuplifter-content"><p>Hi</p></div>',
+            '<div class="courseuplift-content"><p>Hi</p></div>',
             content_styler::wrap('<p>Hi</p>')
         );
     }

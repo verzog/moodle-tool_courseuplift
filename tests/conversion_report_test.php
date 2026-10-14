@@ -14,23 +14,23 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <https://www.gnu.org/licenses/>.
 
-namespace tool_canvasuplifter;
+namespace tool_courseuplift;
 
-use tool_canvasuplifter\local\model\course_model;
-use tool_canvasuplifter\local\model\item;
-use tool_canvasuplifter\local\model\section_model;
-use tool_canvasuplifter\local\parser\source_detector;
-use tool_canvasuplifter\local\report\conversion_report;
+use tool_courseuplift\local\model\course_model;
+use tool_courseuplift\local\model\item;
+use tool_courseuplift\local\model\section_model;
+use tool_courseuplift\local\parser\source_detector;
+use tool_courseuplift\local\report\conversion_report;
 use PHPUnit\Framework\Attributes\CoversClass;
 
 /**
  * Tests for the conversion report.
  *
- * @package    tool_canvasuplifter
+ * @package    tool_courseuplift
  * @copyright  2026 Vernon Spain
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-#[CoversClass(\tool_canvasuplifter\local\report\conversion_report::class)]
+#[CoversClass(\tool_courseuplift\local\report\conversion_report::class)]
 final class conversion_report_test extends \advanced_testcase {
     /**
      * The analyse preview summarises the package's calendar events (a package can carry
@@ -125,7 +125,7 @@ final class conversion_report_test extends \advanced_testcase {
         $section2->add_item($inline);
         $course2->add_section($section2);
 
-        $patterns = \tool_canvasuplifter\local\parser\lti_classifier::parse_patterns('lms.example.edu');
+        $patterns = \tool_courseuplift\local\parser\lti_classifier::parse_patterns('lms.example.edu');
         $warnings2 = (new conversion_report($course2, null, '', false, $patterns))->build()['warnings'];
         $this->assertContains('warnreportmoodlelti', $warnings2);
     }
@@ -1261,7 +1261,7 @@ final class conversion_report_test extends \advanced_testcase {
         $this->assertSame('canvaserror', $matrix['rows'][0]['label']);
         $this->assertSame('unsupported', $matrix['rows'][0]['status']);
         $this->assertSame(2, $matrix['rows'][0]['count']);
-        $this->assertTrue(get_string_manager()->string_exists('qtype_canvaserror', 'tool_canvasuplifter'));
+        $this->assertTrue(get_string_manager()->string_exists('qtype_canvaserror', 'tool_courseuplift'));
     }
 
     /**

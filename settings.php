@@ -15,10 +15,10 @@
 // along with Moodle.  If not, see <https://www.gnu.org/licenses/>.
 
 /**
- * Adds the Canvas Uplifter run page under Site administration > Courses, and a
- * Canvas Uplifter settings page (chunked upload) under Admin tools.
+ * Adds the CourseUplift run page under Site administration > Courses, and a
+ * CourseUplift settings page (chunked upload) under Admin tools.
  *
- * @package    tool_canvasuplifter
+ * @package    tool_courseuplift
  * @copyright  2026 Vernon Spain
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -27,57 +27,57 @@ defined('MOODLE_INTERNAL') || die();
 
 if ($hassiteconfig) {
     $ADMIN->add('courses', new admin_externalpage(
-        'tool_canvasuplifter',
-        get_string('pluginname', 'tool_canvasuplifter'),
-        new moodle_url('/admin/tool/canvasuplifter/index.php'),
-        'tool/canvasuplifter:use'
+        'tool_courseuplift',
+        get_string('pluginname', 'tool_courseuplift'),
+        new moodle_url('/admin/tool/courseuplift/index.php'),
+        'tool/courseuplift:use'
     ));
 
-    // Group everything for this plugin under a "Canvas Uplifter" category in Admin
+    // Group everything for this plugin under a "CourseUplift" category in Admin
     // tools, so its settings (and any future admin pages) sit one level under the
     // plugin name rather than as a loose leaf beside other tools.
     $category = new admin_category(
-        'tool_canvasuplifter_cat',
-        get_string('pluginname', 'tool_canvasuplifter')
+        'tool_courseuplift_cat',
+        get_string('pluginname', 'tool_courseuplift')
     );
     $ADMIN->add('tools', $category);
 
     // Settings for the chunked-upload field on the package upload form (folded in
     // from the former local_chunkupload plugin).
     $settings = new admin_settingpage(
-        'tool_canvasuplifter_settings',
-        get_string('settings', 'tool_canvasuplifter')
+        'tool_courseuplift_settings',
+        get_string('settings', 'tool_courseuplift')
     );
     $settings->add(new admin_setting_heading(
-        'tool_canvasuplifter/chunkheading',
-        get_string('settings', 'tool_canvasuplifter'),
+        'tool_courseuplift/chunkheading',
+        get_string('settings', 'tool_courseuplift'),
         ''
     ));
     $settings->add(new admin_setting_configtext(
-        'tool_canvasuplifter/chunksize',
-        new lang_string('setting:chunksize', 'tool_canvasuplifter'),
-        new lang_string('setting:chunksize_desc', 'tool_canvasuplifter'),
+        'tool_courseuplift/chunksize',
+        new lang_string('setting:chunksize', 'tool_courseuplift'),
+        new lang_string('setting:chunksize_desc', 'tool_courseuplift'),
         20,
         PARAM_INT
     ));
     $settings->add(new admin_setting_configduration(
-        'tool_canvasuplifter/state0duration',
-        new lang_string('setting:state0duration', 'tool_canvasuplifter'),
-        new lang_string('setting:state0duration_desc', 'tool_canvasuplifter'),
+        'tool_courseuplift/state0duration',
+        new lang_string('setting:state0duration', 'tool_courseuplift'),
+        new lang_string('setting:state0duration_desc', 'tool_courseuplift'),
         3600,
         3600
     ));
     $settings->add(new admin_setting_configduration(
-        'tool_canvasuplifter/state1duration',
-        new lang_string('setting:state1duration', 'tool_canvasuplifter'),
-        new lang_string('setting:state1duration_desc', 'tool_canvasuplifter'),
+        'tool_courseuplift/state1duration',
+        new lang_string('setting:state1duration', 'tool_courseuplift'),
+        new lang_string('setting:state1duration_desc', 'tool_courseuplift'),
         3600,
         3600
     ));
     $settings->add(new admin_setting_configduration(
-        'tool_canvasuplifter/state2duration',
-        new lang_string('setting:state2duration', 'tool_canvasuplifter'),
-        new lang_string('setting:state2duration_desc', 'tool_canvasuplifter'),
+        'tool_courseuplift/state2duration',
+        new lang_string('setting:state2duration', 'tool_courseuplift'),
+        new lang_string('setting:state2duration_desc', 'tool_courseuplift'),
         86400,
         86400
     ));
@@ -86,9 +86,9 @@ if ($hassiteconfig) {
     // ingest url_fetcher enforces this and reads the value here (with a floor of
     // 30 seconds and a ceiling of 1 hour).
     $settings->add(new admin_setting_configduration(
-        'tool_canvasuplifter/transferstall',
-        new lang_string('setting:transferstall', 'tool_canvasuplifter'),
-        new lang_string('setting:transferstall_desc', 'tool_canvasuplifter'),
+        'tool_courseuplift/transferstall',
+        new lang_string('setting:transferstall', 'tool_courseuplift'),
+        new lang_string('setting:transferstall_desc', 'tool_courseuplift'),
         120,
         60
     ));
@@ -96,10 +96,10 @@ if ($hassiteconfig) {
     // questions delivered over LTI), so the conversion report can flag them. Built-in detection
     // (enrol_lti/mod-lti URLs, and "stack") works without any configuration here.
     $settings->add(new admin_setting_configtextarea(
-        'tool_canvasuplifter/ltimoodlepatterns',
-        new lang_string('setting:ltimoodlepatterns', 'tool_canvasuplifter'),
-        new lang_string('setting:ltimoodlepatterns_desc', 'tool_canvasuplifter'),
+        'tool_courseuplift/ltimoodlepatterns',
+        new lang_string('setting:ltimoodlepatterns', 'tool_courseuplift'),
+        new lang_string('setting:ltimoodlepatterns_desc', 'tool_courseuplift'),
         ''
     ));
-    $ADMIN->add('tool_canvasuplifter_cat', $settings);
+    $ADMIN->add('tool_courseuplift_cat', $settings);
 }

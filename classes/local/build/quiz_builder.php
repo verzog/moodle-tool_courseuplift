@@ -14,13 +14,13 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <https://www.gnu.org/licenses/>.
 
-namespace tool_canvasuplifter\local\build;
+namespace tool_courseuplift\local\build;
 
 use stdClass;
-use tool_canvasuplifter\local\model\item;
-use tool_canvasuplifter\local\model\qti_question;
-use tool_canvasuplifter\local\parser\qti_parser;
-use tool_canvasuplifter\local\parser\quiz_settings;
+use tool_courseuplift\local\model\item;
+use tool_courseuplift\local\model\qti_question;
+use tool_courseuplift\local\parser\qti_parser;
+use tool_courseuplift\local\parser\quiz_settings;
 
 /**
  * Creates a mod_quiz activity from a Canvas QTI assessment.
@@ -36,7 +36,7 @@ use tool_canvasuplifter\local\parser\quiz_settings;
  * meta file is absent (e.g. a question-bank-only export) the generic defaults
  * stand.
  *
- * @package    tool_canvasuplifter
+ * @package    tool_courseuplift
  * @copyright  2026 Vernon Spain
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -156,7 +156,7 @@ class quiz_builder {
         $intro = $settings->description;
         if ($isplaceholder) {
             $this->placeholdercount++;
-            $intro = get_string('quizplaceholderintro', 'tool_canvasuplifter') . $intro;
+            $intro = get_string('quizplaceholderintro', 'tool_courseuplift') . $intro;
         }
 
         $moduleinfo = (object) array_merge($this->quiz_defaults(), $this->settings_overlay($settings), [
@@ -486,7 +486,7 @@ class quiz_builder {
         // Prepend the teacher note to whatever intro is stored now (already rewritten to
         // pluginfile refs by the embedder), so the embedded media survives.
         $current = (string) $DB->get_field('quiz', 'intro', ['id' => $quizinstance]);
-        $note = get_string('quizplaceholderintro', 'tool_canvasuplifter');
+        $note = get_string('quizplaceholderintro', 'tool_courseuplift');
         $DB->set_field('quiz', 'intro', $note . $current, ['id' => $quizinstance]);
     }
 

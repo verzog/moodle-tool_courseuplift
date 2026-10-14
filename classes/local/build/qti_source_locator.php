@@ -14,11 +14,11 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <https://www.gnu.org/licenses/>.
 
-namespace tool_canvasuplifter\local\build;
+namespace tool_courseuplift\local\build;
 
-use tool_canvasuplifter\local\model\item;
-use tool_canvasuplifter\local\model\qti_question;
-use tool_canvasuplifter\local\parser\qti_parser;
+use tool_courseuplift\local\model\item;
+use tool_courseuplift\local\model\qti_question;
+use tool_courseuplift\local\parser\qti_parser;
 
 /**
  * Shared QTI-source helpers for the quiz and question-bank builders.
@@ -28,7 +28,7 @@ use tool_canvasuplifter\local\parser\qti_parser;
  * that logic lives here once. The using class must expose a $packageroot
  * property (the extracted package root) for path resolution.
  *
- * @package    tool_canvasuplifter
+ * @package    tool_courseuplift
  * @copyright  2026 Vernon Spain
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */

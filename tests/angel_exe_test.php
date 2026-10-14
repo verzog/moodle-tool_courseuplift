@@ -14,22 +14,22 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <https://www.gnu.org/licenses/>.
 
-namespace tool_canvasuplifter;
+namespace tool_courseuplift;
 
-use tool_canvasuplifter\local\parser\manifest_parser;
-use tool_canvasuplifter\local\parser\source_detector;
+use tool_courseuplift\local\parser\manifest_parser;
+use tool_courseuplift\local\parser\source_detector;
 use PHPUnit\Framework\Attributes\CoversClass;
 
 /**
  * Tests source detection and the ANGEL/eXe cleanup: dropping _UNREFERENCED_
  * artifacts and titling an empty-<title> page from its first heading.
  *
- * @package    tool_canvasuplifter
+ * @package    tool_courseuplift
  * @copyright  2026 Vernon Spain
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-#[CoversClass(\tool_canvasuplifter\local\parser\source_detector::class)]
-#[CoversClass(\tool_canvasuplifter\local\parser\manifest_parser::class)]
+#[CoversClass(\tool_courseuplift\local\parser\source_detector::class)]
+#[CoversClass(\tool_courseuplift\local\parser\manifest_parser::class)]
 final class angel_exe_test extends \advanced_testcase {
     /**
      * Parse a manifest string into a DOMDocument.

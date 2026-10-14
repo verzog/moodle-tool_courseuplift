@@ -15,14 +15,14 @@
 // along with Moodle.  If not, see <https://www.gnu.org/licenses/>.
 
 /**
- * Canvas Uplifter main page: upload a package and queue an analyse or build run.
+ * CourseUplift main page: upload a package and queue an analyse or build run.
  *
  * Both actions run in the background (see analyse_package_task and
  * build_course_task) and redirect to status.php, so extracting, parsing and any
  * remote download happen off the web request rather than risking a gateway
  * timeout on a large package.
  *
- * @package    tool_canvasuplifter
+ * @package    tool_courseuplift
  * @copyright  2026 Vernon Spain
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -30,15 +30,15 @@
 require(__DIR__ . '/../../../config.php');
 require_once($CFG->libdir . '/adminlib.php');
 
-use tool_canvasuplifter\form\upload_form;
-use tool_canvasuplifter\launcher;
-use tool_canvasuplifter\local\job_manager;
+use tool_courseuplift\form\upload_form;
+use tool_courseuplift\launcher;
+use tool_courseuplift\local\job_manager;
 
-admin_externalpage_setup('tool_canvasuplifter');
-require_capability('tool/canvasuplifter:use', context_system::instance());
+admin_externalpage_setup('tool_courseuplift');
+require_capability('tool/courseuplift:use', context_system::instance());
 
-$PAGE->set_title(get_string('pluginname', 'tool_canvasuplifter'));
-$PAGE->set_heading(get_string('pluginname', 'tool_canvasuplifter'));
+$PAGE->set_title(get_string('pluginname', 'tool_courseuplift'));
+$PAGE->set_heading(get_string('pluginname', 'tool_courseuplift'));
 
 $form = new upload_form();
 $error = null;
@@ -77,7 +77,7 @@ if ($data = $form->get_data()) {
             }
             $filerecord = (object) [
                 'contextid' => context_system::instance()->id,
-                'component' => 'tool_canvasuplifter',
+                'component' => 'tool_courseuplift',
                 'filearea' => 'packages',
                 'itemid' => $USER->id,
                 'filepath' => '/' . uniqid() . '/',
@@ -105,18 +105,18 @@ if ($data = $form->get_data()) {
             $pagegrouping
         );
 
-        redirect(new moodle_url('/admin/tool/canvasuplifter/status.php', ['jobid' => $jobid]));
+        redirect(new moodle_url('/admin/tool/courseuplift/status.php', ['jobid' => $jobid]));
     } catch (\RuntimeException $e) {
         // The message is one of the package/ingest ERROR_* lang-string keys.
         $key = $e->getMessage();
-        $error = get_string_manager()->string_exists($key, 'tool_canvasuplifter')
-            ? get_string($key, 'tool_canvasuplifter')
+        $error = get_string_manager()->string_exists($key, 'tool_courseuplift')
+            ? get_string($key, 'tool_courseuplift')
             : $e->getMessage();
     } catch (\InvalidArgumentException $e) {
         // A malformed URL or other bad source slipped past form validation and
         // the launcher rejected it. Show a friendly error rather than letting
         // the exception surface as an uncaught-exception page.
-        $error = get_string('errorbadurl', 'tool_canvasuplifter');
+        $error = get_string('errorbadurl', 'tool_courseuplift');
     } finally {
         // On success redirect() has already exited; this only runs if queuing
         // failed after a file was resolved.
@@ -141,8 +141,8 @@ if ($buildfromreport > 0) {
 
     $fs = get_file_storage();
     $file = $fs->get_file_by_id($buildfromreport);
-    if (!$file || $file->get_component() !== 'tool_canvasuplifter' || (int) $file->get_userid() !== (int) $USER->id) {
-        throw new \moodle_exception('errorjobnotfound', 'tool_canvasuplifter');
+    if (!$file || $file->get_component() !== 'tool_courseuplift' || (int) $file->get_userid() !== (int) $USER->id) {
+        throw new \moodle_exception('errorjobnotfound', 'tool_courseuplift');
     }
     $quizfrombank = optional_param('quizfrombank', 0, PARAM_INT);
     $pagegrouping = optional_param('pagegrouping', '', PARAM_ALPHA);
@@ -155,7 +155,7 @@ if ($buildfromreport > 0) {
         (bool) $quizfrombank,
         $pagegrouping
     );
-    redirect(new moodle_url('/admin/tool/canvasuplifter/status.php', ['jobid' => $jobid]));
+    redirect(new moodle_url('/admin/tool/courseuplift/status.php', ['jobid' => $jobid]));
 }
 
 echo $OUTPUT->header();
@@ -168,14 +168,14 @@ if ($error !== null) {
 // not re-clean it), so an untrusted package could carry active content. Warn the
 // admin to only import packages they trust.
 echo $OUTPUT->notification(
-    get_string('trustedsourcewarning', 'tool_canvasuplifter'),
+    get_string('trustedsourcewarning', 'tool_courseuplift'),
     \core\output\notification::NOTIFY_WARNING
 );
 
 // Point the admin at the built-in chunked-upload field for large packages; when the Large file
 // repository replaces that field, the form carries its own pointer instead.
 if (!upload_form::largefile_repository_available()) {
-    echo html_writer::tag('p', get_string('chunkuploadactive', 'tool_canvasuplifter'), ['class' => 'text-muted']);
+    echo html_writer::tag('p', get_string('chunkuploadactive', 'tool_courseuplift'), ['class' => 'text-muted']);
 }
 $form->display();
 

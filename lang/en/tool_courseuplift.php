@@ -15,9 +15,9 @@
 // along with Moodle.  If not, see <https://www.gnu.org/licenses/>.
 
 /**
- * Language strings for tool_canvasuplifter (Australian English).
+ * Language strings for tool_courseuplift (Australian English).
  *
- * @package    tool_canvasuplifter
+ * @package    tool_courseuplift
  * @copyright  2026 Vernon Spain
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -38,7 +38,6 @@ $string['buildsnowsummarynotbuilt'] = '{$a} contain no questions (empty Canvas q
 $string['buildstatusheading'] = 'Build status';
 $string['builtcoursesummary'] = 'Built {$a->created} of {$a->itemcount} content items across '
     . '{$a->sectioncount} sections ({$a->skipped} skipped).';
-$string['canvasuplifter:use'] = 'Upload a Canvas package and view the conversion report';
 $string['chosenbuildoptions'] = 'Page grouping (fixed when the package was analysed) — combine consecutive '
     . 'pages: {$a->grouping}.';
 $string['chunkuploadactive'] = 'For a very large package, use the optional "Large package (chunked upload)" '
@@ -60,6 +59,7 @@ $string['confidence_manual'] = 'Needs manual finishing';
 $string['confidence_none'] = 'Cannot map yet';
 $string['confidence_partial'] = 'Maps, some detail may be lost';
 $string['coursename'] = 'Course name';
+$string['courseuplift:use'] = 'Upload a Canvas package and view the conversion report';
 $string['defaultbookname'] = 'Course pages';
 $string['defaultcoursename'] = 'Imported course';
 $string['defaultcoursenamesource'] = 'Imported {$a} course';
@@ -183,23 +183,23 @@ $string['placement_extras'] = 'Additional resources section';
 $string['placement_none'] = 'Not created (no questions)';
 $string['placement_section0'] = 'General (top) section';
 $string['placement_top'] = 'Top of course';
-$string['pluginname'] = 'Canvas Uplifter';
+$string['pluginname'] = 'CourseUplift';
 $string['privacy:chunkspath'] = 'Chunked uploads';
-$string['privacy:jobspath'] = 'Canvas Uplifter build jobs';
-$string['privacy:metadata:tool_canvasuplifter_chunks'] = 'Temporary records of large packages uploaded in chunks before they are saved.';
-$string['privacy:metadata:tool_canvasuplifter_chunks:contextid'] = 'The context in which the file was uploaded.';
-$string['privacy:metadata:tool_canvasuplifter_chunks:filename'] = 'The name of the uploaded file.';
-$string['privacy:metadata:tool_canvasuplifter_chunks:lastmodified'] = 'The time the upload was last modified.';
-$string['privacy:metadata:tool_canvasuplifter_chunks:userid'] = 'The user who uploaded the file.';
-$string['privacy:metadata:tool_canvasuplifter_jobs'] = 'Details of each Canvas-to-Moodle build run started by a user.';
-$string['privacy:metadata:tool_canvasuplifter_jobs:categoryid'] = 'The course category the build targeted.';
-$string['privacy:metadata:tool_canvasuplifter_jobs:courseid'] = 'The course created by the build, if any.';
-$string['privacy:metadata:tool_canvasuplifter_jobs:errormsg'] = 'Any error message recorded if the build failed.';
-$string['privacy:metadata:tool_canvasuplifter_jobs:packageurl'] = 'The download URL of the package, when the run was started from a URL rather than an upload.';
-$string['privacy:metadata:tool_canvasuplifter_jobs:status'] = 'The state of the build (queued, running, done or failed).';
-$string['privacy:metadata:tool_canvasuplifter_jobs:timecreated'] = 'The time the build was started.';
-$string['privacy:metadata:tool_canvasuplifter_jobs:timemodified'] = 'The time the build was last updated.';
-$string['privacy:metadata:tool_canvasuplifter_jobs:userid'] = 'The user who started the build.';
+$string['privacy:jobspath'] = 'CourseUplift build jobs';
+$string['privacy:metadata:tool_courseuplift_chunks'] = 'Temporary records of large packages uploaded in chunks before they are saved.';
+$string['privacy:metadata:tool_courseuplift_chunks:contextid'] = 'The context in which the file was uploaded.';
+$string['privacy:metadata:tool_courseuplift_chunks:filename'] = 'The name of the uploaded file.';
+$string['privacy:metadata:tool_courseuplift_chunks:lastmodified'] = 'The time the upload was last modified.';
+$string['privacy:metadata:tool_courseuplift_chunks:userid'] = 'The user who uploaded the file.';
+$string['privacy:metadata:tool_courseuplift_jobs'] = 'Details of each Canvas-to-Moodle build run started by a user.';
+$string['privacy:metadata:tool_courseuplift_jobs:categoryid'] = 'The course category the build targeted.';
+$string['privacy:metadata:tool_courseuplift_jobs:courseid'] = 'The course created by the build, if any.';
+$string['privacy:metadata:tool_courseuplift_jobs:errormsg'] = 'Any error message recorded if the build failed.';
+$string['privacy:metadata:tool_courseuplift_jobs:packageurl'] = 'The download URL of the package, when the run was started from a URL rather than an upload.';
+$string['privacy:metadata:tool_courseuplift_jobs:status'] = 'The state of the build (queued, running, done or failed).';
+$string['privacy:metadata:tool_courseuplift_jobs:timecreated'] = 'The time the build was started.';
+$string['privacy:metadata:tool_courseuplift_jobs:timemodified'] = 'The time the build was last updated.';
+$string['privacy:metadata:tool_courseuplift_jobs:userid'] = 'The user who started the build.';
 $string['progresscoursecreated'] = 'Course created. Building activities…';
 $string['progressextract'] = 'Extracting package…';
 $string['progressfetch'] = 'Downloading package…';

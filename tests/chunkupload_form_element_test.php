@@ -14,20 +14,20 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <https://www.gnu.org/licenses/>.
 
-namespace tool_canvasuplifter;
+namespace tool_courseuplift;
 
-use tool_canvasuplifter\chunkupload\form_element;
-use tool_canvasuplifter\chunkupload\state_type;
+use tool_courseuplift\chunkupload\form_element;
+use tool_courseuplift\chunkupload\state_type;
 use PHPUnit\Framework\Attributes\CoversClass;
 
 /**
  * Tests for the bundled chunked-upload form element's file API.
  *
- * @package    tool_canvasuplifter
+ * @package    tool_courseuplift
  * @copyright  2026 Vernon Spain
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-#[CoversClass(\tool_canvasuplifter\chunkupload\form_element::class)]
+#[CoversClass(\tool_courseuplift\chunkupload\form_element::class)]
 final class chunkupload_form_element_test extends \advanced_testcase {
     /**
      * Insert a chunk-tracking row with an on-disk file when a state requires it.
@@ -51,7 +51,7 @@ final class chunkupload_form_element_test extends \advanced_testcase {
             'length' => strlen($content),
             'currentpos' => strlen($content),
         ];
-        $DB->insert_record_raw('tool_canvasuplifter_chunks', $record, false, false, true);
+        $DB->insert_record_raw('tool_courseuplift_chunks', $record, false, false, true);
 
         if ($content !== '') {
             $dir = form_element::get_base_folder();
@@ -115,7 +115,7 @@ final class chunkupload_form_element_test extends \advanced_testcase {
         $id = $element->create_token();
 
         $this->assertIsInt($id);
-        $record = $DB->get_record('tool_canvasuplifter_chunks', ['id' => $id]);
+        $record = $DB->get_record('tool_courseuplift_chunks', ['id' => $id]);
         $this->assertEquals($USER->id, $record->userid);
         $this->assertEquals(state_type::UNUSED_TOKEN_GENERATED, $record->state);
     }
@@ -131,13 +131,13 @@ final class chunkupload_form_element_test extends \advanced_testcase {
         $context = \context_system::instance();
 
         $this->make_chunk(200, state_type::UPLOAD_COMPLETED, 'course.imscc', 'PK-zip-bytes');
-        $file = form_element::export_to_filearea(200, $context->id, 'tool_canvasuplifter', 'unittest');
+        $file = form_element::export_to_filearea(200, $context->id, 'tool_courseuplift', 'unittest');
         $this->assertInstanceOf(\stored_file::class, $file);
         $this->assertSame('course.imscc', $file->get_filename());
         $this->assertSame('PK-zip-bytes', $file->get_content());
 
         $this->make_chunk(201, state_type::UPLOAD_STARTED, 'partial.imscc', 'half');
-        $this->assertNull(form_element::export_to_filearea(201, $context->id, 'tool_canvasuplifter', 'unittest'));
+        $this->assertNull(form_element::export_to_filearea(201, $context->id, 'tool_courseuplift', 'unittest'));
     }
 
     /**
@@ -156,7 +156,7 @@ final class chunkupload_form_element_test extends \advanced_testcase {
 
         form_element::delete_file(300);
 
-        $this->assertFalse($DB->record_exists('tool_canvasuplifter_chunks', ['id' => 300]));
+        $this->assertFalse($DB->record_exists('tool_courseuplift_chunks', ['id' => 300]));
         $this->assertFileDoesNotExist($path);
     }
 }

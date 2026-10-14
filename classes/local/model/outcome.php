@@ -14,7 +14,7 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <https://www.gnu.org/licenses/>.
 
-namespace tool_canvasuplifter\local\model;
+namespace tool_courseuplift\local\model;
 
 /**
  * One Canvas learning outcome parsed from course_settings/learning_outcomes.xml.
@@ -22,7 +22,7 @@ namespace tool_canvasuplifter\local\model;
  * Plain data holder with no Moodle dependencies so the outcomes parser stays
  * unit-testable in isolation.
  *
- * @package    tool_canvasuplifter
+ * @package    tool_courseuplift
  * @copyright  2026 Vernon Spain
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */

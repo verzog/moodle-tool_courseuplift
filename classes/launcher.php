@@ -14,11 +14,11 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <https://www.gnu.org/licenses/>.
 
-namespace tool_canvasuplifter;
+namespace tool_courseuplift;
 
-use tool_canvasuplifter\local\job_manager;
-use tool_canvasuplifter\task\analyse_package_task;
-use tool_canvasuplifter\task\build_course_task;
+use tool_courseuplift\local\job_manager;
+use tool_courseuplift\task\analyse_package_task;
+use tool_courseuplift\task\build_course_task;
 
 /**
  * Stable entry point for queuing an analyse or build run.
@@ -35,17 +35,17 @@ use tool_canvasuplifter\task\build_course_task;
  *
  * Callers are responsible for their own capability checks first - neither this
  * class nor the adhoc tasks re-check capabilities (the tasks run under cron as
- * the job's user). Every caller must enforce tool/canvasuplifter:use at the
+ * the job's user). Every caller must enforce tool/courseuplift:use at the
  * system context; a caller requesting a *build* (job_manager::KIND_BUILD) must
  * additionally enforce moodle/course:create on the target category context, as
  * the upload page does. An *analyse* run creates no course, so it needs only
- * the tool/canvasuplifter:use check - do not gate analysis on course:create.
+ * the tool/courseuplift:use check - do not gate analysis on course:create.
  *
  * This class sits in the plugin's public namespace (not local\) precisely
  * because it is an integration surface other components may depend on; the
  * job-status contract they poll afterwards is job_manager.
  *
- * @package    tool_canvasuplifter
+ * @package    tool_courseuplift
  * @copyright  2026 Vernon Spain
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -114,18 +114,18 @@ class launcher {
         // would otherwise queue a job that fails later when the file cannot be
         // loaded; a file from another component or another user would analyse
         // fine but then be refused by the "Build this course" handler (which
-        // requires a tool_canvasuplifter file owned by the job user), so a
+        // requires a tool_courseuplift file owned by the job user), so a
         // successful analyse could never be built. Reject all three here.
         // Callers with an on-disk package should use queue_from_path(), which
         // stores it into this user's package area first.
         if ($fileid !== null) {
             $storedfile = get_file_storage()->get_file_by_id($fileid);
             $badfile = !$storedfile
-                || $storedfile->get_component() !== 'tool_canvasuplifter'
+                || $storedfile->get_component() !== 'tool_courseuplift'
                 || (int) $storedfile->get_userid() !== $userid;
             if ($badfile) {
                 throw new \InvalidArgumentException(
-                    'launcher: $fileid must be an existing tool_canvasuplifter package file owned by the user'
+                    'launcher: $fileid must be an existing tool_courseuplift package file owned by the user'
                 );
             }
         }
@@ -150,7 +150,7 @@ class launcher {
             $jobid = self::with_package_lock($fid, function () use ($jobs, $userid, $categoryid, $kind, $fid) {
                 if (!get_file_storage()->get_file_by_id($fid)) {
                     throw new \InvalidArgumentException(
-                        'launcher: $fileid must be an existing tool_canvasuplifter package file owned by the user'
+                        'launcher: $fileid must be an existing tool_courseuplift package file owned by the user'
                     );
                 }
                 return $jobs->create($userid, $categoryid, $kind, $fid, null);
@@ -363,7 +363,7 @@ class launcher {
      * @throws \moodle_exception When the lock cannot be acquired in time.
      */
     protected static function with_package_lock(int $fileid, callable $fn) {
-        $factory = \core\lock\lock_config::get_lock_factory('tool_canvasuplifter_packages');
+        $factory = \core\lock\lock_config::get_lock_factory('tool_courseuplift_packages');
         $lock = $factory->get_lock('package_' . $fileid, 10);
         if (!$lock) {
             throw new \moodle_exception('locktimeout', 'core');
@@ -388,7 +388,7 @@ class launcher {
     public static function package_storage_used(?int $userid = null): int {
         global $DB;
         $where = "component = :component AND filearea = :filearea AND filename <> '.'";
-        $params = ['component' => 'tool_canvasuplifter', 'filearea' => self::PACKAGE_FILEAREA];
+        $params = ['component' => 'tool_courseuplift', 'filearea' => self::PACKAGE_FILEAREA];
         if ($userid !== null) {
             $where .= ' AND itemid = :itemid';
             $params['itemid'] = $userid;
@@ -412,7 +412,7 @@ class launcher {
         $fs = get_file_storage();
         $filerecord = (object) [
             'contextid' => \context_system::instance()->id,
-            'component' => 'tool_canvasuplifter',
+            'component' => 'tool_courseuplift',
             'filearea' => self::PACKAGE_FILEAREA,
             'itemid' => $userid,
             // A unique filepath lets distinct packages keep their original names

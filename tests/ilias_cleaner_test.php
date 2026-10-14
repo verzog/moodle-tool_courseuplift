@@ -14,19 +14,19 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <https://www.gnu.org/licenses/>.
 
-namespace tool_canvasuplifter;
+namespace tool_courseuplift;
 
-use tool_canvasuplifter\local\build\ilias_cleaner;
+use tool_courseuplift\local\build\ilias_cleaner;
 use PHPUnit\Framework\Attributes\CoversClass;
 
 /**
  * Tests stripping ILIAS viewer chrome from exported pages.
  *
- * @package    tool_canvasuplifter
+ * @package    tool_courseuplift
  * @copyright  2026 Vernon Spain
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-#[CoversClass(\tool_canvasuplifter\local\build\ilias_cleaner::class)]
+#[CoversClass(\tool_courseuplift\local\build\ilias_cleaner::class)]
 final class ilias_cleaner_test extends \basic_testcase {
     /**
      * A folder/landing page: the "Activities" navigation column, its sibling

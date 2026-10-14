@@ -14,12 +14,12 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <https://www.gnu.org/licenses/>.
 
-namespace tool_canvasuplifter\task;
+namespace tool_courseuplift\task;
 
-use tool_canvasuplifter\local\build\course_builder;
-use tool_canvasuplifter\local\ingest\package;
-use tool_canvasuplifter\local\job_manager;
-use tool_canvasuplifter\local\parser\manifest_parser;
+use tool_courseuplift\local\build\course_builder;
+use tool_courseuplift\local\ingest\package;
+use tool_courseuplift\local\job_manager;
+use tool_courseuplift\local\parser\manifest_parser;
 
 /**
  * Adhoc task that obtains the Canvas package (downloading a URL job, or reading
@@ -27,7 +27,7 @@ use tool_canvasuplifter\local\parser\manifest_parser;
  *
  * Custom data shape: {jobid: int, quizfrombank?: int, pagegrouping?: string}.
  *
- * @package    tool_canvasuplifter
+ * @package    tool_courseuplift
  * @copyright  2026 Vernon Spain
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -38,7 +38,7 @@ class build_course_task extends package_job_task {
      * @return string
      */
     public function get_name(): string {
-        return get_string('taskbuild', 'tool_canvasuplifter');
+        return get_string('taskbuild', 'tool_courseuplift');
     }
 
     /**
@@ -83,10 +83,10 @@ class build_course_task extends package_job_task {
             // Downloads a URL job (recording the stored file for reuse) or copies
             // the stored upload.
             $temppackage = $this->resolve_package($jobs, $job);
-            $jobs->set_progress($jobid, 2, get_string('progressextract', 'tool_canvasuplifter'));
+            $jobs->set_progress($jobid, 2, get_string('progressextract', 'tool_courseuplift'));
             $root = (new package())->extract($temppackage, $extractdir);
 
-            $jobs->set_progress($jobid, 3, get_string('progressparse', 'tool_canvasuplifter'));
+            $jobs->set_progress($jobid, 3, get_string('progressparse', 'tool_courseuplift'));
             $coursemodel = (new manifest_parser($root))->parse();
 
             // A package with no embedded course title (e.g. a D2L/Brightspace

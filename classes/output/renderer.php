@@ -14,7 +14,7 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <https://www.gnu.org/licenses/>.
 
-namespace tool_canvasuplifter\output;
+namespace tool_courseuplift\output;
 
 use html_table;
 use html_writer;
@@ -29,7 +29,7 @@ use plugin_renderer_base;
  * renderer so the (string-returning) markup lives in one place rather than
  * being echoed inline from a page.
  *
- * @package    tool_canvasuplifter
+ * @package    tool_courseuplift
  * @copyright  2026 Vernon Spain
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -42,25 +42,25 @@ class renderer extends plugin_renderer_base {
      * @return string HTML.
      */
     public function analysis(array $report): string {
-        $out = $this->output->heading(get_string('reportheading', 'tool_canvasuplifter'));
+        $out = $this->output->heading(get_string('reportheading', 'tool_courseuplift'));
 
         $out .= html_writer::tag(
             'p',
-            get_string('coursename', 'tool_canvasuplifter') . ': ' . s($report['coursename'] ?? '') . ' &middot; ' .
-            get_string('sectioncount', 'tool_canvasuplifter') . ': ' . (int) ($report['sectioncount'] ?? 0) . ' &middot; ' .
-            get_string('itemcount', 'tool_canvasuplifter') . ': ' . (int) ($report['itemcount'] ?? 0)
+            get_string('coursename', 'tool_courseuplift') . ': ' . s($report['coursename'] ?? '') . ' &middot; ' .
+            get_string('sectioncount', 'tool_courseuplift') . ': ' . (int) ($report['sectioncount'] ?? 0) . ' &middot; ' .
+            get_string('itemcount', 'tool_courseuplift') . ': ' . (int) ($report['itemcount'] ?? 0)
         );
 
         // Name the detected source LMS when we recognised one.
         $source = (string) ($report['source'] ?? '');
         if (
             $source !== '' && $source !== 'generic'
-            && get_string_manager()->string_exists('source_' . $source, 'tool_canvasuplifter')
+            && get_string_manager()->string_exists('source_' . $source, 'tool_courseuplift')
         ) {
             $out .= html_writer::tag('p', get_string(
                 'detectedsource',
-                'tool_canvasuplifter',
-                get_string('source_' . $source, 'tool_canvasuplifter')
+                'tool_courseuplift',
+                get_string('source_' . $source, 'tool_courseuplift')
             ), ['class' => 'text-muted']);
         }
 
@@ -73,21 +73,21 @@ class renderer extends plugin_renderer_base {
         if (in_array('warnblackboardnative', $warnings, true)) {
             $out .= html_writer::tag(
                 'p',
-                get_string('warnblackboardnative', 'tool_canvasuplifter'),
+                get_string('warnblackboardnative', 'tool_courseuplift'),
                 ['class' => 'alert alert-warning']
             );
             $warnings = array_values(array_filter($warnings, fn($w) => $w !== 'warnblackboardnative'));
             $nativeshown = true;
         }
 
-        $summary = get_string('buildsnowsummary', 'tool_canvasuplifter', [
+        $summary = get_string('buildsnowsummary', 'tool_courseuplift', [
             'now' => (int) ($report['buildsnowtotal'] ?? 0),
             'later' => (int) ($report['latertotal'] ?? 0),
         ]);
         // Empty Canvas quizzes are neither built now nor deferred; count them so the totals add up.
         $notbuilt = (int) ($report['notbuilttotal'] ?? 0);
         if ($notbuilt > 0) {
-            $summary .= ' ' . get_string('buildsnowsummarynotbuilt', 'tool_canvasuplifter', $notbuilt);
+            $summary .= ' ' . get_string('buildsnowsummarynotbuilt', 'tool_courseuplift', $notbuilt);
         }
         $out .= html_writer::tag('p', $summary, ['class' => 'alert alert-info']);
 
@@ -118,12 +118,12 @@ class renderer extends plugin_renderer_base {
     private function mapping_table(array $rows): string {
         $table = new html_table();
         $table->head = [
-            get_string('colkind', 'tool_canvasuplifter'),
-            get_string('colcount', 'tool_canvasuplifter'),
-            get_string('coltarget', 'tool_canvasuplifter'),
-            get_string('colbuildsnow', 'tool_canvasuplifter'),
-            get_string('colconfidence', 'tool_canvasuplifter'),
-            get_string('colnote', 'tool_canvasuplifter'),
+            get_string('colkind', 'tool_courseuplift'),
+            get_string('colcount', 'tool_courseuplift'),
+            get_string('coltarget', 'tool_courseuplift'),
+            get_string('colbuildsnow', 'tool_courseuplift'),
+            get_string('colconfidence', 'tool_courseuplift'),
+            get_string('colnote', 'tool_courseuplift'),
         ];
         foreach ($rows as $row) {
             $table->data[] = [
@@ -132,10 +132,10 @@ class renderer extends plugin_renderer_base {
                 s($row['target']),
                 get_string(
                     !empty($row['notbuilt']) ? 'buildsnow_no' : ($row['buildsnow'] ? 'buildsnow_yes' : 'buildsnow_later'),
-                    'tool_canvasuplifter'
+                    'tool_courseuplift'
                 ),
-                get_string('confidence_' . $row['confidence'], 'tool_canvasuplifter'),
-                get_string($row['note'], 'tool_canvasuplifter'),
+                get_string('confidence_' . $row['confidence'], 'tool_courseuplift'),
+                get_string($row['note'], 'tool_courseuplift'),
             ];
         }
         return html_writer::table($table);
@@ -151,16 +151,16 @@ class renderer extends plugin_renderer_base {
         if (empty($matrix)) {
             return '';
         }
-        $out = $this->output->heading(get_string('matrixheading', 'tool_canvasuplifter'), 4);
-        $out .= html_writer::tag('p', get_string('matrixexplain', 'tool_canvasuplifter', [
+        $out = $this->output->heading(get_string('matrixheading', 'tool_courseuplift'), 4);
+        $out .= html_writer::tag('p', get_string('matrixexplain', 'tool_courseuplift', [
             'supported' => (int) ($matrix['supported'] ?? 0),
             'total' => (int) ($matrix['total'] ?? 0),
         ]));
         $table = new html_table();
         $table->head = [
-            get_string('matrixcoltype', 'tool_canvasuplifter'),
-            get_string('colcount', 'tool_canvasuplifter'),
-            get_string('matrixcolsupported', 'tool_canvasuplifter'),
+            get_string('matrixcoltype', 'tool_courseuplift'),
+            get_string('colcount', 'tool_courseuplift'),
+            get_string('matrixcolsupported', 'tool_courseuplift'),
         ];
         $statuskeys = [
             'yes' => 'matrixsupported_yes',
@@ -169,11 +169,11 @@ class renderer extends plugin_renderer_base {
         ];
         foreach ($matrix['rows'] ?? [] as $mrow) {
             $typekey = 'qtype_' . $mrow['label'];
-            $typelabel = get_string_manager()->string_exists($typekey, 'tool_canvasuplifter')
-                ? get_string($typekey, 'tool_canvasuplifter')
+            $typelabel = get_string_manager()->string_exists($typekey, 'tool_courseuplift')
+                ? get_string($typekey, 'tool_courseuplift')
                 : $mrow['label'];
             $status = $mrow['status'] ?? ($mrow['supported'] ? 'yes' : 'unsupported');
-            $converts = get_string($statuskeys[$status] ?? 'matrixsupported_no', 'tool_canvasuplifter');
+            $converts = get_string($statuskeys[$status] ?? 'matrixsupported_no', 'tool_courseuplift');
             // For skipped rows, name the assessments the dropped questions came
             // from so a shortened quiz can't slip through unnoticed.
             if (!empty($mrow['sources'])) {
@@ -181,7 +181,7 @@ class renderer extends plugin_renderer_base {
                     fn($source) => s($source['name']) . ' (' . (int) $source['count'] . ')',
                     $mrow['sources']
                 );
-                $converts .= ' &mdash; ' . get_string('matrixskippedfrom', 'tool_canvasuplifter', implode(', ', $names));
+                $converts .= ' &mdash; ' . get_string('matrixskippedfrom', 'tool_courseuplift', implode(', ', $names));
             }
             $table->data[] = [
                 s($typelabel),
@@ -202,11 +202,11 @@ class renderer extends plugin_renderer_base {
         if (empty($outcomes)) {
             return '';
         }
-        $out = $this->output->heading(get_string('outcomesheading', 'tool_canvasuplifter'), 4);
+        $out = $this->output->heading(get_string('outcomesheading', 'tool_courseuplift'), 4);
         if (!empty($outcomes['malformed'])) {
-            return $out . html_writer::tag('p', get_string('outcomesmalformed', 'tool_canvasuplifter'));
+            return $out . html_writer::tag('p', get_string('outcomesmalformed', 'tool_courseuplift'));
         }
-        $out .= html_writer::tag('p', get_string('outcomessummary', 'tool_canvasuplifter', [
+        $out .= html_writer::tag('p', get_string('outcomessummary', 'tool_courseuplift', [
             'total' => (int) ($outcomes['total'] ?? 0),
             'importable' => (int) ($outcomes['importable'] ?? 0),
             'skipped' => (int) ($outcomes['skipped'] ?? 0),
@@ -224,11 +224,11 @@ class renderer extends plugin_renderer_base {
         if (empty($events)) {
             return '';
         }
-        $out = $this->output->heading(get_string('eventsheading', 'tool_canvasuplifter'), 4);
+        $out = $this->output->heading(get_string('eventsheading', 'tool_courseuplift'), 4);
         if (!empty($events['malformed'])) {
-            return $out . html_writer::tag('p', get_string('eventsmalformed', 'tool_canvasuplifter'));
+            return $out . html_writer::tag('p', get_string('eventsmalformed', 'tool_courseuplift'));
         }
-        $out .= html_writer::tag('p', get_string('eventssummary', 'tool_canvasuplifter', [
+        $out .= html_writer::tag('p', get_string('eventssummary', 'tool_courseuplift', [
             'total' => (int) ($events['total'] ?? 0),
             'importable' => (int) ($events['importable'] ?? 0),
             'skipped' => (int) ($events['skipped'] ?? 0),
@@ -246,31 +246,31 @@ class renderer extends plugin_renderer_base {
         if (empty($sections)) {
             return '';
         }
-        $out = $this->output->heading(get_string('itemdetailheading', 'tool_canvasuplifter'), 4);
+        $out = $this->output->heading(get_string('itemdetailheading', 'tool_courseuplift'), 4);
         foreach ($sections as $section) {
             if (empty($section['items'])) {
                 continue;
             }
             $table = new html_table();
             $table->head = [
-                get_string('coltitle', 'tool_canvasuplifter'),
-                get_string('coltarget', 'tool_canvasuplifter'),
-                get_string('colbuildsnow', 'tool_canvasuplifter'),
-                get_string('colconfidence', 'tool_canvasuplifter'),
+                get_string('coltitle', 'tool_courseuplift'),
+                get_string('coltarget', 'tool_courseuplift'),
+                get_string('colbuildsnow', 'tool_courseuplift'),
+                get_string('colconfidence', 'tool_courseuplift'),
             ];
             foreach ($section['items'] as $detailitem) {
                 $title = $detailitem['title'] !== '' ? $detailitem['title'] : $detailitem['kind'];
                 $table->data[] = [
                     s($title),
                     s($detailitem['target']),
-                    get_string($detailitem['buildsnow'] ? 'buildsnow_yes' : 'buildsnow_later', 'tool_canvasuplifter'),
-                    get_string('confidence_' . $detailitem['confidence'], 'tool_canvasuplifter'),
+                    get_string($detailitem['buildsnow'] ? 'buildsnow_yes' : 'buildsnow_later', 'tool_courseuplift'),
+                    get_string('confidence_' . $detailitem['confidence'], 'tool_courseuplift'),
                 ];
             }
             $sectiontitle = $section['title'] !== ''
                 ? $section['title']
-                : get_string('untitledsection', 'tool_canvasuplifter');
-            $summarytext = get_string('sectionitemscount', 'tool_canvasuplifter', [
+                : get_string('untitledsection', 'tool_courseuplift');
+            $summarytext = get_string('sectionitemscount', 'tool_courseuplift', [
                 'title' => $sectiontitle,
                 'count' => count($section['items']),
             ]);
@@ -292,20 +292,20 @@ class renderer extends plugin_renderer_base {
         if (empty($orphans)) {
             return '';
         }
-        $out = $this->output->heading(get_string('orphansheading', 'tool_canvasuplifter'), 4);
-        $explain = get_string('orphansexplain', 'tool_canvasuplifter');
+        $out = $this->output->heading(get_string('orphansheading', 'tool_courseuplift'), 4);
+        $explain = get_string('orphansexplain', 'tool_courseuplift');
         // Not every listed resource is imported when an empty Canvas quiz is among them.
         if (in_array('none', array_column($orphans, 'placement'), true)) {
-            $explain .= ' ' . get_string('orphansexplainnone', 'tool_canvasuplifter');
+            $explain .= ' ' . get_string('orphansexplainnone', 'tool_courseuplift');
         }
         $out .= html_writer::tag('p', $explain);
         $table = new html_table();
         $table->head = [
-            get_string('coltitle', 'tool_canvasuplifter'),
-            get_string('colkind', 'tool_canvasuplifter'),
-            get_string('coltarget', 'tool_canvasuplifter'),
-            get_string('colresourcetype', 'tool_canvasuplifter'),
-            get_string('colplacement', 'tool_canvasuplifter'),
+            get_string('coltitle', 'tool_courseuplift'),
+            get_string('colkind', 'tool_courseuplift'),
+            get_string('coltarget', 'tool_courseuplift'),
+            get_string('colresourcetype', 'tool_courseuplift'),
+            get_string('colplacement', 'tool_courseuplift'),
         ];
         $placements = [
             'top' => 'placement_top',
@@ -320,7 +320,7 @@ class renderer extends plugin_renderer_base {
                 s($orphan['kind']),
                 s($orphan['target']),
                 s($orphan['resourcetype'] !== '' ? $orphan['resourcetype'] : '-'),
-                get_string($placement, 'tool_canvasuplifter'),
+                get_string($placement, 'tool_courseuplift'),
             ];
         }
         return $out . html_writer::table($table);
@@ -333,11 +333,11 @@ class renderer extends plugin_renderer_base {
      * @return string HTML.
      */
     private function unknown_types(array $unknowntypes): string {
-        $out = $this->output->heading(get_string('unknownheading', 'tool_canvasuplifter'), 4);
+        $out = $this->output->heading(get_string('unknownheading', 'tool_courseuplift'), 4);
         $table = new html_table();
         $table->head = [
-            get_string('colresourcetype', 'tool_canvasuplifter'),
-            get_string('colcount', 'tool_canvasuplifter'),
+            get_string('colresourcetype', 'tool_courseuplift'),
+            get_string('colcount', 'tool_courseuplift'),
         ];
         foreach ($unknowntypes as $type => $count) {
             $table->data[] = [s($type), (int) $count];
@@ -352,11 +352,11 @@ class renderer extends plugin_renderer_base {
      * @return string HTML.
      */
     private function warnings(array $warnings): string {
-        $out = $this->output->heading(get_string('warningsheading', 'tool_canvasuplifter'), 4);
+        $out = $this->output->heading(get_string('warningsheading', 'tool_courseuplift'), 4);
         if (empty($warnings)) {
-            return $out . html_writer::tag('p', get_string('nowarnings', 'tool_canvasuplifter'));
+            return $out . html_writer::tag('p', get_string('nowarnings', 'tool_courseuplift'));
         }
-        $items = array_map(fn($key) => get_string($key, 'tool_canvasuplifter'), $warnings);
+        $items = array_map(fn($key) => get_string($key, 'tool_courseuplift'), $warnings);
         return $out . html_writer::alist($items);
     }
 
@@ -372,13 +372,13 @@ class renderer extends plugin_renderer_base {
      * @return string HTML.
      */
     public function build_from_report_form(int $fileid, ?int $categoryid, string $pagegrouping, int $quizfrombank): string {
-        $out = $this->output->heading(get_string('readytobuildheading', 'tool_canvasuplifter'), 4);
-        $out .= html_writer::tag('p', get_string('readytobuildexplain', 'tool_canvasuplifter'));
+        $out = $this->output->heading(get_string('readytobuildheading', 'tool_courseuplift'), 4);
+        $out .= html_writer::tag('p', get_string('readytobuildexplain', 'tool_courseuplift'));
 
         $categories = \core_course_category::make_categories_list('moodle/course:create');
         $form = html_writer::start_tag('form', [
             'method' => 'post',
-            'action' => new moodle_url('/admin/tool/canvasuplifter/index.php'),
+            'action' => new moodle_url('/admin/tool/courseuplift/index.php'),
             'class' => 'mform',
         ]);
         $form .= html_writer::empty_tag('input', ['type' => 'hidden', 'name' => 'sesskey', 'value' => sesskey()]);
@@ -386,7 +386,7 @@ class renderer extends plugin_renderer_base {
         $form .= html_writer::start_div('form-group row mb-2');
         $form .= html_writer::tag(
             'label',
-            get_string('targetcategory', 'tool_canvasuplifter'),
+            get_string('targetcategory', 'tool_courseuplift'),
             ['for' => 'reportcategoryid', 'class' => 'col-md-3 col-form-label']
         );
         $form .= html_writer::start_div('col-md-9');
@@ -422,28 +422,28 @@ class renderer extends plugin_renderer_base {
         $form .= html_writer::empty_tag('input', $checkboxattrs);
         $form .= html_writer::tag(
             'label',
-            get_string('quizfrombank', 'tool_canvasuplifter'),
+            get_string('quizfrombank', 'tool_courseuplift'),
             ['for' => 'reportquizfrombank', 'class' => 'form-check-label']
         );
         $form .= html_writer::end_div();
         $groupinglabels = [
-            '' => get_string('pagegrouping_none', 'tool_canvasuplifter'),
-            'book' => get_string('pagegrouping_book', 'tool_canvasuplifter'),
-            'lesson' => get_string('pagegrouping_lesson', 'tool_canvasuplifter'),
+            '' => get_string('pagegrouping_none', 'tool_courseuplift'),
+            'book' => get_string('pagegrouping_book', 'tool_courseuplift'),
+            'lesson' => get_string('pagegrouping_lesson', 'tool_courseuplift'),
         ];
-        $form .= html_writer::tag('p', get_string('chosenbuildoptions', 'tool_canvasuplifter', [
+        $form .= html_writer::tag('p', get_string('chosenbuildoptions', 'tool_courseuplift', [
             'grouping' => $groupinglabels[$pagegrouping] ?? $groupinglabels[''],
         ]), ['class' => 'text-muted']);
         $form .= html_writer::div(
             html_writer::empty_tag('input', [
                 'type' => 'submit',
-                'value' => get_string('buildcourse', 'tool_canvasuplifter'),
+                'value' => get_string('buildcourse', 'tool_courseuplift'),
                 'class' => 'btn btn-primary',
             ])
             . ' '
             . html_writer::link(
-                new moodle_url('/admin/tool/canvasuplifter/index.php'),
-                get_string('analyseanother', 'tool_canvasuplifter'),
+                new moodle_url('/admin/tool/courseuplift/index.php'),
+                get_string('analyseanother', 'tool_courseuplift'),
                 ['class' => 'btn btn-secondary']
             ),
             'mt-3'

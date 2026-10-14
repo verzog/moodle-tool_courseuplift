@@ -14,12 +14,12 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <https://www.gnu.org/licenses/>.
 
-namespace tool_canvasuplifter\local\build;
+namespace tool_courseuplift\local\build;
 
 use DOMDocument;
 use DOMElement;
 use stdClass;
-use tool_canvasuplifter\local\model\item;
+use tool_courseuplift\local\model\item;
 
 /**
  * Creates a mod_forum activity from a Canvas discussion-topic resource.
@@ -30,7 +30,7 @@ use tool_canvasuplifter\local\model\item;
  * learners can reply to it. Any media the prompt embeds is imported so it resolves
  * through pluginfile.php.
  *
- * @package    tool_canvasuplifter
+ * @package    tool_courseuplift
  * @copyright  2026 Vernon Spain
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */

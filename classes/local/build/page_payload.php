@@ -14,9 +14,9 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <https://www.gnu.org/licenses/>.
 
-namespace tool_canvasuplifter\local\build;
+namespace tool_courseuplift\local\build;
 
-use tool_canvasuplifter\local\model\item;
+use tool_courseuplift\local\model\item;
 
 /**
  * Locate and read the HTML payload that backs a Canvas page item.
@@ -25,7 +25,7 @@ use tool_canvasuplifter\local\model\item;
  * "where does this page's HTML live, and what title should it carry" rules stay
  * in one place. Filesystem-only (no Moodle DB dependency).
  *
- * @package    tool_canvasuplifter
+ * @package    tool_courseuplift
  * @copyright  2026 Vernon Spain
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */

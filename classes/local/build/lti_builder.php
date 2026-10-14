@@ -14,12 +14,12 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <https://www.gnu.org/licenses/>.
 
-namespace tool_canvasuplifter\local\build;
+namespace tool_courseuplift\local\build;
 
 use stdClass;
-use tool_canvasuplifter\local\model\item;
-use tool_canvasuplifter\local\parser\lti_cartridge;
-use tool_canvasuplifter\local\parser\lti_classifier;
+use tool_courseuplift\local\model\item;
+use tool_courseuplift\local\parser\lti_cartridge;
+use tool_courseuplift\local\parser\lti_classifier;
 
 /**
  * Creates a mod_lti placeholder from a Common Cartridge LTI link.
@@ -31,7 +31,7 @@ use tool_canvasuplifter\local\parser\lti_classifier;
  * mod_lti instance with the launch URL filled in and an intro note flagging
  * that credentials still need to be configured.
  *
- * @package    tool_canvasuplifter
+ * @package    tool_courseuplift
  * @copyright  2026 Vernon Spain
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -220,7 +220,7 @@ class lti_builder {
     private function classifier_patterns(): array {
         if ($this->classifierpatterns === null) {
             $this->classifierpatterns = lti_classifier::parse_patterns(
-                (string) get_config('tool_canvasuplifter', 'ltimoodlepatterns')
+                (string) get_config('tool_courseuplift', 'ltimoodlepatterns')
             );
         }
         return $this->classifierpatterns;
@@ -404,7 +404,7 @@ class lti_builder {
         // looking at the activity knows the tool still needs credentials. A
         // re-homed assignment supplies raw instructions HTML; a cartridge supplies
         // only a plain-text description, which is escaped.
-        $note = get_string('lti_placeholder_note', 'tool_canvasuplifter');
+        $note = get_string('lti_placeholder_note', 'tool_courseuplift');
         $descriptionhtml = trim($cartridge['descriptionhtml'] ?? '');
         if ($descriptionhtml === '') {
             $plain = trim($cartridge['description']);

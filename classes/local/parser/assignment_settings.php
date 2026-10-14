@@ -14,7 +14,7 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <https://www.gnu.org/licenses/>.
 
-namespace tool_canvasuplifter\local\parser;
+namespace tool_courseuplift\local\parser;
 
 /**
  * Reads a Canvas assignment_settings.xml document into a plain value object.
@@ -24,7 +24,7 @@ namespace tool_canvasuplifter\local\parser;
  * out the fields Moodle's mod_assign cares about. It has no Moodle dependencies
  * so it can be unit-tested directly from XML strings.
  *
- * @package    tool_canvasuplifter
+ * @package    tool_courseuplift
  * @copyright  2026 Vernon Spain
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */

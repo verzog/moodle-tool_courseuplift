@@ -14,12 +14,12 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <https://www.gnu.org/licenses/>.
 
-namespace tool_canvasuplifter\local\build;
+namespace tool_courseuplift\local\build;
 
 use stdClass;
-use tool_canvasuplifter\local\model\item;
-use tool_canvasuplifter\local\model\qti_question;
-use tool_canvasuplifter\local\parser\qti_parser;
+use tool_courseuplift\local\model\item;
+use tool_courseuplift\local\model\qti_question;
+use tool_courseuplift\local\parser\qti_parser;
 
 /**
  * Creates a mod_qbank activity from a Canvas QTI assessment and imports its
@@ -30,7 +30,7 @@ use tool_canvasuplifter\local\parser\qti_parser;
  * importer into the new bank's default question category. Question banks must be
  * created in section 0, so the section number is ignored.
  *
- * @package    tool_canvasuplifter
+ * @package    tool_courseuplift
  * @copyright  2026 Vernon Spain
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */

@@ -14,14 +14,14 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <https://www.gnu.org/licenses/>.
 
-namespace tool_canvasuplifter\local\parser;
+namespace tool_courseuplift\local\parser;
 
 use DateTimeImmutable;
 use DateTimeZone;
 use DOMDocument;
 use DOMElement;
 use Exception;
-use tool_canvasuplifter\local\model\course_event;
+use tool_courseuplift\local\model\course_event;
 
 /**
  * Parses a Canvas course_settings/events.xml file into course-event models.
@@ -32,7 +32,7 @@ use tool_canvasuplifter\local\model\course_event;
  * XML strings; it resolves the timestamps to Unix time here so the builder stays a
  * thin Moodle wrapper.
  *
- * @package    tool_canvasuplifter
+ * @package    tool_courseuplift
  * @copyright  2026 Vernon Spain
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */

@@ -14,7 +14,7 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <https://www.gnu.org/licenses/>.
 
-namespace tool_canvasuplifter\local\build;
+namespace tool_courseuplift\local\build;
 
 /**
  * Collects the embedded-media references a build could not resolve.
@@ -41,7 +41,7 @@ namespace tool_canvasuplifter\local\build;
  * report and promoted with {@see merge()} only when the owning activity survives,
  * so a rejected-and-deleted activity contributes no phantom embeds.
  *
- * @package    tool_canvasuplifter
+ * @package    tool_courseuplift
  * @copyright  2026 Vernon Spain
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */

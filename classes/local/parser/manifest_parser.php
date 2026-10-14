@@ -14,20 +14,20 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <https://www.gnu.org/licenses/>.
 
-namespace tool_canvasuplifter\local\parser;
+namespace tool_courseuplift\local\parser;
 
 use DOMDocument;
 use DOMElement;
-use tool_canvasuplifter\local\build\ilias_cleaner;
-use tool_canvasuplifter\local\build\link_rewriter;
-use tool_canvasuplifter\local\build\media_report;
-use tool_canvasuplifter\local\build\page_payload;
-use tool_canvasuplifter\local\build\question_xml_writer;
-use tool_canvasuplifter\local\build\safe_path;
-use tool_canvasuplifter\local\model\course_model;
-use tool_canvasuplifter\local\model\section_model;
-use tool_canvasuplifter\local\model\item;
-use tool_canvasuplifter\local\model\qti_question;
+use tool_courseuplift\local\build\ilias_cleaner;
+use tool_courseuplift\local\build\link_rewriter;
+use tool_courseuplift\local\build\media_report;
+use tool_courseuplift\local\build\page_payload;
+use tool_courseuplift\local\build\question_xml_writer;
+use tool_courseuplift\local\build\safe_path;
+use tool_courseuplift\local\model\course_model;
+use tool_courseuplift\local\model\section_model;
+use tool_courseuplift\local\model\item;
+use tool_courseuplift\local\model\qti_question;
 
 /**
  * Reads an extracted Canvas Common Cartridge package into a {@see course_model}.
@@ -35,7 +35,7 @@ use tool_canvasuplifter\local\model\qti_question;
  * Deliberately free of Moodle dependencies so it can be unit-tested on its own.
  * It does NOT create anything in Moodle - that is the job of later phases.
  *
- * @package    tool_canvasuplifter
+ * @package    tool_courseuplift
  * @copyright  2026 Vernon Spain
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */

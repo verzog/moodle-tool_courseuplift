@@ -14,21 +14,21 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <https://www.gnu.org/licenses/>.
 
-namespace tool_canvasuplifter;
+namespace tool_courseuplift;
 
-use tool_canvasuplifter\local\build\media_report;
-use tool_canvasuplifter\local\build\question_importer;
-use tool_canvasuplifter\local\model\qti_question;
+use tool_courseuplift\local\build\media_report;
+use tool_courseuplift\local\build\question_importer;
+use tool_courseuplift\local\model\qti_question;
 use PHPUnit\Framework\Attributes\CoversClass;
 
 /**
  * Tests that the question importer claims question media only for questions Moodle stored.
  *
- * @package    tool_canvasuplifter
+ * @package    tool_courseuplift
  * @copyright  2026 Vernon Spain
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-#[CoversClass(\tool_canvasuplifter\local\build\question_importer::class)]
+#[CoversClass(\tool_courseuplift\local\build\question_importer::class)]
 final class question_importer_media_test extends \advanced_testcase {
     /**
      * A two-option multiple choice question whose stem embeds the given package image.

@@ -14,7 +14,7 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <https://www.gnu.org/licenses/>.
 
-namespace tool_canvasuplifter\local\model;
+namespace tool_courseuplift\local\model;
 
 /**
  * One Canvas calendar event parsed from course_settings/events.xml.
@@ -23,7 +23,7 @@ namespace tool_canvasuplifter\local\model;
  * unit-tested in isolation. Times are already resolved to Unix timestamps by the
  * parser (Canvas stores them as ISO-8601 UTC), so the builder stays thin.
  *
- * @package    tool_canvasuplifter
+ * @package    tool_courseuplift
  * @copyright  2026 Vernon Spain
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */

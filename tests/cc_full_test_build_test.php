@@ -14,11 +14,11 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <https://www.gnu.org/licenses/>.
 
-namespace tool_canvasuplifter;
+namespace tool_courseuplift;
 
-use tool_canvasuplifter\local\build\course_builder;
-use tool_canvasuplifter\local\model\course_model;
-use tool_canvasuplifter\local\parser\manifest_parser;
+use tool_courseuplift\local\build\course_builder;
+use tool_courseuplift\local\model\course_model;
+use tool_courseuplift\local\parser\manifest_parser;
 use PHPUnit\Framework\Attributes\CoversClass;
 
 /**
@@ -27,11 +27,11 @@ use PHPUnit\Framework\Attributes\CoversClass;
  * external tools, weblinks, a question bank and a quiz. Complements gbird_sandbox
  * (analyse-only) with a full course build across many activity kinds at once.
  *
- * @package    tool_canvasuplifter
+ * @package    tool_courseuplift
  * @copyright  2026 Vernon Spain
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-#[CoversClass(\tool_canvasuplifter\local\build\course_builder::class)]
+#[CoversClass(\tool_courseuplift\local\build\course_builder::class)]
 final class cc_full_test_build_test extends \advanced_testcase {
     /**
      * Build the whole fixture into a fresh course and return the modinfo plus the
@@ -207,7 +207,7 @@ final class cc_full_test_build_test extends \advanced_testcase {
         $model->navtoolsunimported = 2;
         $report = (new course_builder($category->id, __DIR__ . '/fixtures/cc_full_test'))->build($model);
 
-        $this->assertContains(get_string('warnreportnavtools', 'tool_canvasuplifter'), $report['warnings']);
+        $this->assertContains(get_string('warnreportnavtools', 'tool_courseuplift'), $report['warnings']);
     }
 
     /**
@@ -223,13 +223,13 @@ final class cc_full_test_build_test extends \advanced_testcase {
 
         $model = new course_model();
         $model->fullname = 'Blackboard Export';
-        $model->source = \tool_canvasuplifter\local\parser\source_detector::BLACKBOARD_NATIVE;
+        $model->source = \tool_courseuplift\local\parser\source_detector::BLACKBOARD_NATIVE;
         $report = (new course_builder($category->id, __DIR__ . '/fixtures/cc_full_test'))->build($model);
 
-        $this->assertContains(get_string('warnblackboardnative', 'tool_canvasuplifter'), $report['warnings']);
+        $this->assertContains(get_string('warnblackboardnative', 'tool_courseuplift'), $report['warnings']);
         $this->assertSame(0, $report['created']);
         // The build report carries the source so the status page can lead with the
         // native-format explanation before the zero-created summary.
-        $this->assertSame(\tool_canvasuplifter\local\parser\source_detector::BLACKBOARD_NATIVE, $report['source']);
+        $this->assertSame(\tool_courseuplift\local\parser\source_detector::BLACKBOARD_NATIVE, $report['source']);
     }
 }

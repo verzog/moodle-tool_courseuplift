@@ -17,31 +17,31 @@
 /**
  * Upgrade steps.
  *
- * @package    tool_canvasuplifter
+ * @package    tool_courseuplift
  * @copyright  2026 Vernon Spain
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 /**
- * Apply schema and data upgrades for tool_canvasuplifter.
+ * Apply schema and data upgrades for tool_courseuplift.
  *
  * @param int $oldversion Previously-installed version.
  * @return bool
  */
-function xmldb_tool_canvasuplifter_upgrade(int $oldversion): bool {
+function xmldb_tool_courseuplift_upgrade(int $oldversion): bool {
     global $DB;
     $dbman = $DB->get_manager();
 
     if ($oldversion < 2026061101) {
-        $table = new xmldb_table('tool_canvasuplifter_jobs');
+        $table = new xmldb_table('tool_courseuplift_jobs');
         if (!$dbman->table_exists($table)) {
-            $dbman->install_one_table_from_xmldb_file(__DIR__ . '/install.xml', 'tool_canvasuplifter_jobs');
+            $dbman->install_one_table_from_xmldb_file(__DIR__ . '/install.xml', 'tool_courseuplift_jobs');
         }
-        upgrade_plugin_savepoint(true, 2026061101, 'tool', 'canvasuplifter');
+        upgrade_plugin_savepoint(true, 2026061101, 'tool', 'courseuplift');
     }
 
     if ($oldversion < 2026061104) {
-        $table = new xmldb_table('tool_canvasuplifter_jobs');
+        $table = new xmldb_table('tool_courseuplift_jobs');
 
         $progress = new xmldb_field('progress', XMLDB_TYPE_INTEGER, '3', null, XMLDB_NOTNULL, null, '0', 'errormsg');
         if (!$dbman->field_exists($table, $progress)) {
@@ -53,11 +53,11 @@ function xmldb_tool_canvasuplifter_upgrade(int $oldversion): bool {
             $dbman->add_field($table, $progressmessage);
         }
 
-        upgrade_plugin_savepoint(true, 2026061104, 'tool', 'canvasuplifter');
+        upgrade_plugin_savepoint(true, 2026061104, 'tool', 'courseuplift');
     }
 
     if ($oldversion < 2026062405) {
-        $table = new xmldb_table('tool_canvasuplifter_jobs');
+        $table = new xmldb_table('tool_courseuplift_jobs');
 
         // Whether a run produces a report (analyse) or a course (build).
         // Existing rows are builds, which is the default.
@@ -79,18 +79,18 @@ function xmldb_tool_canvasuplifter_upgrade(int $oldversion): bool {
             $dbman->change_field_notnull($table, $fileid);
         }
 
-        upgrade_plugin_savepoint(true, 2026062405, 'tool', 'canvasuplifter');
+        upgrade_plugin_savepoint(true, 2026062405, 'tool', 'courseuplift');
     }
 
     if ($oldversion < 2026062500) {
         // Chunked-upload support was folded in from the former local_chunkupload
         // plugin, so the package upload form no longer needs it as a separate
         // install. Create the tracking table for sites upgrading from before.
-        $table = new xmldb_table('tool_canvasuplifter_chunks');
+        $table = new xmldb_table('tool_courseuplift_chunks');
         if (!$dbman->table_exists($table)) {
-            $dbman->install_one_table_from_xmldb_file(__DIR__ . '/install.xml', 'tool_canvasuplifter_chunks');
+            $dbman->install_one_table_from_xmldb_file(__DIR__ . '/install.xml', 'tool_courseuplift_chunks');
         }
-        upgrade_plugin_savepoint(true, 2026062500, 'tool', 'canvasuplifter');
+        upgrade_plugin_savepoint(true, 2026062500, 'tool', 'courseuplift');
     }
 
     return true;

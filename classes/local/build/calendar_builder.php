@@ -14,12 +14,12 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <https://www.gnu.org/licenses/>.
 
-namespace tool_canvasuplifter\local\build;
+namespace tool_courseuplift\local\build;
 
 use calendar_event;
 use stdClass;
-use tool_canvasuplifter\local\model\course_event;
-use tool_canvasuplifter\local\parser\events_parser;
+use tool_courseuplift\local\model\course_event;
+use tool_courseuplift\local\parser\events_parser;
 
 /**
  * Imports Canvas calendar events as Moodle course calendar events.
@@ -33,7 +33,7 @@ use tool_canvasuplifter\local\parser\events_parser;
  * Assignment/quiz due dates are not in events.xml (Canvas attaches them to the
  * activity), so there is nothing to de-duplicate against the activities' own dates.
  *
- * @package    tool_canvasuplifter
+ * @package    tool_courseuplift
  * @copyright  2026 Vernon Spain
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -153,7 +153,7 @@ class calendar_builder {
      */
     private function event_name(course_event $model): string {
         $name = trim($model->title);
-        $name = $name !== '' ? $name : get_string('eventuntitled', 'tool_canvasuplifter');
+        $name = $name !== '' ? $name : get_string('eventuntitled', 'tool_courseuplift');
         // Moodle's event.name column is 255 chars; a longer Canvas title would overflow it
         // and abort the whole course build, so cap it as the other builders cap their names.
         return shorten_text($name, 255);

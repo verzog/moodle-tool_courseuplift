@@ -14,10 +14,10 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <https://www.gnu.org/licenses/>.
 
-namespace tool_canvasuplifter\local\build;
+namespace tool_courseuplift\local\build;
 
 use stdClass;
-use tool_canvasuplifter\local\model\item;
+use tool_courseuplift\local\model\item;
 
 /**
  * Builds one mod_book activity from a run of consecutive Canvas page items, with
@@ -28,7 +28,7 @@ use tool_canvasuplifter\local\model\item;
  * build(course, sectionnum, item) signature. course_builder routes maximal runs
  * of pages here when the "combine pages" build option is set to "book".
  *
- * @package    tool_canvasuplifter
+ * @package    tool_courseuplift
  * @copyright  2026 Vernon Spain
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -88,7 +88,7 @@ class book_builder {
             'course' => $course->id,
             'section' => $sectionnum,
             'visible' => 1,
-            'name' => $name !== '' ? $name : get_string('defaultbookname', 'tool_canvasuplifter'),
+            'name' => $name !== '' ? $name : get_string('defaultbookname', 'tool_courseuplift'),
             'intro' => '',
             'introformat' => FORMAT_HTML,
             // Canvas page titles often already carry their own numbering

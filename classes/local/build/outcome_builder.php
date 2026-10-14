@@ -14,13 +14,13 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <https://www.gnu.org/licenses/>.
 
-namespace tool_canvasuplifter\local\build;
+namespace tool_courseuplift\local\build;
 
 use grade_outcome;
 use grade_scale;
 use stdClass;
-use tool_canvasuplifter\local\model\outcome;
-use tool_canvasuplifter\local\parser\outcomes_parser;
+use tool_courseuplift\local\model\outcome;
+use tool_courseuplift\local\parser\outcomes_parser;
 
 /**
  * Imports Canvas learning outcomes as Moodle course grade outcomes.
@@ -34,7 +34,7 @@ use tool_canvasuplifter\local\parser\outcomes_parser;
  * Alignment of outcomes to specific activities/rubric criteria is not carried
  * across — Canvas records that separately and Moodle models it differently.
  *
- * @package    tool_canvasuplifter
+ * @package    tool_courseuplift
  * @copyright  2026 Vernon Spain
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -124,7 +124,7 @@ class outcome_builder {
         $outcome->scaleid = $scaleid;
         $outcome->description = $model->description;
         $outcome->descriptionformat = FORMAT_HTML;
-        $id = $outcome->insert('tool_canvasuplifter');
+        $id = $outcome->insert('tool_courseuplift');
         if (!$id) {
             return false;
         }
@@ -140,7 +140,7 @@ class outcome_builder {
             ->embed($systemcontext->id, 'grade', 'outcome', $model->description, (int) $id, 'course_settings');
         if ($rewritten !== $model->description) {
             $outcome->description = $rewritten;
-            $outcome->update('tool_canvasuplifter');
+            $outcome->update('tool_courseuplift');
         }
         return true;
     }
@@ -171,7 +171,7 @@ class outcome_builder {
         $scale->description = '';
         $scale->descriptionformat = FORMAT_HTML;
         $scale->standard = 0;
-        return (int) $scale->insert('tool_canvasuplifter');
+        return (int) $scale->insert('tool_courseuplift');
     }
 
     /**
@@ -184,7 +184,7 @@ class outcome_builder {
      */
     private function outcome_name(outcome $model): string {
         $name = trim($model->fullname);
-        return $name !== '' ? $name : get_string('outcomeuntitled', 'tool_canvasuplifter');
+        return $name !== '' ? $name : get_string('outcomeuntitled', 'tool_courseuplift');
     }
 
     /**

@@ -20,12 +20,12 @@
  * Folded in from local_chunkupload (2020 Justus Dieckmann WWU) so a large
  * package can be uploaded in chunks without a separate plugin dependency.
  *
- * @package    tool_canvasuplifter
+ * @package    tool_courseuplift
  * @copyright  2020 Justus Dieckmann WWU
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-namespace tool_canvasuplifter\chunkupload;
+namespace tool_courseuplift\chunkupload;
 
 use core_form\filetypes_util;
 use html_writer;
@@ -42,7 +42,7 @@ require_once($CFG->libdir . '/form/templatable_form_element.php');
 /**
  * Chunked-upload form element.
  *
- * @package    tool_canvasuplifter
+ * @package    tool_courseuplift
  * @copyright  2020 Justus Dieckmann WWU
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -118,7 +118,7 @@ class form_element extends \HTML_QuickForm_input implements \templatable {
 
         if ($value = $this->getvalue()) {
             global $DB;
-            if ($record = $DB->get_record('tool_canvasuplifter_chunks', ['id' => $value])) {
+            if ($record = $DB->get_record('tool_courseuplift_chunks', ['id' => $value])) {
                 if ($record->state == state_type::UPLOAD_COMPLETED) {
                     $filenamestring = $record->filename;
                     $showfinishedicon = true;
@@ -143,7 +143,7 @@ class form_element extends \HTML_QuickForm_input implements \templatable {
                 'filesize' => display_size((int) $this->_options['maxbytes']),
         ];
 
-        $html = $OUTPUT->render_from_template('tool_canvasuplifter/chunkupload_filepicker', $context);
+        $html = $OUTPUT->render_from_template('tool_courseuplift/chunkupload_filepicker', $context);
 
         // Need these three to filter repositories list.
         $acceptedtypes = $this->_options['accepted_types'] ? $this->_options['accepted_types'] : '*';
@@ -158,12 +158,12 @@ class form_element extends \HTML_QuickForm_input implements \templatable {
 
         // Fall back to 20 MB if the admin setting has not been written yet, so a
         // zero chunk size can never stall the uploader.
-        $chunksize = (int) get_config('tool_canvasuplifter', 'chunksize');
+        $chunksize = (int) get_config('tool_courseuplift', 'chunksize');
         if ($chunksize <= 0) {
             $chunksize = 20;
         }
 
-        $PAGE->requires->js_call_amd('tool_canvasuplifter/chunkupload', 'init', [
+        $PAGE->requires->js_call_amd('tool_courseuplift/chunkupload', 'init', [
                 'elementid' => $id,
                 'acceptedTypes' => $acceptedtypes,
                 'maxBytes' => (int) $this->_options['maxbytes'],
@@ -213,12 +213,12 @@ class form_element extends \HTML_QuickForm_input implements \templatable {
         if (is_null($value)) {
             return "";
         }
-        $record = $DB->get_record('tool_canvasuplifter_chunks', ['id' => $value]);
+        $record = $DB->get_record('tool_courseuplift_chunks', ['id' => $value]);
         if (!$record || $record->state == state_type::UNUSED_TOKEN_GENERATED) {
             return "";
         }
         if ($record->state == state_type::UPLOAD_STARTED) {
-            return get_string('uploadnotfinished', 'tool_canvasuplifter');
+            return get_string('uploadnotfinished', 'tool_courseuplift');
         }
         $path = self::get_path_for_id($value);
         if ($path == null || !file_exists($path)) {
@@ -226,7 +226,7 @@ class form_element extends \HTML_QuickForm_input implements \templatable {
         }
         if ($this->_options['maxbytes'] !== -1 && filesize($path) > $this->_options['maxbytes']) {
             unlink($path);
-            $DB->delete_records('tool_canvasuplifter_chunks', ['id' => $value]);
+            $DB->delete_records('tool_courseuplift_chunks', ['id' => $value]);
             return get_string('errorfiletoobig', 'moodle', $this->_options['maxbytes']);
         }
 
@@ -235,7 +235,7 @@ class form_element extends \HTML_QuickForm_input implements \templatable {
         $filename = $record->filename;
         if (!$util->is_allowed_file_type($filename, $allowlist)) {
             unlink($path);
-            $DB->delete_records('tool_canvasuplifter_chunks', ['id' => $value]);
+            $DB->delete_records('tool_courseuplift_chunks', ['id' => $value]);
             $filetype = substr($filename, strrpos($filename, '.'));
             return get_string('invalidfiletype', 'core_repository', $filetype);
         }
@@ -257,7 +257,7 @@ class form_element extends \HTML_QuickForm_input implements \templatable {
 
         do {
             $id = random_int(0, 10000000000);
-        } while ($DB->record_exists('tool_canvasuplifter_chunks', ['id' => $id]));
+        } while ($DB->record_exists('tool_courseuplift_chunks', ['id' => $id]));
 
         $record = new \stdClass();
         $record->id = $id;
@@ -265,7 +265,7 @@ class form_element extends \HTML_QuickForm_input implements \templatable {
         $record->contextid = $PAGE->context->id;
         $record->maxlength = $this->_options['maxbytes'];
         $record->lastmodified = time();
-        $DB->insert_record_raw('tool_canvasuplifter_chunks', $record, false, false, true);
+        $DB->insert_record_raw('tool_courseuplift_chunks', $record, false, false, true);
         return $id;
     }
 
@@ -281,7 +281,7 @@ class form_element extends \HTML_QuickForm_input implements \templatable {
     public static function get_progress($id) {
         global $DB;
         $record = $DB->get_record(
-            'tool_canvasuplifter_chunks',
+            'tool_courseuplift_chunks',
             ['id' => $id],
             'id, state, currentpos, length',
             IGNORE_MISSING
@@ -336,7 +336,7 @@ class form_element extends \HTML_QuickForm_input implements \templatable {
         $record->state = (int) $record->currentpos == (int) $record->length
             ? state_type::UPLOAD_COMPLETED : state_type::UPLOAD_STARTED;
         $record->lastmodified = time();
-        $DB->update_record('tool_canvasuplifter_chunks', $record);
+        $DB->update_record('tool_courseuplift_chunks', $record);
         return null;
     }
 
@@ -395,7 +395,7 @@ class form_element extends \HTML_QuickForm_input implements \templatable {
      */
     public static function get_base_folder() {
         global $CFG;
-        return "$CFG->dataroot/tool_canvasuplifter/chunks/";
+        return "$CFG->dataroot/tool_courseuplift/chunks/";
     }
 
     /**
@@ -431,7 +431,7 @@ class form_element extends \HTML_QuickForm_input implements \templatable {
     ) {
         global $DB;
         $fs = get_file_storage();
-        $record = $DB->get_record('tool_canvasuplifter_chunks', ['id' => $chunkuploadid], '*', IGNORE_MISSING);
+        $record = $DB->get_record('tool_courseuplift_chunks', ['id' => $chunkuploadid], '*', IGNORE_MISSING);
         // Loose comparison: the DB layer returns the state column as a string.
         if (!$record || $record->state != state_type::UPLOAD_COMPLETED) {
             return null;
@@ -458,7 +458,7 @@ class form_element extends \HTML_QuickForm_input implements \templatable {
      */
     public static function delete_file($chunkuploadid) {
         global $DB;
-        $DB->delete_records('tool_canvasuplifter_chunks', ['id' => $chunkuploadid]);
+        $DB->delete_records('tool_courseuplift_chunks', ['id' => $chunkuploadid]);
         $path = self::get_path_for_id($chunkuploadid);
         if ($path !== null && file_exists($path)) {
             unlink($path);
@@ -476,7 +476,7 @@ class form_element extends \HTML_QuickForm_input implements \templatable {
         if (is_null($id)) {
             return false;
         }
-        $record = $DB->get_record('tool_canvasuplifter_chunks', ['id' => $id]);
+        $record = $DB->get_record('tool_courseuplift_chunks', ['id' => $id]);
         if (!$record) {
             return false;
         }

@@ -14,21 +14,21 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <https://www.gnu.org/licenses/>.
 
-namespace tool_canvasuplifter;
+namespace tool_courseuplift;
 
-use tool_canvasuplifter\local\parser\manifest_parser;
-use tool_canvasuplifter\local\parser\source_detector;
-use tool_canvasuplifter\local\model\item;
+use tool_courseuplift\local\parser\manifest_parser;
+use tool_courseuplift\local\parser\source_detector;
+use tool_courseuplift\local\model\item;
 use PHPUnit\Framework\Attributes\CoversClass;
 
 /**
  * Tests for the manifest parser.
  *
- * @package    tool_canvasuplifter
+ * @package    tool_courseuplift
  * @copyright  2026 Vernon Spain
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-#[CoversClass(\tool_canvasuplifter\local\parser\manifest_parser::class)]
+#[CoversClass(\tool_courseuplift\local\parser\manifest_parser::class)]
 final class manifest_parser_test extends \advanced_testcase {
     /**
      * Write a minimal Canvas-style package to a temporary directory.
@@ -2637,9 +2637,9 @@ XML;
      *
      * @param array $placed Placed page slugs => titles.
      * @param array $unplaced Unreferenced page slugs => titles.
-     * @return \tool_canvasuplifter\local\model\course_model
+     * @return \tool_courseuplift\local\model\course_model
      */
-    private function parse_syllabus_candidates(array $placed, array $unplaced): \tool_canvasuplifter\local\model\course_model {
+    private function parse_syllabus_candidates(array $placed, array $unplaced): \tool_courseuplift\local\model\course_model {
         $dir = make_request_directory();
         mkdir($dir . '/wiki_content');
         $items = '';
@@ -3057,7 +3057,7 @@ XML;
         $this->assertStringContainsString('Inline body', $assign->inlinexml);
         // The captured snippet parses through assignment_settings as a
         // full CC 1.3 profile document.
-        $settings = \tool_canvasuplifter\local\parser\assignment_settings::parse($assign->inlinexml);
+        $settings = \tool_courseuplift\local\parser\assignment_settings::parse($assign->inlinexml);
         $this->assertSame('Inline Lab', $settings->title);
         $this->assertSame(7, $settings->points);
     }

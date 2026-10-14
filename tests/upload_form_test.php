@@ -14,19 +14,19 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <https://www.gnu.org/licenses/>.
 
-namespace tool_canvasuplifter;
+namespace tool_courseuplift;
 
-use tool_canvasuplifter\form\upload_form;
+use tool_courseuplift\form\upload_form;
 use PHPUnit\Framework\Attributes\CoversClass;
 
 /**
  * Tests for the package upload form's built-in chunked-upload field.
  *
- * @package    tool_canvasuplifter
+ * @package    tool_courseuplift
  * @copyright  2026 Vernon Spain
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-#[CoversClass(\tool_canvasuplifter\form\upload_form::class)]
+#[CoversClass(\tool_courseuplift\form\upload_form::class)]
 final class upload_form_test extends \advanced_testcase {
     /**
      * The chunked uploader is bundled, so it is always available and the form

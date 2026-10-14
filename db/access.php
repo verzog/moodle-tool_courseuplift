@@ -15,9 +15,9 @@
 // along with Moodle.  If not, see <https://www.gnu.org/licenses/>.
 
 /**
- * Capabilities for tool_canvasuplifter.
+ * Capabilities for tool_courseuplift.
  *
- * @package    tool_canvasuplifter
+ * @package    tool_courseuplift
  * @copyright  2026 Vernon Spain
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -26,7 +26,7 @@ defined('MOODLE_INTERNAL') || die();
 
 $capabilities = [
     // Allows a user to upload a Canvas package and view the conversion report.
-    'tool/canvasuplifter:use' => [
+    'tool/courseuplift:use' => [
         // Imported Canvas pages become HTML page content, so this carries an XSS risk.
         'riskbitmask'  => RISK_SPAM | RISK_XSS,
         'captype'      => 'write',

@@ -14,20 +14,20 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <https://www.gnu.org/licenses/>.
 
-namespace tool_canvasuplifter;
+namespace tool_courseuplift;
 
-use tool_canvasuplifter\local\build\course_builder;
-use tool_canvasuplifter\local\parser\manifest_parser;
+use tool_courseuplift\local\build\course_builder;
+use tool_courseuplift\local\parser\manifest_parser;
 use PHPUnit\Framework\Attributes\CoversClass;
 
 /**
  * End-to-end test for the QTI question bank builder.
  *
- * @package    tool_canvasuplifter
+ * @package    tool_courseuplift
  * @copyright  2026 Vernon Spain
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-#[CoversClass(\tool_canvasuplifter\local\build\questionbank_builder::class)]
+#[CoversClass(\tool_courseuplift\local\build\questionbank_builder::class)]
 final class questionbank_builder_test extends \advanced_testcase {
     /**
      * Write a package with a single QTI assessment holding two questions.
@@ -947,7 +947,7 @@ XML;
         // A package whose only orphan is the section-0 bank gains no empty "Additional
         // resources" section.
         $sectionnames = $DB->get_fieldset_select('course_sections', 'name', 'course = ?', [$report['courseid']]);
-        $this->assertNotContains(get_string('additionalresources', 'tool_canvasuplifter'), $sectionnames);
+        $this->assertNotContains(get_string('additionalresources', 'tool_courseuplift'), $sectionnames);
     }
 
     /**

@@ -14,7 +14,7 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <https://www.gnu.org/licenses/>.
 
-namespace tool_canvasuplifter\local\build;
+namespace tool_courseuplift\local\build;
 
 /**
  * Resolves a package-relative path while guaranteeing it stays inside the
@@ -24,7 +24,7 @@ namespace tool_canvasuplifter\local\build;
  * A crafted href such as "../../../../etc/passwd" must never be followed out of
  * the package root, so every builder routes file lookups through here.
  *
- * @package    tool_canvasuplifter
+ * @package    tool_courseuplift
  * @copyright  2026 Vernon Spain
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */

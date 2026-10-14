@@ -14,21 +14,21 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <https://www.gnu.org/licenses/>.
 
-namespace tool_canvasuplifter;
+namespace tool_courseuplift;
 
-use tool_canvasuplifter\local\build\course_builder;
-use tool_canvasuplifter\local\parser\manifest_parser;
+use tool_courseuplift\local\build\course_builder;
+use tool_courseuplift\local\parser\manifest_parser;
 use PHPUnit\Framework\Attributes\CoversClass;
 
 /**
  * End-to-end test that a Canvas external-tool assignment is built as a hidden
  * mod_lti placeholder that keeps its launch URL and its instructions (#128).
  *
- * @package    tool_canvasuplifter
+ * @package    tool_courseuplift
  * @copyright  2026 Vernon Spain
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-#[CoversClass(\tool_canvasuplifter\local\build\lti_builder::class)]
+#[CoversClass(\tool_courseuplift\local\build\lti_builder::class)]
 final class lti_launch_build_test extends \advanced_testcase {
     /**
      * Write a package with a single external-tool assignment: an
@@ -269,7 +269,7 @@ XML;
 
         $this->assertCount(1, get_fast_modinfo($report['courseid'])->get_instances_of('lti'));
         $this->assertStringContainsString(
-            get_string('notemoodleltidetected', 'tool_canvasuplifter', 1),
+            get_string('notemoodleltidetected', 'tool_courseuplift', 1),
             implode("\n", $report['warnings'])
         );
     }
@@ -291,7 +291,7 @@ XML;
 
         $this->assertCount(1, get_fast_modinfo($report['courseid'])->get_instances_of('lti'));
         $this->assertStringContainsString(
-            get_string('notestackltidetected', 'tool_canvasuplifter', 1),
+            get_string('notestackltidetected', 'tool_courseuplift', 1),
             implode("\n", $report['warnings'])
         );
     }
@@ -312,7 +312,7 @@ XML;
         $report = (new course_builder($category->id, $root))->build($coursemodel);
 
         $this->assertStringContainsString(
-            get_string('notestackltidetected', 'tool_canvasuplifter', 1),
+            get_string('notestackltidetected', 'tool_courseuplift', 1),
             implode("\n", $report['warnings'])
         );
     }

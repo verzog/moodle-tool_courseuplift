@@ -22,7 +22,7 @@
  * delete (discard a partial upload). Folded in from local_chunkupload
  * (2020 Justus Dieckmann), consolidated into one action-dispatched script.
  *
- * @package    tool_canvasuplifter
+ * @package    tool_courseuplift
  * @copyright  2020 Justus Dieckmann
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -32,8 +32,8 @@ define('AJAX_SCRIPT', true);
 require(__DIR__ . '/../../../config.php');
 require_once($CFG->dirroot . '/lib/filelib.php');
 
-use tool_canvasuplifter\chunkupload\form_element;
-use tool_canvasuplifter\chunkupload\state_type;
+use tool_courseuplift\chunkupload\form_element;
+use tool_courseuplift\chunkupload\state_type;
 
 $action = optional_param('action', null, PARAM_ALPHA);
 $id = optional_param('id', null, PARAM_ALPHANUM);
@@ -50,11 +50,11 @@ if (!$id) {
     $senderror('Parameter id is missing.');
 }
 
-$record = $DB->get_record('tool_canvasuplifter_chunks', ['id' => $id]);
+$record = $DB->get_record('tool_courseuplift_chunks', ['id' => $id]);
 if (!$record) {
     $PAGE->set_context(context_system::instance());
     echo $OUTPUT->header();
-    $senderror(get_string('tokenexpired', 'tool_canvasuplifter'));
+    $senderror(get_string('tokenexpired', 'tool_courseuplift'));
 }
 
 $context = context::instance_by_id($record->contextid, IGNORE_MISSING);
@@ -115,7 +115,7 @@ switch ($action) {
         $record->lastmodified = time();
         $record->state = $end == $length ? state_type::UPLOAD_COMPLETED : state_type::UPLOAD_STARTED;
         $record->filename = $filename;
-        $DB->update_record('tool_canvasuplifter_chunks', $record);
+        $DB->update_record('tool_courseuplift_chunks', $record);
         break;
 
     case 'proceed':
@@ -156,7 +156,7 @@ switch ($action) {
             $record->lastmodified = time();
             $record->state = state_type::UNUSED_TOKEN_GENERATED;
             $record->filename = "";
-            $DB->update_record('tool_canvasuplifter_chunks', $record);
+            $DB->update_record('tool_courseuplift_chunks', $record);
         }
         break;
 
@@ -164,7 +164,7 @@ switch ($action) {
         // Report how far the server has actually stored this upload, so the
         // browser can resume from the true position after a failed chunk.
         $progress = form_element::get_progress($id);
-        die(json_encode((object) ($progress ?? ['error' => get_string('tokenexpired', 'tool_canvasuplifter')])));
+        die(json_encode((object) ($progress ?? ['error' => get_string('tokenexpired', 'tool_courseuplift')])));
 
     default:
         $senderror('Unknown action.');

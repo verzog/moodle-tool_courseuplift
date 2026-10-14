@@ -385,3 +385,7 @@
         break-inside: avoid;
     }
 }
+
+.tool_courseuplift-jobs td:last-child {
+    white-space: nowrap;
+}

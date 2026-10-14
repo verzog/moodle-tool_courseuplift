@@ -70,6 +70,19 @@ class jobs_view {
     }
 
     /**
+     * A short label for a package: the file name from a URL or path, so long URLs don't crowd the
+     * table. The page shows the full value on hover.
+     *
+     * @param string $package The package URL or file name.
+     * @return string The file name, or the value unchanged when it has none.
+     */
+    public static function package_label(string $package): string {
+        $path = (string) parse_url($package, PHP_URL_PATH);
+        $name = $path !== '' ? basename($path) : '';
+        return $name !== '' ? rawurldecode($name) : $package;
+    }
+
+    /**
      * The Bootstrap badge classes for a job status.
      *
      * @param string $status A job_manager::STATUS_* value.

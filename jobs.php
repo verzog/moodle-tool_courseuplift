@@ -134,8 +134,6 @@ if ($print) {
     exit;
 }
 
-echo $OUTPUT->heading(get_string('jobsheading', 'tool_courseuplift'));
-
 // Filters: a plain GET form, so each view can be bookmarked or shared.
 $useroptions = [0 => get_string('jobsfilteranyone', 'tool_courseuplift')];
 foreach ($users as $user) {
@@ -238,7 +236,7 @@ foreach ($summaries as $summary) {
 
     $table->data[] = [
         $jobcell . html_writer::div(get_string('kind_' . $summary['kind'], 'tool_courseuplift'), 'small text-muted'),
-        s($summary['package']),
+        html_writer::span(s(jobs_view::package_label($summary['package'])), '', ['title' => $summary['package']]),
         s($username($summary['userid'])),
         html_writer::span(get_string('status_' . $summary['status'], 'tool_courseuplift'), $badge),
         $progress,
@@ -249,6 +247,7 @@ foreach ($summaries as $summary) {
         userdate($summary['timemodified'], $datefmt),
     ];
 }
-echo html_writer::table($table);
+// Scroll sideways on narrow screens rather than cutting off the last columns.
+echo html_writer::div(html_writer::table($table), 'table-responsive');
 
 echo $OUTPUT->footer();

@@ -14,19 +14,19 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <https://www.gnu.org/licenses/>.
 
-namespace tool_canvasuplifter;
+namespace tool_courseuplift;
 
-use tool_canvasuplifter\local\ingest\dspace_resolver;
+use tool_courseuplift\local\ingest\dspace_resolver;
 use PHPUnit\Framework\Attributes\CoversClass;
 
 /**
  * Tests resolving a Common Cartridge download from a DSpace 7 repository page.
  *
- * @package    tool_canvasuplifter
+ * @package    tool_courseuplift
  * @copyright  2026 Vernon Spain
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-#[CoversClass(\tool_canvasuplifter\local\ingest\dspace_resolver::class)]
+#[CoversClass(\tool_courseuplift\local\ingest\dspace_resolver::class)]
 final class dspace_resolver_test extends \basic_testcase {
     /** @var string REST API base for the SkillsCommons backend used in fixtures. */
     private const REST = 'https://library.skillscommons.org/server/api';

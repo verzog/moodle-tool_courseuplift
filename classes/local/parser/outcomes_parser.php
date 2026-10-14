@@ -14,11 +14,11 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <https://www.gnu.org/licenses/>.
 
-namespace tool_canvasuplifter\local\parser;
+namespace tool_courseuplift\local\parser;
 
 use DOMDocument;
 use DOMElement;
-use tool_canvasuplifter\local\model\outcome;
+use tool_courseuplift\local\model\outcome;
 
 /**
  * Parses a Canvas course_settings/learning_outcomes.xml file into outcome models.
@@ -27,7 +27,7 @@ use tool_canvasuplifter\local\model\outcome;
  * mastery levels) inside <learningOutcomeGroup> containers. This class is
  * Moodle-free so it can be unit-tested directly from XML strings.
  *
- * @package    tool_canvasuplifter
+ * @package    tool_courseuplift
  * @copyright  2026 Vernon Spain
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */

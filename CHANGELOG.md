@@ -5,11 +5,24 @@ loosely based on [Keep a Changelog](https://keepachangelog.com/). Releases
 before 1.0.0 were `MATURITY_ALPHA` (`0.x`); 1.0.0 is the first `MATURITY_BETA`
 release.
 
-## [1.0.0] - 2026-10-09
+## [1.0.0] - 2026-10-14
 
 First beta release. All five "Path to beta" validation builds passed (issue #182): New
 Quizzes alongside Classic Quizzes, cross-linked multi-module courses, media-heavy courses,
 non-Canvas Common Cartridge exports and an outcomes-heavy course.
+
+- **Renamed to CourseUplift** (`tool_courseuplift`), "A Canvas to Moodle Course
+  Converter", so the plugin's name doesn't use the Canvas trademark. Everything that
+  carried the old name changed with it: the namespace, database tables, the
+  `tool/courseuplift:use` capability, settings, language strings, the JavaScript module
+  and the install folder (`admin/tool/courseuplift`).
+  - **A site that installed Canvas Uplifter (`tool_canvasuplifter`)** sees this as a new
+    plugin. Install CourseUplift, give the new capability to the roles that had the old
+    one, re-enter any settings you changed, then uninstall Canvas Uplifter. Courses it
+    already built are ordinary Moodle courses and are not affected (their content keeps
+    its styling, because CourseUplift's stylesheet also matches the old wrapper class).
+    Staged analyses and job history from the old plugin are not carried across.
+  - Entries below this one describe releases made under the old name.
 
 - **Plugin maturity is now beta** (`MATURITY_BETA`), ready to submit to the Moodle
   Plugins directory.

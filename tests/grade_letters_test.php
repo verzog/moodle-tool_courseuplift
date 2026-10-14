@@ -14,23 +14,23 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <https://www.gnu.org/licenses/>.
 
-namespace tool_canvasuplifter;
+namespace tool_courseuplift;
 
-use tool_canvasuplifter\local\parser\manifest_parser;
-use tool_canvasuplifter\local\build\course_builder;
-use tool_canvasuplifter\local\model\course_model;
+use tool_courseuplift\local\parser\manifest_parser;
+use tool_courseuplift\local\build\course_builder;
+use tool_courseuplift\local\model\course_model;
 use PHPUnit\Framework\Attributes\CoversClass;
 
 /**
  * Tests importing a Canvas grading standard (grading_standards.xml) as Moodle
  * course grade letters.
  *
- * @package    tool_canvasuplifter
+ * @package    tool_courseuplift
  * @copyright  2026 Vernon Spain
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-#[CoversClass(\tool_canvasuplifter\local\parser\manifest_parser::class)]
-#[CoversClass(\tool_canvasuplifter\local\build\course_builder::class)]
+#[CoversClass(\tool_courseuplift\local\parser\manifest_parser::class)]
+#[CoversClass(\tool_courseuplift\local\build\course_builder::class)]
 final class grade_letters_test extends \advanced_testcase {
     /**
      * Write a minimal Canvas package with the given course_settings and

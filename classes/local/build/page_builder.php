@@ -14,10 +14,10 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <https://www.gnu.org/licenses/>.
 
-namespace tool_canvasuplifter\local\build;
+namespace tool_courseuplift\local\build;
 
 use stdClass;
-use tool_canvasuplifter\local\model\item;
+use tool_courseuplift\local\model\item;
 
 /**
  * Creates a mod_page activity from a parsed page item.
@@ -27,7 +27,7 @@ use tool_canvasuplifter\local\model\item;
  * Link rewriting (placeholders like $IMS-CC-FILEBASE$) is intentionally not
  * done here yet — that's a later patch once files and assignments exist.
  *
- * @package    tool_canvasuplifter
+ * @package    tool_courseuplift
  * @copyright  2026 Vernon Spain
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -72,7 +72,7 @@ class page_builder {
         if ($contentpath === null) {
             if (!defined('PHPUNIT_TEST') || !PHPUNIT_TEST) {
                 mtrace(sprintf(
-                    'tool_canvasuplifter: page "%s" skipped — no readable payload (href=%s, files=%s)',
+                    'tool_courseuplift: page "%s" skipped — no readable payload (href=%s, files=%s)',
                     $modelitem->title,
                     $modelitem->href,
                     implode(',', $modelitem->files)
@@ -83,7 +83,7 @@ class page_builder {
         $content = (string) @file_get_contents($contentpath);
         if ($content === '') {
             if (!defined('PHPUNIT_TEST') || !PHPUNIT_TEST) {
-                mtrace("tool_canvasuplifter: page \"$modelitem->title\" skipped — empty payload at $contentpath");
+                mtrace("tool_courseuplift: page \"$modelitem->title\" skipped — empty payload at $contentpath");
             }
             return null;
         }

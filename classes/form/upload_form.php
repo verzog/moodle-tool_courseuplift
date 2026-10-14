@@ -14,7 +14,7 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <https://www.gnu.org/licenses/>.
 
-namespace tool_canvasuplifter\form;
+namespace tool_courseuplift\form;
 
 use moodleform;
 
@@ -32,13 +32,13 @@ require_once($CFG->libdir . '/formslib.php');
  * plugin (folded in from the former local_chunkupload), so the field is always
  * available.
  *
- * @package    tool_canvasuplifter
+ * @package    tool_courseuplift
  * @copyright  2026 Vernon Spain
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class upload_form extends moodleform {
     /** Fully-qualified class of the chunkupload form element / file API. */
-    private const CHUNKUPLOAD_CLASS = 'tool_canvasuplifter\\chunkupload\\form_element';
+    private const CHUNKUPLOAD_CLASS = 'tool_courseuplift\\chunkupload\\form_element';
 
     /** @var bool Whether the optional chunkupload field was added to the form. */
     private bool $chunkuploadoffered = false;
@@ -59,11 +59,11 @@ class upload_form extends moodleform {
         $mform->addElement(
             'filepicker',
             'packagefile',
-            get_string('packagefile', 'tool_canvasuplifter'),
+            get_string('packagefile', 'tool_courseuplift'),
             null,
             ['accepted_types' => ['.imscc', '.zip']]
         );
-        $mform->addHelpButton('packagefile', 'packagefile', 'tool_canvasuplifter');
+        $mform->addHelpButton('packagefile', 'packagefile', 'tool_courseuplift');
 
         // When the separate Large file repository is available here, it already offers chunked
         // upload inside the file picker above, so point to it instead of showing this plugin's
@@ -75,7 +75,7 @@ class upload_form extends moodleform {
                 'static',
                 'largefilehint',
                 '',
-                get_string('largefilerepositoryhint', 'tool_canvasuplifter')
+                get_string('largefilerepositoryhint', 'tool_courseuplift')
             );
         }
 
@@ -85,56 +85,56 @@ class upload_form extends moodleform {
         if (!$largefilerepository && self::chunkupload_available()) {
             \MoodleQuickForm::registerElementType(
                 'chunkupload',
-                "$CFG->dirroot/admin/tool/canvasuplifter/classes/chunkupload/form_element.php",
+                "$CFG->dirroot/admin/tool/courseuplift/classes/chunkupload/form_element.php",
                 self::CHUNKUPLOAD_CLASS
             );
             $mform->addElement(
                 'chunkupload',
                 'packagelargefile',
-                get_string('packagelargefile', 'tool_canvasuplifter'),
+                get_string('packagelargefile', 'tool_courseuplift'),
                 null,
                 // Pass -1, chunkupload's "unlimited" sentinel; the point of the
                 // field is to exceed PHP's per-request upload ceiling.
                 ['maxbytes' => -1, 'accepted_types' => ['.imscc', '.zip']]
             );
-            $mform->addHelpButton('packagelargefile', 'packagelargefile', 'tool_canvasuplifter');
+            $mform->addHelpButton('packagelargefile', 'packagelargefile', 'tool_courseuplift');
             $this->chunkuploadoffered = true;
         }
 
         $mform->addElement(
             'text',
             'packageurl',
-            get_string('packageurl', 'tool_canvasuplifter'),
+            get_string('packageurl', 'tool_courseuplift'),
             ['size' => 80, 'placeholder' => 'https://']
         );
         $mform->setType('packageurl', PARAM_RAW_TRIMMED);
-        $mform->addHelpButton('packageurl', 'packageurl', 'tool_canvasuplifter');
+        $mform->addHelpButton('packageurl', 'packageurl', 'tool_courseuplift');
 
         $categories = \core_course_category::make_categories_list('moodle/course:create');
         $mform->addElement(
             'select',
             'categoryid',
-            get_string('targetcategory', 'tool_canvasuplifter'),
+            get_string('targetcategory', 'tool_courseuplift'),
             $categories
         );
-        $mform->addHelpButton('categoryid', 'targetcategory', 'tool_canvasuplifter');
+        $mform->addHelpButton('categoryid', 'targetcategory', 'tool_courseuplift');
 
-        $mform->addElement('advcheckbox', 'quizfrombank', get_string('quizfrombank', 'tool_canvasuplifter'));
+        $mform->addElement('advcheckbox', 'quizfrombank', get_string('quizfrombank', 'tool_courseuplift'));
         $mform->setDefault('quizfrombank', 0);
-        $mform->addHelpButton('quizfrombank', 'quizfrombank', 'tool_canvasuplifter');
+        $mform->addHelpButton('quizfrombank', 'quizfrombank', 'tool_courseuplift');
 
-        $mform->addElement('select', 'pagegrouping', get_string('pagegrouping', 'tool_canvasuplifter'), [
-            '' => get_string('pagegrouping_none', 'tool_canvasuplifter'),
-            'book' => get_string('pagegrouping_book', 'tool_canvasuplifter'),
-            'lesson' => get_string('pagegrouping_lesson', 'tool_canvasuplifter'),
+        $mform->addElement('select', 'pagegrouping', get_string('pagegrouping', 'tool_courseuplift'), [
+            '' => get_string('pagegrouping_none', 'tool_courseuplift'),
+            'book' => get_string('pagegrouping_book', 'tool_courseuplift'),
+            'lesson' => get_string('pagegrouping_lesson', 'tool_courseuplift'),
         ]);
         $mform->setDefault('pagegrouping', '');
         $mform->setType('pagegrouping', PARAM_ALPHA);
-        $mform->addHelpButton('pagegrouping', 'pagegrouping', 'tool_canvasuplifter');
+        $mform->addHelpButton('pagegrouping', 'pagegrouping', 'tool_courseuplift');
 
         $buttons = [
-            $mform->createElement('submit', 'analysebutton', get_string('analyse', 'tool_canvasuplifter')),
-            $mform->createElement('submit', 'buildbutton', get_string('buildcourse', 'tool_canvasuplifter')),
+            $mform->createElement('submit', 'analysebutton', get_string('analyse', 'tool_courseuplift')),
+            $mform->createElement('submit', 'buildbutton', get_string('buildcourse', 'tool_courseuplift')),
             $mform->createElement('cancel'),
         ];
         $mform->addGroup($buttons, 'buttonar', '', [' '], false);
@@ -217,7 +217,7 @@ class upload_form extends moodleform {
             global $DB, $USER;
             $id = (int) ($data->packagelargefile ?? 0);
             $name = $DB->get_field(
-                'tool_canvasuplifter_chunks',
+                'tool_courseuplift_chunks',
                 'filename',
                 ['id' => $id, 'userid' => $USER->id],
                 IGNORE_MISSING
@@ -240,7 +240,7 @@ class upload_form extends moodleform {
      */
     private function chunkupload_owned(int $id): bool {
         global $DB, $USER;
-        return $id > 0 && $DB->record_exists('tool_canvasuplifter_chunks', ['id' => $id, 'userid' => $USER->id]);
+        return $id > 0 && $DB->record_exists('tool_courseuplift_chunks', ['id' => $id, 'userid' => $USER->id]);
     }
 
     /**
@@ -327,13 +327,13 @@ class upload_form extends moodleform {
 
         $sources = (int) $hasfile + (int) $haslarge + (int) $hasurl;
         if ($sources === 0) {
-            $errors['packagefile'] = get_string('errornosource', 'tool_canvasuplifter');
+            $errors['packagefile'] = get_string('errornosource', 'tool_courseuplift');
         } else if ($sources > 1) {
-            $errors['packageurl'] = get_string('errorbothsources', 'tool_canvasuplifter');
-        } else if ($hasurl && !\tool_canvasuplifter\launcher::is_fetchable_url(trim((string) $data['packageurl']))) {
+            $errors['packageurl'] = get_string('errorbothsources', 'tool_courseuplift');
+        } else if ($hasurl && !\tool_courseuplift\launcher::is_fetchable_url(trim((string) $data['packageurl']))) {
             // Validate the same way the launcher does, so a URL that passes the
             // form never trips the launcher's guard (which throws) downstream.
-            $errors['packageurl'] = get_string('errorbadurl', 'tool_canvasuplifter');
+            $errors['packageurl'] = get_string('errorbadurl', 'tool_courseuplift');
         }
         return $errors;
     }

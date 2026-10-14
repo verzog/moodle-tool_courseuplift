@@ -19,17 +19,17 @@
  *
  * Folded in from local_chunkupload (2020 Laura Troost, Nina Herrmann WWU).
  *
- * @package    tool_canvasuplifter
+ * @package    tool_courseuplift
  * @copyright  2020 Laura Troost, Nina Herrmann WWU
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-namespace tool_canvasuplifter\chunkupload;
+namespace tool_courseuplift\chunkupload;
 
 /**
  * Upload states for the chunked-upload field.
  *
- * @package    tool_canvasuplifter
+ * @package    tool_courseuplift
  * @copyright  2020 Laura Troost, Nina Herrmann WWU
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */

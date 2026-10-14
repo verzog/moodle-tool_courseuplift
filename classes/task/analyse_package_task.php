@@ -14,13 +14,13 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <https://www.gnu.org/licenses/>.
 
-namespace tool_canvasuplifter\task;
+namespace tool_courseuplift\task;
 
-use tool_canvasuplifter\local\ingest\package;
-use tool_canvasuplifter\local\job_manager;
-use tool_canvasuplifter\local\parser\manifest_parser;
-use tool_canvasuplifter\local\parser\lti_classifier;
-use tool_canvasuplifter\local\report\conversion_report;
+use tool_courseuplift\local\ingest\package;
+use tool_courseuplift\local\job_manager;
+use tool_courseuplift\local\parser\manifest_parser;
+use tool_courseuplift\local\parser\lti_classifier;
+use tool_courseuplift\local\report\conversion_report;
 
 /**
  * Adhoc task that downloads/extracts a Canvas package and builds the conversion
@@ -30,7 +30,7 @@ use tool_canvasuplifter\local\report\conversion_report;
  * The chosen build options are carried into the stored report so the status
  * page's "Build this course" form can reuse them without asking again.
  *
- * @package    tool_canvasuplifter
+ * @package    tool_courseuplift
  * @copyright  2026 Vernon Spain
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -41,7 +41,7 @@ class analyse_package_task extends package_job_task {
      * @return string
      */
     public function get_name(): string {
-        return get_string('taskanalyse', 'tool_canvasuplifter');
+        return get_string('taskanalyse', 'tool_courseuplift');
     }
 
     /**
@@ -80,12 +80,12 @@ class analyse_package_task extends package_job_task {
         try {
             $temppackage = $this->resolve_package($jobs, $job);
 
-            $jobs->set_progress($jobid, 40, get_string('progressextract', 'tool_canvasuplifter'));
+            $jobs->set_progress($jobid, 40, get_string('progressextract', 'tool_courseuplift'));
             $root = (new package())->extract($temppackage, make_request_directory());
 
-            $jobs->set_progress($jobid, 70, get_string('progressparse', 'tool_canvasuplifter'));
+            $jobs->set_progress($jobid, 70, get_string('progressparse', 'tool_courseuplift'));
             $course = (new manifest_parser($root))->parse();
-            $ltipatterns = lti_classifier::parse_patterns((string) get_config('tool_canvasuplifter', 'ltimoodlepatterns'));
+            $ltipatterns = lti_classifier::parse_patterns((string) get_config('tool_courseuplift', 'ltimoodlepatterns'));
             $report = (new conversion_report($course, $root, $pagegrouping, (bool) $quizfrombank, $ltipatterns))->build();
 
             // Carry the chosen build options so the status page's build form

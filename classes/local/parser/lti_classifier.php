@@ -14,7 +14,7 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <https://www.gnu.org/licenses/>.
 
-namespace tool_canvasuplifter\local\parser;
+namespace tool_courseuplift\local\parser;
 
 /**
  * Best-effort classifier for LTI external-tool links that actually launch Moodle-hosted
@@ -31,7 +31,7 @@ namespace tool_canvasuplifter\local\parser;
  * extend it with its own patterns (see {@see parse_patterns()}). Moodle-free so it is unit-testable
  * from strings.
  *
- * @package    tool_canvasuplifter
+ * @package    tool_courseuplift
  * @copyright  2026 Vernon Spain
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */

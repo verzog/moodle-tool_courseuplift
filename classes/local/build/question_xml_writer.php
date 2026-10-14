@@ -14,9 +14,9 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <https://www.gnu.org/licenses/>.
 
-namespace tool_canvasuplifter\local\build;
+namespace tool_courseuplift\local\build;
 
-use tool_canvasuplifter\local\model\qti_question;
+use tool_courseuplift\local\model\qti_question;
 
 /**
  * Renders parsed QTI questions as a Moodle XML import document.
@@ -29,7 +29,7 @@ use tool_canvasuplifter\local\model\qti_question;
  * External URLs (e.g. YouTube embeds) are left untouched. No Moodle
  * dependencies, so it's unit-testable.
  *
- * @package    tool_canvasuplifter
+ * @package    tool_courseuplift
  * @copyright  2026 Vernon Spain
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */

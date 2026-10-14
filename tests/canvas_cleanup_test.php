@@ -14,25 +14,25 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <https://www.gnu.org/licenses/>.
 
-namespace tool_canvasuplifter;
+namespace tool_courseuplift;
 
-use tool_canvasuplifter\local\parser\manifest_parser;
+use tool_courseuplift\local\parser\manifest_parser;
 use PHPUnit\Framework\Attributes\CoversClass;
 
 /**
  * Tests dropping Canvas platform boilerplate: help-guide web-links to Canvas's
  * own docs and ANGEL migration objects, while leaving real content untouched.
  *
- * @package    tool_canvasuplifter
+ * @package    tool_courseuplift
  * @copyright  2026 Vernon Spain
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-#[CoversClass(\tool_canvasuplifter\local\parser\manifest_parser::class)]
+#[CoversClass(\tool_courseuplift\local\parser\manifest_parser::class)]
 final class canvas_cleanup_test extends \advanced_testcase {
     /**
      * Titles of every built (non-suppressed) item in a parsed course.
      *
-     * @param \tool_canvasuplifter\local\model\course_model $course The parsed course.
+     * @param \tool_courseuplift\local\model\course_model $course The parsed course.
      * @return string[]
      */
     private function built_titles($course): array {

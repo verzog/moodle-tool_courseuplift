@@ -14,20 +14,20 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <https://www.gnu.org/licenses/>.
 
-namespace tool_canvasuplifter;
+namespace tool_courseuplift;
 
-use tool_canvasuplifter\local\build\question_importer;
-use tool_canvasuplifter\local\model\qti_question;
+use tool_courseuplift\local\build\question_importer;
+use tool_courseuplift\local\model\qti_question;
 use PHPUnit\Framework\Attributes\CoversMethod;
 
 /**
  * Tests for the question importer's skip-reason summary.
  *
- * @package    tool_canvasuplifter
+ * @package    tool_courseuplift
  * @copyright  2026 Vernon Spain
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-#[CoversMethod(\tool_canvasuplifter\local\build\question_importer::class, 'describe_unconvertible')]
+#[CoversMethod(\tool_courseuplift\local\build\question_importer::class, 'describe_unconvertible')]
 final class question_importer_test extends \basic_testcase {
     /**
      * An assessment that parsed no questions is described as empty, not as a

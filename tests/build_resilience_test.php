@@ -14,12 +14,12 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <https://www.gnu.org/licenses/>.
 
-namespace tool_canvasuplifter;
+namespace tool_courseuplift;
 
-use tool_canvasuplifter\local\build\lti_builder;
-use tool_canvasuplifter\local\job_manager;
-use tool_canvasuplifter\local\model\item;
-use tool_canvasuplifter\task\build_course_task;
+use tool_courseuplift\local\build\lti_builder;
+use tool_courseuplift\local\job_manager;
+use tool_courseuplift\local\model\item;
+use tool_courseuplift\task\build_course_task;
 use PHPUnit\Framework\Attributes\CoversClass;
 
 /**
@@ -27,12 +27,12 @@ use PHPUnit\Framework\Attributes\CoversClass;
  * a leaked DB transaction is rolled back, and an already-built job is not built
  * a second time (which would create duplicate courses).
  *
- * @package    tool_canvasuplifter
+ * @package    tool_courseuplift
  * @copyright  2026 Vernon Spain
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-#[CoversClass(\tool_canvasuplifter\local\build\lti_builder::class)]
-#[CoversClass(\tool_canvasuplifter\task\build_course_task::class)]
+#[CoversClass(\tool_courseuplift\local\build\lti_builder::class)]
+#[CoversClass(\tool_courseuplift\task\build_course_task::class)]
 final class build_resilience_test extends \advanced_testcase {
     /**
      * An LTI cartridge whose launch URL mod_lti tries (and fails) to re-fetch as
@@ -142,7 +142,7 @@ final class build_resilience_test extends \advanced_testcase {
         $fs = get_file_storage();
         $file = $fs->create_file_from_string([
             'contextid' => \context_system::instance()->id,
-            'component' => 'tool_canvasuplifter',
+            'component' => 'tool_courseuplift',
             'filearea' => 'packages',
             'itemid' => (int) $admin->id,
             'filepath' => '/',

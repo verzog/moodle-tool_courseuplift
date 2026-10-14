@@ -14,19 +14,19 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <https://www.gnu.org/licenses/>.
 
-namespace tool_canvasuplifter;
+namespace tool_courseuplift;
 
-use tool_canvasuplifter\local\build\url_builder;
+use tool_courseuplift\local\build\url_builder;
 use PHPUnit\Framework\Attributes\CoversMethod;
 
 /**
  * Tests for reading the target URL out of a Common Cartridge web-link file.
  *
- * @package    tool_canvasuplifter
+ * @package    tool_courseuplift
  * @copyright  2026 Vernon Spain
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-#[CoversMethod(\tool_canvasuplifter\local\build\url_builder::class, 'url_from_weblink_xml')]
+#[CoversMethod(\tool_courseuplift\local\build\url_builder::class, 'url_from_weblink_xml')]
 final class url_builder_test extends \basic_testcase {
     /**
      * A web link with no XML namespace yields its href.

@@ -1,12 +1,15 @@
 /*
- * Styling for content imported by tool_canvasuplifter.
+ * Styling for content imported by tool_courseuplift.
  *
- * Every rule is scoped to the .canvasuplifter-content wrapper the builders put
+ * Every rule is scoped to the .courseuplift-content wrapper the builders put
  * around imported page / lesson / book HTML (see content_styler), so nothing
  * here affects the rest of Moodle even though the file is loaded site-wide by
- * Moodle's CSS aggregation.
+ * Moodle's CSS aggregation. Each content rule also matches .canvasuplifter-content,
+ * the wrapper written by releases before the rename to CourseUplift, so courses
+ * built with them keep their styling.
  */
 
+.courseuplift-content,
 .canvasuplifter-content {
     max-width: 70rem;
     margin: 1rem auto;
@@ -20,13 +23,18 @@
     box-shadow: 0 2px 10px rgba(20, 50, 35, 0.08);
 }
 
+.courseuplift-content > :first-child,
 .canvasuplifter-content > :first-child {
     margin-top: 0;
 }
 
+.courseuplift-content h1,
 .canvasuplifter-content h1,
+.courseuplift-content h2,
 .canvasuplifter-content h2,
+.courseuplift-content h3,
 .canvasuplifter-content h3,
+.courseuplift-content h4,
 .canvasuplifter-content h4 {
     margin: 1.4em 0 0.5em;
     line-height: 1.25;
@@ -34,35 +42,44 @@
     color: #2c6e49;
 }
 
+.courseuplift-content h1,
 .canvasuplifter-content h1,
+.courseuplift-content h2,
 .canvasuplifter-content h2 {
     padding-bottom: 0.3em;
     border-bottom: 2px solid #e7efe9;
 }
 
+.courseuplift-content p,
 .canvasuplifter-content p {
     margin: 0 0 1em;
 }
 
+.courseuplift-content ul,
 .canvasuplifter-content ul,
+.courseuplift-content ol,
 .canvasuplifter-content ol {
     margin: 0 0 1em;
     padding-left: 1.5em;
 }
 
+.courseuplift-content li,
 .canvasuplifter-content li {
     margin: 0.25em 0;
 }
 
+.courseuplift-content a,
 .canvasuplifter-content a {
     color: #1d6f8b;
     text-decoration: none;
 }
 
+.courseuplift-content a:hover,
 .canvasuplifter-content a:hover {
     text-decoration: underline;
 }
 
+.courseuplift-content img,
 .canvasuplifter-content img {
     max-width: 100%;
     height: auto;
@@ -71,8 +88,11 @@
 }
 
 /* Embedded documents such as PDF previews span the full content width. */
+.courseuplift-content iframe,
 .canvasuplifter-content iframe,
+.courseuplift-content object,
 .canvasuplifter-content object,
+.courseuplift-content embed,
 .canvasuplifter-content embed {
     width: 100%;
     max-width: 100%;
@@ -80,6 +100,7 @@
 
 /* Videos stay inside the container, keep their aspect ratio, and gain spacing
    when several are stacked together. */
+.courseuplift-content video,
 .canvasuplifter-content video {
     display: block;
     max-width: 100%;
@@ -88,11 +109,13 @@
 }
 
 /* Moodle media-filter player wrappers: contain and space them the same way. */
+.courseuplift-content .mediaplugin,
 .canvasuplifter-content .mediaplugin {
     max-width: 100%;
     margin: 1em auto;
 }
 
+.courseuplift-content blockquote,
 .canvasuplifter-content blockquote {
     margin: 1em 0;
     padding: 0.5em 1.2em;
@@ -102,43 +125,53 @@
     border-left: 4px solid #2c6e49;
 }
 
+.courseuplift-content table,
 .canvasuplifter-content table {
     width: 100%;
     margin: 1em 0;
     border-collapse: collapse;
 }
 
+.courseuplift-content th,
 .canvasuplifter-content th,
+.courseuplift-content td,
 .canvasuplifter-content td {
     padding: 0.5em 0.75em;
     text-align: left;
     border: 1px solid #dfe6e1;
 }
 
+.courseuplift-content th,
 .canvasuplifter-content th {
     background: #eef4f0;
 }
 
+.courseuplift-content tbody tr:nth-child(even),
 .canvasuplifter-content tbody tr:nth-child(even) {
     background: #f8faf9;
 }
 
+.courseuplift-content pre,
 .canvasuplifter-content pre,
+.courseuplift-content code,
 .canvasuplifter-content code {
     font-family: SFMono-Regular, Menlo, Consolas, monospace;
     background: #f2f5f3;
     border-radius: 6px;
 }
 
+.courseuplift-content pre,
 .canvasuplifter-content pre {
     padding: 0.9em 1.1em;
     overflow: auto;
 }
 
+.courseuplift-content code,
 .canvasuplifter-content code {
     padding: 0.1em 0.4em;
 }
 
+.courseuplift-content hr,
 .canvasuplifter-content hr {
     margin: 1.5em 0;
     border: 0;
@@ -146,13 +179,21 @@
 }
 
 /* Links to downloadable files become buttons with a download affordance. */
+.courseuplift-content a[href$=".pdf" i],
 .canvasuplifter-content a[href$=".pdf" i],
+.courseuplift-content a[href$=".doc" i],
 .canvasuplifter-content a[href$=".doc" i],
+.courseuplift-content a[href$=".docx" i],
 .canvasuplifter-content a[href$=".docx" i],
+.courseuplift-content a[href$=".ppt" i],
 .canvasuplifter-content a[href$=".ppt" i],
+.courseuplift-content a[href$=".pptx" i],
 .canvasuplifter-content a[href$=".pptx" i],
+.courseuplift-content a[href$=".xls" i],
 .canvasuplifter-content a[href$=".xls" i],
+.courseuplift-content a[href$=".xlsx" i],
 .canvasuplifter-content a[href$=".xlsx" i],
+.courseuplift-content a[href$=".zip" i],
 .canvasuplifter-content a[href$=".zip" i] {
     display: inline-block;
     margin: 0.2em 0;
@@ -163,25 +204,41 @@
     border-radius: 6px;
 }
 
+.courseuplift-content a[href$=".pdf" i]::before,
 .canvasuplifter-content a[href$=".pdf" i]::before,
+.courseuplift-content a[href$=".doc" i]::before,
 .canvasuplifter-content a[href$=".doc" i]::before,
+.courseuplift-content a[href$=".docx" i]::before,
 .canvasuplifter-content a[href$=".docx" i]::before,
+.courseuplift-content a[href$=".ppt" i]::before,
 .canvasuplifter-content a[href$=".ppt" i]::before,
+.courseuplift-content a[href$=".pptx" i]::before,
 .canvasuplifter-content a[href$=".pptx" i]::before,
+.courseuplift-content a[href$=".xls" i]::before,
 .canvasuplifter-content a[href$=".xls" i]::before,
+.courseuplift-content a[href$=".xlsx" i]::before,
 .canvasuplifter-content a[href$=".xlsx" i]::before,
+.courseuplift-content a[href$=".zip" i]::before,
 .canvasuplifter-content a[href$=".zip" i]::before {
     margin-right: 0.45em;
     content: "\2193";
 }
 
+.courseuplift-content a[href$=".pdf" i]:hover,
 .canvasuplifter-content a[href$=".pdf" i]:hover,
+.courseuplift-content a[href$=".doc" i]:hover,
 .canvasuplifter-content a[href$=".doc" i]:hover,
+.courseuplift-content a[href$=".docx" i]:hover,
 .canvasuplifter-content a[href$=".docx" i]:hover,
+.courseuplift-content a[href$=".ppt" i]:hover,
 .canvasuplifter-content a[href$=".ppt" i]:hover,
+.courseuplift-content a[href$=".pptx" i]:hover,
 .canvasuplifter-content a[href$=".pptx" i]:hover,
+.courseuplift-content a[href$=".xls" i]:hover,
 .canvasuplifter-content a[href$=".xls" i]:hover,
+.courseuplift-content a[href$=".xlsx" i]:hover,
 .canvasuplifter-content a[href$=".xlsx" i]:hover,
+.courseuplift-content a[href$=".zip" i]:hover,
 .canvasuplifter-content a[href$=".zip" i]:hover {
     background: #24583a;
     text-decoration: none;
@@ -190,14 +247,14 @@
 /*
  * Chunked-upload field on the package upload form. Folded in from
  * local_chunkupload (2020 Justus Dieckmann WWU); selectors rescoped to the
- * .tool_canvasuplifter-chunkupload wrapper.
+ * .tool_courseuplift-chunkupload wrapper.
  */
 
-.tool_canvasuplifter-chunkupload {
+.tool_courseuplift-chunkupload {
     width: 100%;
 }
 
-.tool_canvasuplifter-chunkupload .custom-file-input ~ .custom-file-label.chunkupload-label {
+.tool_courseuplift-chunkupload .custom-file-input ~ .custom-file-label.chunkupload-label {
     padding: 0;
     border-radius: 0;
     display: flex;
@@ -206,28 +263,28 @@
     margin-bottom: 0;
 }
 
-.tool_canvasuplifter-chunkupload .custom-file-input ~ .custom-file-label.chunkupload-label:after {
+.tool_courseuplift-chunkupload .custom-file-input ~ .custom-file-label.chunkupload-label:after {
     display: none;
 }
 
-.tool_canvasuplifter-chunkupload .chunkupload-label > span {
+.tool_courseuplift-chunkupload .chunkupload-label > span {
     height: 100%;
     text-align: center;
     padding: .375rem .75rem;
 }
 
-.tool_canvasuplifter-chunkupload .chunkupload-label .chunkupload-browse {
+.tool_courseuplift-chunkupload .chunkupload-label .chunkupload-browse {
     flex: 1 1 20%;
 }
 
-.tool_canvasuplifter-chunkupload .chunkupload-label .chunkupload-left {
+.tool_courseuplift-chunkupload .chunkupload-label .chunkupload-left {
     flex: 1 1 80%;
     position: relative;
     white-space: nowrap;
     overflow: hidden;
 }
 
-.tool_canvasuplifter-chunkupload .chunkupload-label .chunkupload-left .chunkupload-filename {
+.tool_courseuplift-chunkupload .chunkupload-label .chunkupload-left .chunkupload-filename {
     width: 100%;
     overflow: hidden;
     display: inline-block;
@@ -236,7 +293,7 @@
     left: 0;
 }
 
-.tool_canvasuplifter-chunkupload .chunkupload-label .chunkupload-progress {
+.tool_courseuplift-chunkupload .chunkupload-label .chunkupload-progress {
     position: absolute;
     bottom: 0;
     left: 0;
@@ -244,7 +301,7 @@
     background: #71a81a;
 }
 
-.tool_canvasuplifter-chunkupload .chunkupload-label .chunkupload-icon {
+.tool_courseuplift-chunkupload .chunkupload-label .chunkupload-icon {
     position: absolute;
     left: 8px;
     display: inline-block;
@@ -255,7 +312,7 @@
 /* The percentage sits in its own space at the right of the label, stacked above
    the (absolutely positioned) filename overlay and the opaque progress bar so it
    stays readable throughout the upload. It is empty when no upload is running. */
-.tool_canvasuplifter-chunkupload .chunkupload-label .chunkupload-left .chunkupload-percent {
+.tool_courseuplift-chunkupload .chunkupload-label .chunkupload-left .chunkupload-percent {
     position: absolute;
     top: 0;
     right: 0;
@@ -266,11 +323,11 @@
     line-height: 1.5;
 }
 
-.tool_canvasuplifter-chunkupload .chunkupload-label .chunkupload-left .chunkupload-percent:empty {
+.tool_courseuplift-chunkupload .chunkupload-label .chunkupload-left .chunkupload-percent:empty {
     display: none;
 }
 
-.tool_canvasuplifter-chunkupload .chunkupload-delete {
+.tool_courseuplift-chunkupload .chunkupload-delete {
     position: absolute;
     right: 0;
     top: 0;
@@ -279,6 +336,6 @@
     cursor: pointer;
 }
 
-.tool_canvasuplifter-chunkupload .chunkupload-filesize {
+.tool_courseuplift-chunkupload .chunkupload-filesize {
     float: right;
 }

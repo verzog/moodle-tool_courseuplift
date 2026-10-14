@@ -14,23 +14,23 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <https://www.gnu.org/licenses/>.
 
-namespace tool_canvasuplifter;
+namespace tool_courseuplift;
 
-use tool_canvasuplifter\local\build\course_builder;
-use tool_canvasuplifter\local\model\item;
-use tool_canvasuplifter\local\parser\manifest_parser;
+use tool_courseuplift\local\build\course_builder;
+use tool_courseuplift\local\model\item;
+use tool_courseuplift\local\parser\manifest_parser;
 use PHPUnit\Framework\Attributes\CoversClass;
 
 /**
  * Tests importing a D2L (Brightspace) Common Cartridge export, whose modules are
  * empty "contentmodule" resources and whose syllabus/news are D2L metadata.
  *
- * @package    tool_canvasuplifter
+ * @package    tool_courseuplift
  * @copyright  2026 Vernon Spain
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-#[CoversClass(\tool_canvasuplifter\local\parser\manifest_parser::class)]
-#[CoversClass(\tool_canvasuplifter\local\build\course_builder::class)]
+#[CoversClass(\tool_courseuplift\local\parser\manifest_parser::class)]
+#[CoversClass(\tool_courseuplift\local\build\course_builder::class)]
 final class d2l_import_test extends \advanced_testcase {
     /**
      * Build a package shaped like a D2L export: two content "modules"

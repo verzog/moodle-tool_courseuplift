@@ -14,7 +14,7 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <https://www.gnu.org/licenses/>.
 
-namespace tool_canvasuplifter\local\model;
+namespace tool_courseuplift\local\model;
 
 /**
  * One piece of course content found in a Canvas package.
@@ -22,7 +22,7 @@ namespace tool_canvasuplifter\local\model;
  * This is a plain data holder with no Moodle dependencies, so it can be
  * built and tested in isolation. Nothing here touches the database.
  *
- * @package    tool_canvasuplifter
+ * @package    tool_courseuplift
  * @copyright  2026 Vernon Spain
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -97,7 +97,7 @@ class item {
 
     /** @var bool Marks a suppressed dependency the build may recover as a whole. When it
      * carries more than one reachable member, course_builder recovers it as a mod_folder
-     * (via {@see \tool_canvasuplifter\local\build\folder_builder}) so every file in
+     * (via {@see \tool_courseuplift\local\build\folder_builder}) so every file in
      * {@see $files} is listed, rather than a mod_resource that would serve only the
      * primary. The parser narrows {@see $files} to the visible members first. */
     public bool $recoverallfiles = false;

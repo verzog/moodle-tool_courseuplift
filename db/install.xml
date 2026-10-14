@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<XMLDB PATH="admin/tool/canvasuplifter/db" VERSION="20260625" COMMENT="Canvas Uplifter schema"
+<XMLDB PATH="admin/tool/courseuplift/db" VERSION="20260625" COMMENT="CourseUplift schema"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:noNamespaceSchemaLocation="../../../../lib/xmldb/xmldb.xsd"
 >
   <TABLES>
-    <TABLE NAME="tool_canvasuplifter_jobs" COMMENT="One row per Canvas-to-Moodle analyse or build run.">
+    <TABLE NAME="tool_courseuplift_jobs" COMMENT="One row per Canvas-to-Moodle analyse or build run.">
       <FIELDS>
         <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
         <FIELD NAME="userid" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false" COMMENT="Admin who started the run."/>
@@ -39,7 +39,7 @@
         <INDEX NAME="status_ix" UNIQUE="false" FIELDS="status"/>
       </INDEXES>
     </TABLE>
-    <TABLE NAME="tool_canvasuplifter_chunks" COMMENT="Tracks chunked uploads of large packages. id, userid, contextid, maxlength and state are set when the form field renders; the remaining fields are filled as chunks arrive.">
+    <TABLE NAME="tool_courseuplift_chunks" COMMENT="Tracks chunked uploads of large packages. id, userid, contextid, maxlength and state are set when the form field renders; the remaining fields are filled as chunks arrive.">
       <FIELDS>
         <FIELD NAME="id" TYPE="char" LENGTH="15" NOTNULL="true" SEQUENCE="false" COMMENT="Upload token generated when the field renders."/>
         <FIELD NAME="userid" TYPE="int" LENGTH="10" NOTNULL="false" SEQUENCE="false" COMMENT="User who owns the upload."/>

@@ -14,7 +14,7 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <https://www.gnu.org/licenses/>.
 
-namespace tool_canvasuplifter\local\build;
+namespace tool_courseuplift\local\build;
 
 /**
  * Imports package files referenced by a piece of HTML into a Moodle file area
@@ -26,7 +26,7 @@ namespace tool_canvasuplifter\local\build;
  * pluginfile.php. It is shared by every builder that stores rich-text content
  * (pages, assignment descriptions, and so on).
  *
- * @package    tool_canvasuplifter
+ * @package    tool_courseuplift
  * @copyright  2026 Vernon Spain
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */

@@ -20,7 +20,7 @@
  * was reworked to retry a chunk through transient network/5xx failures and to
  * reconcile the resume position with the server after each failure.
  *
- * @module    tool_canvasuplifter/chunkupload
+ * @module    tool_courseuplift/chunkupload
  * @copyright  2020 Justus Dieckmann WWU
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -29,7 +29,7 @@ import {get_strings as getStrings} from 'core/str';
 import notification from 'core/notification';
 
 /** @var {string} URL of the action-dispatched chunk upload endpoint, relative to wwwroot. */
-const ENDPOINT = "/admin/tool/canvasuplifter/chunkupload_ajax.php?";
+const ENDPOINT = "/admin/tool/courseuplift/chunkupload_ajax.php?";
 
 /** @var {number} How many times to retry a chunk after a transient failure before giving up. */
 const MAX_RETRIES = 5;
@@ -212,15 +212,15 @@ export function init(elementid, acceptedTypes, maxBytes, wwwroot, chunksize, bro
             } else if (isTerminal(result.status)) {
                 // Terminal client-side rejection (e.g. 413: chunk too large for a proxy).
                 notifyError(result.status === 413
-                    ? {key: 'errorchunktoolarge', component: 'tool_canvasuplifter'}
-                    : {key: 'erroruploadfailed', component: 'tool_canvasuplifter'});
+                    ? {key: 'errorchunktoolarge', component: 'tool_courseuplift'}
+                    : {key: 'erroruploadfailed', component: 'tool_courseuplift'});
                 return;
             }
 
             // Transient failure (network, 5xx, 408/429, or an unreadable 200):
             // back off, reconcile the resume position with the server, then retry.
             if (retries >= MAX_RETRIES) {
-                notifyError({key: 'erroruploadfailed', component: 'tool_canvasuplifter'});
+                notifyError({key: 'erroruploadfailed', component: 'tool_courseuplift'});
                 return;
             }
             retries++;

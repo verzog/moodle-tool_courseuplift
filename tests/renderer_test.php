@@ -14,21 +14,21 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <https://www.gnu.org/licenses/>.
 
-namespace tool_canvasuplifter;
+namespace tool_courseuplift;
 
-use tool_canvasuplifter\local\model\course_model;
-use tool_canvasuplifter\local\model\item;
-use tool_canvasuplifter\local\report\conversion_report;
+use tool_courseuplift\local\model\course_model;
+use tool_courseuplift\local\model\item;
+use tool_courseuplift\local\report\conversion_report;
 use PHPUnit\Framework\Attributes\CoversClass;
 
 /**
  * Tests for the analysis renderer.
  *
- * @package    tool_canvasuplifter
+ * @package    tool_courseuplift
  * @copyright  2026 Vernon Spain
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-#[CoversClass(\tool_canvasuplifter\output\renderer::class)]
+#[CoversClass(\tool_courseuplift\output\renderer::class)]
 final class renderer_test extends \advanced_testcase {
     /**
      * An empty unlinked Canvas quiz is counted in the summary line, and the unreferenced
@@ -54,12 +54,12 @@ final class renderer_test extends \advanced_testcase {
         $course->orphans[] = $orphan;
         $report = (new conversion_report($course, $dir))->build();
 
-        $PAGE->set_url(new \moodle_url('/admin/tool/canvasuplifter/index.php'));
-        $html = $PAGE->get_renderer('tool_canvasuplifter')->analysis($report);
+        $PAGE->set_url(new \moodle_url('/admin/tool/courseuplift/index.php'));
+        $html = $PAGE->get_renderer('tool_courseuplift')->analysis($report);
 
-        $this->assertStringContainsString(get_string('buildsnowsummarynotbuilt', 'tool_canvasuplifter', 1), $html);
-        $this->assertStringContainsString(get_string('orphansexplainnone', 'tool_canvasuplifter'), $html);
-        $this->assertStringContainsString(get_string('placement_none', 'tool_canvasuplifter'), $html);
+        $this->assertStringContainsString(get_string('buildsnowsummarynotbuilt', 'tool_courseuplift', 1), $html);
+        $this->assertStringContainsString(get_string('orphansexplainnone', 'tool_courseuplift'), $html);
+        $this->assertStringContainsString(get_string('placement_none', 'tool_courseuplift'), $html);
         // No syllabus is among the unreferenced resources, so the intro does not mention one.
         $this->assertStringNotContainsStringIgnoringCase('syllabus', $html);
     }

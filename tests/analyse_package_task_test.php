@@ -14,22 +14,22 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <https://www.gnu.org/licenses/>.
 
-namespace tool_canvasuplifter;
+namespace tool_courseuplift;
 
-use tool_canvasuplifter\local\job_manager;
-use tool_canvasuplifter\task\analyse_package_task;
+use tool_courseuplift\local\job_manager;
+use tool_courseuplift\task\analyse_package_task;
 use PHPUnit\Framework\Attributes\CoversClass;
 
 /**
  * Tests the asynchronous analyse task: it extracts a stored package, builds the
  * conversion report onto the job, and creates no course.
  *
- * @package    tool_canvasuplifter
+ * @package    tool_courseuplift
  * @copyright  2026 Vernon Spain
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-#[CoversClass(\tool_canvasuplifter\task\analyse_package_task::class)]
-#[CoversClass(\tool_canvasuplifter\task\package_job_task::class)]
+#[CoversClass(\tool_courseuplift\task\analyse_package_task::class)]
+#[CoversClass(\tool_courseuplift\task\package_job_task::class)]
 final class analyse_package_task_test extends \advanced_testcase {
     /**
      * Zip a minimal one-page Canvas package and store it in the plugin's file
@@ -75,7 +75,7 @@ XML;
         $fs = get_file_storage();
         $file = $fs->create_file_from_pathname((object) [
             'contextid' => \context_system::instance()->id,
-            'component' => 'tool_canvasuplifter',
+            'component' => 'tool_courseuplift',
             'filearea' => 'packages',
             'itemid' => $userid,
             'filepath' => '/',

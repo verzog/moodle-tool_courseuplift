@@ -176,7 +176,7 @@ install_moodle() {
 # Keep the installed copy of the plugin in sync with the working tree so a
 # code-only change can be retested without a full reinstall.
 sync_plugin() {
-  local dest="$WORKSPACE/moodle/admin/tool/canvasuplifter"
+  local dest="$WORKSPACE/moodle/admin/tool/courseuplift"
   [ -d "$WORKSPACE/moodle" ] || return 0
   # If the installer symlinked the plugin, edits are already live.
   [ -L "$dest" ] && return 0

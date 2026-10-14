@@ -14,7 +14,7 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <https://www.gnu.org/licenses/>.
 
-namespace tool_canvasuplifter\local\parser;
+namespace tool_courseuplift\local\parser;
 
 use DOMDocument;
 use DOMElement;
@@ -30,7 +30,7 @@ use DOMElement;
  * Knowing the source lets the report name it and lets the parser drop
  * exporter-specific junk. Pure detection, no Moodle dependency.
  *
- * @package    tool_canvasuplifter
+ * @package    tool_courseuplift
  * @copyright  2026 Vernon Spain
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */

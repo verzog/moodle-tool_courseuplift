@@ -14,19 +14,19 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <https://www.gnu.org/licenses/>.
 
-namespace tool_canvasuplifter;
+namespace tool_courseuplift;
 
-use tool_canvasuplifter\local\ingest\download_link_extractor;
+use tool_courseuplift\local\ingest\download_link_extractor;
 use PHPUnit\Framework\Attributes\CoversClass;
 
 /**
  * Tests the HTML landing-page download-link extractor.
  *
- * @package    tool_canvasuplifter
+ * @package    tool_courseuplift
  * @copyright  2026 Vernon Spain
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-#[CoversClass(\tool_canvasuplifter\local\ingest\download_link_extractor::class)]
+#[CoversClass(\tool_courseuplift\local\ingest\download_link_extractor::class)]
 final class download_link_extractor_test extends \advanced_testcase {
     /**
      * A relative .imscc anchor resolves against the page URL.

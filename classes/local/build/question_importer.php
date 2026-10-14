@@ -14,10 +14,10 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <https://www.gnu.org/licenses/>.
 
-namespace tool_canvasuplifter\local\build;
+namespace tool_courseuplift\local\build;
 
 use stdClass;
-use tool_canvasuplifter\local\model\qti_question;
+use tool_courseuplift\local\model\qti_question;
 
 /**
  * Imports parsed QTI questions into a Moodle question category.
@@ -27,7 +27,7 @@ use tool_canvasuplifter\local\model\qti_question;
  * category of the given context, returning the created question ids. Shared by
  * the question-bank and quiz builders.
  *
- * @package    tool_canvasuplifter
+ * @package    tool_courseuplift
  * @copyright  2026 Vernon Spain
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -116,7 +116,7 @@ class question_importer {
      *
      * @param stdClass $course Course record (qformat needs it for context).
      * @param \context $context The context whose default category receives the questions.
-     * @param array $questions Supported {@see \tool_canvasuplifter\local\model\qti_question} objects.
+     * @param array $questions Supported {@see \tool_courseuplift\local\model\qti_question} objects.
      * @param string $imagedir Folder for resolving relative question images.
      * @param string|null $filebase Package root for resolving $IMS-CC-FILEBASE$ image tokens.
      * @param media_report|null $mediareport Shared collector for question media absent from the package.

@@ -14,19 +14,19 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <https://www.gnu.org/licenses/>.
 
-namespace tool_canvasuplifter;
+namespace tool_courseuplift;
 
-use tool_canvasuplifter\local\build\media_report;
+use tool_courseuplift\local\build\media_report;
 use PHPUnit\Framework\Attributes\CoversClass;
 
 /**
  * Tests for the unresolved-media collector.
  *
- * @package    tool_canvasuplifter
+ * @package    tool_courseuplift
  * @copyright  2026 Vernon Spain
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-#[CoversClass(\tool_canvasuplifter\local\build\media_report::class)]
+#[CoversClass(\tool_courseuplift\local\build\media_report::class)]
 final class media_report_test extends \basic_testcase {
     /**
      * A fresh report is empty.

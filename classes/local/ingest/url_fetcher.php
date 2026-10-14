@@ -14,7 +14,7 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <https://www.gnu.org/licenses/>.
 
-namespace tool_canvasuplifter\local\ingest;
+namespace tool_courseuplift\local\ingest;
 
 /**
  * Downloads a Canvas .imscc package from a URL to a temporary file.
@@ -27,7 +27,7 @@ namespace tool_canvasuplifter\local\ingest;
  * client-side, it resolves the package through the DSpace REST API
  * (see {@see dspace_resolver}) instead of scraping the empty page shell.
  *
- * @package    tool_canvasuplifter
+ * @package    tool_courseuplift
  * @copyright  2026 Vernon Spain
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -186,7 +186,7 @@ class url_fetcher {
      * @return int Seconds.
      */
     public static function stall_window_seconds(): int {
-        $raw = get_config('tool_canvasuplifter', 'transferstall');
+        $raw = get_config('tool_courseuplift', 'transferstall');
         // An unset setting uses the default (120 s). A configured value below the
         // documented floor is clamped up to the floor, not silently reset to the
         // default — otherwise an admin who sets 10 s (perhaps by mistake) gets the
@@ -213,7 +213,7 @@ class url_fetcher {
         $this->lastfinalurl = null;
         $this->lastcontenttype = null;
 
-        $target = tempnam(make_request_directory(), 'canvasuplifter_');
+        $target = tempnam(make_request_directory(), 'courseuplift_');
         if ($target === false) {
             $this->lastdetail = 'Could not create temp file';
             throw new \RuntimeException(self::ERROR_DOWNLOAD);

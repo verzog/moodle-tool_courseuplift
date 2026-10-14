@@ -14,10 +14,10 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <https://www.gnu.org/licenses/>.
 
-namespace tool_canvasuplifter;
+namespace tool_courseuplift;
 
-use tool_canvasuplifter\chunkupload\form_element;
-use tool_canvasuplifter\chunkupload\state_type;
+use tool_courseuplift\chunkupload\form_element;
+use tool_courseuplift\chunkupload\state_type;
 use PHPUnit\Framework\Attributes\CoversClass;
 
 /**
@@ -25,11 +25,11 @@ use PHPUnit\Framework\Attributes\CoversClass;
  * reports the stored position, and apply_proceed tolerates a chunk the client
  * retries after an interrupted request without corrupting the file.
  *
- * @package    tool_canvasuplifter
+ * @package    tool_courseuplift
  * @copyright  2026 Vernon Spain
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-#[CoversClass(\tool_canvasuplifter\chunkupload\form_element::class)]
+#[CoversClass(\tool_courseuplift\chunkupload\form_element::class)]
 final class chunkupload_resilience_test extends \advanced_testcase {
     /**
      * Insert a partial upload row and write its on-disk bytes.
@@ -42,7 +42,7 @@ final class chunkupload_resilience_test extends \advanced_testcase {
      */
     private function partial(int $id, string $ondisk, int $currentpos, int $length): \stdClass {
         global $DB, $USER;
-        $DB->insert_record_raw('tool_canvasuplifter_chunks', (object) [
+        $DB->insert_record_raw('tool_courseuplift_chunks', (object) [
             'id' => $id,
             'userid' => $USER->id,
             'contextid' => \context_system::instance()->id,
@@ -58,7 +58,7 @@ final class chunkupload_resilience_test extends \advanced_testcase {
             mkdir($dir, 0777, true);
         }
         file_put_contents(form_element::get_path_for_id($id), $ondisk);
-        return $DB->get_record('tool_canvasuplifter_chunks', ['id' => $id], '*', MUST_EXIST);
+        return $DB->get_record('tool_courseuplift_chunks', ['id' => $id], '*', MUST_EXIST);
     }
 
     /**

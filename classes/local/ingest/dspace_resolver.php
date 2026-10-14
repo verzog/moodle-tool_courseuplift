@@ -14,7 +14,7 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <https://www.gnu.org/licenses/>.
 
-namespace tool_canvasuplifter\local\ingest;
+namespace tool_courseuplift\local\ingest;
 
 /**
  * Resolves a Common Cartridge download from a DSpace 7 repository page.
@@ -31,7 +31,7 @@ namespace tool_canvasuplifter\local\ingest;
  * calls live in url_fetcher and feed the decoded JSON to the picker methods
  * here, so all of this is unit-testable in isolation.
  *
- * @package    tool_canvasuplifter
+ * @package    tool_courseuplift
  * @copyright  2026 Vernon Spain
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */

@@ -14,7 +14,7 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <https://www.gnu.org/licenses/>.
 
-namespace tool_canvasuplifter\local\build;
+namespace tool_courseuplift\local\build;
 
 use stdClass;
 
@@ -31,7 +31,7 @@ use stdClass;
  * the whole build and a single stream of imported question ids for the link-rewrite
  * pass.
  *
- * @package    tool_canvasuplifter
+ * @package    tool_courseuplift
  * @copyright  2026 Vernon Spain
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -234,6 +234,6 @@ class item_bank_registry {
      * @return string
      */
     private function default_bank_name(): string {
-        return get_string('quizbankname', 'tool_canvasuplifter');
+        return get_string('quizbankname', 'tool_courseuplift');
     }
 }

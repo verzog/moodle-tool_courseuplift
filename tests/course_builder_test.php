@@ -14,23 +14,23 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <https://www.gnu.org/licenses/>.
 
-namespace tool_canvasuplifter;
+namespace tool_courseuplift;
 
-use tool_canvasuplifter\local\build\course_builder;
-use tool_canvasuplifter\local\parser\manifest_parser;
-use tool_canvasuplifter\local\parser\source_detector;
-use tool_canvasuplifter\local\model\course_model;
+use tool_courseuplift\local\build\course_builder;
+use tool_courseuplift\local\parser\manifest_parser;
+use tool_courseuplift\local\parser\source_detector;
+use tool_courseuplift\local\model\course_model;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
 
 /**
  * Tests for the course builder.
  *
- * @package    tool_canvasuplifter
+ * @package    tool_courseuplift
  * @copyright  2026 Vernon Spain
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-#[CoversClass(\tool_canvasuplifter\local\build\course_builder::class)]
+#[CoversClass(\tool_courseuplift\local\build\course_builder::class)]
 final class course_builder_test extends \advanced_testcase {
     /**
      * Write a minimal one-page Canvas package to a temporary directory.
@@ -395,13 +395,13 @@ XML;
         // It lands in the "Additional resources" section and carries the file bytes.
         $rescm = reset($resources);
         $section = $modinfo->get_section_info($rescm->sectionnum);
-        $this->assertSame(get_string('additionalresources', 'tool_canvasuplifter'), $section->name);
+        $this->assertSame(get_string('additionalresources', 'tool_courseuplift'), $section->name);
         $fs = get_file_storage();
         $context = \context_module::instance($rescm->id);
         $this->assertNotEmpty($fs->get_area_files($context->id, 'mod_resource', 'content', false, '', false));
         // The build report notes the recovery.
         $this->assertContains(
-            get_string('noterecoveredassets', 'tool_canvasuplifter', 1),
+            get_string('noterecoveredassets', 'tool_courseuplift', 1),
             $report['warnings']
         );
     }
@@ -741,7 +741,7 @@ XML;
         // is owner-independent, so it is recorded unqualified. The present one resolved.
         $this->assertSame(['content/enforced1/CC BY logo.png'], $report['unresolvedmedia']);
         $this->assertSame(1, $report['unresolvedmediacount']);
-        $expectedwarning = get_string('warnunresolvedmedia', 'tool_canvasuplifter', 1);
+        $expectedwarning = get_string('warnunresolvedmedia', 'tool_courseuplift', 1);
         $this->assertContains($expectedwarning, $report['warnings']);
 
         // The present asset was embedded; the missing token is left untouched.
@@ -1135,7 +1135,7 @@ XML;
             . '</resources></manifest>');
 
         $category = $this->getDataGenerator()->create_category();
-        $coursemodel = (new \tool_canvasuplifter\local\parser\manifest_parser($dir))->parse();
+        $coursemodel = (new \tool_courseuplift\local\parser\manifest_parser($dir))->parse();
         $report = (new course_builder($category->id, $dir))->build($coursemodel);
 
         $this->assertSame(1, $report['createdcounts']['lti'] ?? 0);
@@ -1921,10 +1921,10 @@ XML;
         $resource = $modinfo->get_instances_of('resource');
         $this->assertCount(1, $resource);
         $section = $modinfo->get_section_info(reset($resource)->sectionnum);
-        $this->assertSame(get_string('additionalresources', 'tool_canvasuplifter'), $section->name);
+        $this->assertSame(get_string('additionalresources', 'tool_courseuplift'), $section->name);
         $this->assertFalse((bool) $section->visible);
         $this->assertTrue((bool) $modinfo->get_section_info(0)->visible);
-        $this->assertContains(get_string('warnreportextrashidden', 'tool_canvasuplifter'), $report['warnings']);
+        $this->assertContains(get_string('warnreportextrashidden', 'tool_courseuplift'), $report['warnings']);
     }
 
     /**
@@ -1947,8 +1947,8 @@ XML;
             . '</assessment></questestinterop>'
         );
         $coursemodel = new course_model();
-        $orphan = new \tool_canvasuplifter\local\model\item('g1', 'Unnamed Quiz');
-        $orphan->kind = \tool_canvasuplifter\local\model\item::KIND_QUIZ;
+        $orphan = new \tool_courseuplift\local\model\item('g1', 'Unnamed Quiz');
+        $orphan->kind = \tool_courseuplift\local\model\item::KIND_QUIZ;
         $orphan->files = ['g1/assessment_qti.xml'];
         $coursemodel->orphans[] = $orphan;
         $category = $this->getDataGenerator()->create_category();
@@ -1957,8 +1957,8 @@ XML;
 
         $this->assertSame(1, $report['skipped']);
         $this->assertSame([], get_fast_modinfo($report['courseid'])->get_instances_of('quiz'));
-        $this->assertContains(get_string('warnbuildemptyassessments', 'tool_canvasuplifter', 1), $report['warnings']);
-        $this->assertNotContains(get_string('warningskippedfornow', 'tool_canvasuplifter', 1), $report['warnings']);
+        $this->assertContains(get_string('warnbuildemptyassessments', 'tool_courseuplift', 1), $report['warnings']);
+        $this->assertNotContains(get_string('warningskippedfornow', 'tool_courseuplift', 1), $report['warnings']);
     }
 
     /**
@@ -1984,8 +1984,8 @@ XML;
             . '</section></assessment></questestinterop>'
         );
         $coursemodel = new course_model();
-        $orphan = new \tool_canvasuplifter\local\model\item('g1', 'Drawn quiz');
-        $orphan->kind = \tool_canvasuplifter\local\model\item::KIND_QUIZ;
+        $orphan = new \tool_courseuplift\local\model\item('g1', 'Drawn quiz');
+        $orphan->kind = \tool_courseuplift\local\model\item::KIND_QUIZ;
         $orphan->files = ['g1/assessment_qti.xml'];
         $coursemodel->orphans[] = $orphan;
         $category = $this->getDataGenerator()->create_category();
@@ -1993,8 +1993,8 @@ XML;
         $report = (new course_builder($category->id, $dir))->build($coursemodel);
 
         $this->assertSame(1, $report['skipped']);
-        $this->assertNotContains(get_string('warnbuildemptyassessments', 'tool_canvasuplifter', 1), $report['warnings']);
-        $this->assertContains(get_string('warningskippedfornow', 'tool_canvasuplifter', 1), $report['warnings']);
+        $this->assertNotContains(get_string('warnbuildemptyassessments', 'tool_courseuplift', 1), $report['warnings']);
+        $this->assertContains(get_string('warningskippedfornow', 'tool_courseuplift', 1), $report['warnings']);
     }
 
     /**
@@ -2011,8 +2011,8 @@ XML;
         mkdir($dir . '/g1');
         file_put_contents($dir . '/g1/assessment_qti.xml', '<?xml version="1.0"?><notqti><broken');
         $coursemodel = new course_model();
-        $orphan = new \tool_canvasuplifter\local\model\item('g1', 'Broken quiz');
-        $orphan->kind = \tool_canvasuplifter\local\model\item::KIND_QUIZ;
+        $orphan = new \tool_courseuplift\local\model\item('g1', 'Broken quiz');
+        $orphan->kind = \tool_courseuplift\local\model\item::KIND_QUIZ;
         $orphan->files = ['g1/assessment_qti.xml'];
         $coursemodel->orphans[] = $orphan;
         $category = $this->getDataGenerator()->create_category();
@@ -2020,8 +2020,8 @@ XML;
         $report = (new course_builder($category->id, $dir))->build($coursemodel);
 
         $this->assertSame(1, $report['skipped']);
-        $this->assertNotContains(get_string('warnbuildemptyassessments', 'tool_canvasuplifter', 1), $report['warnings']);
-        $this->assertContains(get_string('warningskippedfornow', 'tool_canvasuplifter', 1), $report['warnings']);
+        $this->assertNotContains(get_string('warnbuildemptyassessments', 'tool_courseuplift', 1), $report['warnings']);
+        $this->assertContains(get_string('warningskippedfornow', 'tool_courseuplift', 1), $report['warnings']);
     }
 
     /**
@@ -2051,14 +2051,14 @@ XML;
         ));
         $build = function (string $folder, bool $quizfrombank) use ($dir): array {
             $coursemodel = new course_model();
-            $orphan = new \tool_canvasuplifter\local\model\item($folder, 'Quiz');
-            $orphan->kind = \tool_canvasuplifter\local\model\item::KIND_QUIZ;
+            $orphan = new \tool_courseuplift\local\model\item($folder, 'Quiz');
+            $orphan->kind = \tool_courseuplift\local\model\item::KIND_QUIZ;
             $orphan->files = [$folder . '/assessment_qti.xml'];
             $coursemodel->orphans[] = $orphan;
             $category = $this->getDataGenerator()->create_category();
             return (new course_builder($category->id, $dir, null, 0, $quizfrombank))->build($coursemodel);
         };
-        $emptywarning = get_string('warnbuildemptyassessments', 'tool_canvasuplifter', 1);
+        $emptywarning = get_string('warnbuildemptyassessments', 'tool_courseuplift', 1);
 
         $this->assertNotContains($emptywarning, $build('g1', false)['warnings']);
         $this->assertContains($emptywarning, $build('g2', false)['warnings']);
@@ -2067,7 +2067,7 @@ XML;
         $this->assertCount(1, get_fast_modinfo($toggled['courseid'])->get_instances_of('quiz'));
         // The placeholder quiz exists, so the item counts as created, not skipped.
         $this->assertSame(0, $toggled['skipped']);
-        $this->assertNotContains(get_string('warningskippedfornow', 'tool_canvasuplifter', 1), $toggled['warnings']);
+        $this->assertNotContains(get_string('warningskippedfornow', 'tool_courseuplift', 1), $toggled['warnings']);
     }
 
     /**
@@ -2154,7 +2154,7 @@ XML;
         $page = $DB->get_record('page', ['course' => $report['courseid']]);
         $this->assertStringContainsString('$WIKI_REFERENCE$/pages/deleted-page', $page->content);
         $this->assertStringNotContainsString('$CANVAS_COURSE_REFERENCE$/modules', $page->content);
-        $this->assertContains(get_string('warnunresolvedlinks', 'tool_canvasuplifter', 3), $report['warnings']);
+        $this->assertContains(get_string('warnunresolvedlinks', 'tool_courseuplift', 3), $report['warnings']);
     }
 
     /**

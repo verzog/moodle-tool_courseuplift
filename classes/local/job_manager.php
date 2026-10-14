@@ -14,12 +14,12 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <https://www.gnu.org/licenses/>.
 
-namespace tool_canvasuplifter\local;
+namespace tool_courseuplift\local;
 
 /**
- * Read/write the tool_canvasuplifter_jobs table.
+ * Read/write the tool_courseuplift_jobs table.
  *
- * @package    tool_canvasuplifter
+ * @package    tool_courseuplift
  * @copyright  2026 Vernon Spain
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -39,7 +39,7 @@ class job_manager {
     public const KIND_BUILD = 'build';
 
     /** Database table name. */
-    public const TABLE = 'tool_canvasuplifter_jobs';
+    public const TABLE = 'tool_courseuplift_jobs';
 
     /**
      * Insert a queued job row and return its id.

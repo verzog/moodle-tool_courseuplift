@@ -14,10 +14,10 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <https://www.gnu.org/licenses/>.
 
-namespace tool_canvasuplifter\local\build;
+namespace tool_courseuplift\local\build;
 
 use stdClass;
-use tool_canvasuplifter\local\model\item;
+use tool_courseuplift\local\model\item;
 
 /**
  * Creates a mod_label activity from a Canvas ContextModuleSubHeader item.
@@ -26,7 +26,7 @@ use tool_canvasuplifter\local\model\item;
  * (e.g. "Before Class"). They have no payload of their own — only a title — so
  * we mirror them as Moodle labels carrying the title as their introduction.
  *
- * @package    tool_canvasuplifter
+ * @package    tool_courseuplift
  * @copyright  2026 Vernon Spain
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */

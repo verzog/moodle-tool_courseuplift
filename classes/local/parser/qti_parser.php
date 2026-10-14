@@ -14,12 +14,12 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <https://www.gnu.org/licenses/>.
 
-namespace tool_canvasuplifter\local\parser;
+namespace tool_courseuplift\local\parser;
 
 use DOMDocument;
 use DOMElement;
 use DOMNode;
-use tool_canvasuplifter\local\model\qti_question;
+use tool_courseuplift\local\model\qti_question;
 
 /**
  * Parses a Canvas/Common Cartridge QTI 1.2 assessment into question models.
@@ -30,7 +30,7 @@ use tool_canvasuplifter\local\model\qti_question;
  * response_lid/render_choice, and its scoring in resprocessing. This class is
  * Moodle-free so it can be unit-tested directly from QTI strings.
  *
- * @package    tool_canvasuplifter
+ * @package    tool_courseuplift
  * @copyright  2026 Vernon Spain
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */

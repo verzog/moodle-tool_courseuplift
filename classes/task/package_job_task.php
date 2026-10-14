@@ -14,12 +14,12 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <https://www.gnu.org/licenses/>.
 
-namespace tool_canvasuplifter\task;
+namespace tool_courseuplift\task;
 
 use core\task\adhoc_task;
 use stdClass;
-use tool_canvasuplifter\local\ingest\url_fetcher;
-use tool_canvasuplifter\local\job_manager;
+use tool_courseuplift\local\ingest\url_fetcher;
+use tool_courseuplift\local\job_manager;
 
 /**
  * Shared base for the adhoc tasks that process a queued package job.
@@ -29,7 +29,7 @@ use tool_canvasuplifter\local\job_manager;
  * large fetch can't time out the upload page) and the result stored for reuse,
  * while an upload job just copies its already-stored file out to a temp path.
  *
- * @package    tool_canvasuplifter
+ * @package    tool_courseuplift
  * @copyright  2026 Vernon Spain
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -46,7 +46,7 @@ abstract class package_job_task extends adhoc_task {
      */
     protected function resolve_package(job_manager $jobs, stdClass $job): string {
         if (empty($job->fileid) && !empty($job->packageurl)) {
-            $jobs->set_progress((int) $job->id, 1, get_string('progressfetch', 'tool_canvasuplifter'));
+            $jobs->set_progress((int) $job->id, 1, get_string('progressfetch', 'tool_courseuplift'));
             $temppackage = (new url_fetcher())->fetch((string) $job->packageurl);
             $jobs->set_fileid((int) $job->id, $this->store_fetched_package($temppackage, $job));
             return $temppackage;
@@ -67,7 +67,7 @@ abstract class package_job_task extends adhoc_task {
         $fs = get_file_storage();
         $filerecord = (object) [
             'contextid' => \context_system::instance()->id,
-            'component' => 'tool_canvasuplifter',
+            'component' => 'tool_courseuplift',
             'filearea' => 'packages',
             'itemid' => (int) $job->userid,
             'filepath' => '/',
@@ -101,7 +101,7 @@ abstract class package_job_task extends adhoc_task {
         if (!$file) {
             throw new \RuntimeException("Stored file $fileid not found");
         }
-        $target = tempnam(make_request_directory(), 'canvasuplifter_');
+        $target = tempnam(make_request_directory(), 'courseuplift_');
         $file->copy_content_to($target);
         return $target;
     }

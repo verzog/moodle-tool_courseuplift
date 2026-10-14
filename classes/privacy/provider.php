@@ -14,7 +14,7 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <https://www.gnu.org/licenses/>.
 
-namespace tool_canvasuplifter\privacy;
+namespace tool_courseuplift\privacy;
 
 use context;
 use core_privacy\local\metadata\collection;
@@ -24,19 +24,19 @@ use core_privacy\local\request\contextlist;
 use core_privacy\local\request\transform;
 use core_privacy\local\request\userlist;
 use core_privacy\local\request\writer;
-use tool_canvasuplifter\chunkupload\form_element;
+use tool_courseuplift\chunkupload\form_element;
 
 /**
  * Privacy provider.
  *
  * The plugin stores two kinds of personal data: one row per build run in
- * {tool_canvasuplifter_jobs} (attributed to the user who started it, always in
+ * {tool_courseuplift_jobs} (attributed to the user who started it, always in
  * the system context), and a transient row per chunked upload in
- * {tool_canvasuplifter_chunks} (attributed to the uploading user and the
+ * {tool_courseuplift_chunks} (attributed to the uploading user and the
  * context the upload was started in, with the partial file on the filesystem
  * until the cleanup task removes it). Both are covered here.
  *
- * @package    tool_canvasuplifter
+ * @package    tool_courseuplift
  * @copyright  2026 Vernon Spain
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -51,22 +51,22 @@ class provider implements
      * @return collection The updated collection.
      */
     public static function get_metadata(collection $collection): collection {
-        $collection->add_database_table('tool_canvasuplifter_jobs', [
-            'userid' => 'privacy:metadata:tool_canvasuplifter_jobs:userid',
-            'status' => 'privacy:metadata:tool_canvasuplifter_jobs:status',
-            'categoryid' => 'privacy:metadata:tool_canvasuplifter_jobs:categoryid',
-            'packageurl' => 'privacy:metadata:tool_canvasuplifter_jobs:packageurl',
-            'courseid' => 'privacy:metadata:tool_canvasuplifter_jobs:courseid',
-            'errormsg' => 'privacy:metadata:tool_canvasuplifter_jobs:errormsg',
-            'timecreated' => 'privacy:metadata:tool_canvasuplifter_jobs:timecreated',
-            'timemodified' => 'privacy:metadata:tool_canvasuplifter_jobs:timemodified',
-        ], 'privacy:metadata:tool_canvasuplifter_jobs');
-        $collection->add_database_table('tool_canvasuplifter_chunks', [
-            'userid' => 'privacy:metadata:tool_canvasuplifter_chunks:userid',
-            'contextid' => 'privacy:metadata:tool_canvasuplifter_chunks:contextid',
-            'filename' => 'privacy:metadata:tool_canvasuplifter_chunks:filename',
-            'lastmodified' => 'privacy:metadata:tool_canvasuplifter_chunks:lastmodified',
-        ], 'privacy:metadata:tool_canvasuplifter_chunks');
+        $collection->add_database_table('tool_courseuplift_jobs', [
+            'userid' => 'privacy:metadata:tool_courseuplift_jobs:userid',
+            'status' => 'privacy:metadata:tool_courseuplift_jobs:status',
+            'categoryid' => 'privacy:metadata:tool_courseuplift_jobs:categoryid',
+            'packageurl' => 'privacy:metadata:tool_courseuplift_jobs:packageurl',
+            'courseid' => 'privacy:metadata:tool_courseuplift_jobs:courseid',
+            'errormsg' => 'privacy:metadata:tool_courseuplift_jobs:errormsg',
+            'timecreated' => 'privacy:metadata:tool_courseuplift_jobs:timecreated',
+            'timemodified' => 'privacy:metadata:tool_courseuplift_jobs:timemodified',
+        ], 'privacy:metadata:tool_courseuplift_jobs');
+        $collection->add_database_table('tool_courseuplift_chunks', [
+            'userid' => 'privacy:metadata:tool_courseuplift_chunks:userid',
+            'contextid' => 'privacy:metadata:tool_courseuplift_chunks:contextid',
+            'filename' => 'privacy:metadata:tool_courseuplift_chunks:filename',
+            'lastmodified' => 'privacy:metadata:tool_courseuplift_chunks:lastmodified',
+        ], 'privacy:metadata:tool_courseuplift_chunks');
         return $collection;
     }
 
@@ -83,13 +83,13 @@ class provider implements
         $contextlist = new contextlist();
         $contextlist->add_from_sql("SELECT DISTINCT c.id
                   FROM {context} c
-                  JOIN {tool_canvasuplifter_jobs} j ON j.userid = :userid
+                  JOIN {tool_courseuplift_jobs} j ON j.userid = :userid
                  WHERE c.contextlevel = :contextlevel", [
             'userid' => $userid,
             'contextlevel' => CONTEXT_SYSTEM,
         ]);
         $contextlist->add_from_sql("SELECT DISTINCT contextid
-                  FROM {tool_canvasuplifter_chunks}
+                  FROM {tool_courseuplift_chunks}
                  WHERE userid = :userid AND contextid IS NOT NULL", ['userid' => $userid]);
         return $contextlist;
     }
@@ -106,13 +106,13 @@ class provider implements
         // Chunked uploads are attributed to the context they were started in.
         $userlist->add_from_sql(
             'userid',
-            "SELECT userid FROM {tool_canvasuplifter_chunks} WHERE contextid = :contextid AND userid IS NOT NULL",
+            "SELECT userid FROM {tool_courseuplift_chunks} WHERE contextid = :contextid AND userid IS NOT NULL",
             ['contextid' => $context->id]
         );
 
         // Build jobs all live in the system context.
         if ($context instanceof \context_system) {
-            $userlist->add_from_sql('userid', "SELECT userid FROM {tool_canvasuplifter_jobs}", []);
+            $userlist->add_from_sql('userid', "SELECT userid FROM {tool_courseuplift_jobs}", []);
         }
     }
 
@@ -128,7 +128,7 @@ class provider implements
         foreach ($contextlist->get_contexts() as $context) {
             // Chunked uploads in this context.
             $records = $DB->get_records(
-                'tool_canvasuplifter_chunks',
+                'tool_courseuplift_chunks',
                 ['userid' => $user->id, 'contextid' => $context->id]
             );
             if ($records) {
@@ -142,7 +142,7 @@ class provider implements
                     ];
                 }
                 writer::with_context($context)->export_data(
-                    [get_string('privacy:chunkspath', 'tool_canvasuplifter')],
+                    [get_string('privacy:chunkspath', 'tool_courseuplift')],
                     (object) ['files' => $files]
                 );
             }
@@ -151,7 +151,7 @@ class provider implements
             if (!$context instanceof \context_system) {
                 continue;
             }
-            $jobs = $DB->get_records('tool_canvasuplifter_jobs', ['userid' => $user->id]);
+            $jobs = $DB->get_records('tool_courseuplift_jobs', ['userid' => $user->id]);
             if (!$jobs) {
                 continue;
             }
@@ -168,7 +168,7 @@ class provider implements
                 ];
             }
             writer::with_context($context)->export_data(
-                [get_string('privacy:jobspath', 'tool_canvasuplifter')],
+                [get_string('privacy:jobspath', 'tool_courseuplift')],
                 (object) ['jobs' => $data]
             );
         }
@@ -185,7 +185,7 @@ class provider implements
 
         // Chunked uploads started in this context (plus their on-disk files).
         $ids = $DB->get_fieldset_select(
-            'tool_canvasuplifter_chunks',
+            'tool_courseuplift_chunks',
             'id',
             'contextid = :contextid',
             ['contextid' => $context->id]
@@ -193,7 +193,7 @@ class provider implements
         self::delete_chunk_files($ids);
 
         if ($context instanceof \context_system) {
-            $DB->delete_records('tool_canvasuplifter_jobs');
+            $DB->delete_records('tool_courseuplift_jobs');
         }
     }
 
@@ -213,7 +213,7 @@ class provider implements
             [$insql, $params] = $DB->get_in_or_equal($contextids, SQL_PARAMS_NAMED);
             $params['userid'] = $user->id;
             $ids = $DB->get_fieldset_select(
-                'tool_canvasuplifter_chunks',
+                'tool_courseuplift_chunks',
                 'id',
                 "userid = :userid AND contextid $insql",
                 $params
@@ -224,7 +224,7 @@ class provider implements
         // Build jobs in the system context.
         foreach ($contextlist->get_contexts() as $context) {
             if ($context instanceof \context_system) {
-                $DB->delete_records('tool_canvasuplifter_jobs', ['userid' => $user->id]);
+                $DB->delete_records('tool_courseuplift_jobs', ['userid' => $user->id]);
             }
         }
     }
@@ -247,7 +247,7 @@ class provider implements
         [$insql, $params] = $DB->get_in_or_equal($userids, SQL_PARAMS_NAMED);
         $params['contextid'] = $context->id;
         $ids = $DB->get_fieldset_select(
-            'tool_canvasuplifter_chunks',
+            'tool_courseuplift_chunks',
             'id',
             "contextid = :contextid AND userid $insql",
             $params
@@ -257,7 +257,7 @@ class provider implements
         // Build jobs in the system context.
         if ($context instanceof \context_system) {
             [$jinsql, $jparams] = $DB->get_in_or_equal($userids, SQL_PARAMS_NAMED);
-            $DB->delete_records_select('tool_canvasuplifter_jobs', "userid $jinsql", $jparams);
+            $DB->delete_records_select('tool_courseuplift_jobs', "userid $jinsql", $jparams);
         }
     }
 

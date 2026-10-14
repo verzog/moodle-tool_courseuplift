@@ -14,12 +14,12 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <https://www.gnu.org/licenses/>.
 
-namespace tool_canvasuplifter\local\build;
+namespace tool_courseuplift\local\build;
 
-use tool_canvasuplifter\local\job_manager;
-use tool_canvasuplifter\local\model\course_model;
-use tool_canvasuplifter\local\model\item;
-use tool_canvasuplifter\local\parser\source_detector;
+use tool_courseuplift\local\job_manager;
+use tool_courseuplift\local\model\course_model;
+use tool_courseuplift\local\model\item;
+use tool_courseuplift\local\parser\source_detector;
 
 /**
  * Course builder: creates a Moodle course, its sections, and the activity types
@@ -27,7 +27,7 @@ use tool_canvasuplifter\local\parser\source_detector;
  * mod_qbank, mod_forum, mod_label and mod_lti). With the page-grouping option
  * set, consecutive pages are combined into a single mod_book or mod_lesson.
  *
- * @package    tool_canvasuplifter
+ * @package    tool_courseuplift
  * @copyright  2026 Vernon Spain
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -148,7 +148,7 @@ class course_builder {
         global $DB;
         $course = $DB->get_record('course', ['id' => $course->id], '*', MUST_EXIST);
 
-        $this->report_progress(5, get_string('progresscoursecreated', 'tool_canvasuplifter'));
+        $this->report_progress(5, get_string('progresscoursecreated', 'tool_courseuplift'));
 
         // Create one Moodle grade category per Canvas assignment group, so each
         // mod_assign we build can be moved into its matching category. Built
@@ -319,7 +319,7 @@ class course_builder {
         foreach ($coursemodel->orphans as $modelitem) {
             if ($this->is_syllabus($modelitem)) {
                 if ($modelitem->title === '') {
-                    $modelitem->title = get_string('syllabuspage', 'tool_canvasuplifter');
+                    $modelitem->title = get_string('syllabuspage', 'tool_courseuplift');
                 }
                 $cmid = $this->build_one($course, 0, $modelitem, $builders, $urlmap, $builtpagecmids, $skipreasons, false);
                 $this->tally($cmid, $modelitem->kind, $createdcounts, $skippedcounts);
@@ -343,7 +343,7 @@ class course_builder {
             }
             if ($needssection) {
                 $orphansection = $builtsections + 1;
-                $this->prepare_section($course, $orphansection, get_string('additionalresources', 'tool_canvasuplifter'));
+                $this->prepare_section($course, $orphansection, get_string('additionalresources', 'tool_courseuplift'));
             }
             // Unreferenced pages are never combined into a book or lesson, even with page
             // grouping on: consecutive pages in a module follow each other on purpose, but
@@ -478,18 +478,18 @@ class course_builder {
         // lead the build report with a clear message pointing at a Canvas CC re-export
         // rather than a bare "everything skipped" list.
         if ($coursemodel->source === source_detector::BLACKBOARD_NATIVE) {
-            $warnings[] = get_string('warnblackboardnative', 'tool_canvasuplifter');
+            $warnings[] = get_string('warnblackboardnative', 'tool_courseuplift');
         }
         if ($skippedtotal - $emptyassessments > 0) {
-            $warnings[] = get_string('warningskippedfornow', 'tool_canvasuplifter', $skippedtotal - $emptyassessments);
+            $warnings[] = get_string('warningskippedfornow', 'tool_courseuplift', $skippedtotal - $emptyassessments);
         }
         if ($emptyassessments > 0) {
-            $warnings[] = get_string('warnbuildemptyassessments', 'tool_canvasuplifter', $emptyassessments);
+            $warnings[] = get_string('warnbuildemptyassessments', 'tool_courseuplift', $emptyassessments);
         }
         if (($skippedcounts[item::KIND_UNKNOWN] ?? 0) > 0) {
             $warnings[] = get_string(
                 'warningunclassified',
-                'tool_canvasuplifter',
+                'tool_courseuplift',
                 $skippedcounts[item::KIND_UNKNOWN]
             );
         }
@@ -498,10 +498,10 @@ class course_builder {
         // knows the real content — and its native source — lives in a Moodle, not in this package.
         $ltibuilder = $builders[item::KIND_LTI] ?? null;
         if ($ltibuilder instanceof lti_builder && $ltibuilder->stackcount > 0) {
-            $warnings[] = get_string('notestackltidetected', 'tool_canvasuplifter', $ltibuilder->stackcount);
+            $warnings[] = get_string('notestackltidetected', 'tool_courseuplift', $ltibuilder->stackcount);
         }
         if ($ltibuilder instanceof lti_builder && $ltibuilder->moodlehostedcount > 0) {
-            $warnings[] = get_string('notemoodleltidetected', 'tool_canvasuplifter', $ltibuilder->moodlehostedcount);
+            $warnings[] = get_string('notemoodleltidetected', 'tool_courseuplift', $ltibuilder->moodlehostedcount);
         }
         // Canvas quiz/exam shells whose questions weren't in the package were
         // built as hidden placeholders; flag them so graders know to finish them.
@@ -509,7 +509,7 @@ class course_builder {
         if ($quizbuilder instanceof quiz_builder && $quizbuilder->placeholdercount > 0) {
             $warnings[] = get_string(
                 'warnquizplaceholders',
-                'tool_canvasuplifter',
+                'tool_courseuplift',
                 $quizbuilder->placeholdercount
             );
         }
@@ -517,7 +517,7 @@ class course_builder {
         // drawing random questions from the imported bank; note it so graders know
         // those quizzes select from a bank rather than carrying fixed questions.
         if ($quizbuilder instanceof quiz_builder && $quizbuilder->bankdrawcount > 0) {
-            $warnings[] = get_string('notequizbankdraw', 'tool_canvasuplifter', $quizbuilder->bankdrawcount);
+            $warnings[] = get_string('notequizbankdraw', 'tool_courseuplift', $quizbuilder->bankdrawcount);
         }
         // Quizzes short a bank group: those quiz_builder built (linked, or a runnable
         // quiz from an orphan bank) plus orphan bank-backed quizzes with no runnable
@@ -525,41 +525,41 @@ class course_builder {
         $bankincomplete = ($quizbuilder instanceof quiz_builder ? $quizbuilder->bankincompletecount : 0)
             + $orphanbankincomplete;
         if ($bankincomplete > 0) {
-            $warnings[] = get_string('warnquizbankincomplete', 'tool_canvasuplifter', $bankincomplete);
+            $warnings[] = get_string('warnquizbankincomplete', 'tool_courseuplift', $bankincomplete);
         }
         if ($gradelettercount > 0) {
-            $warnings[] = get_string('notegradeletters', 'tool_canvasuplifter', $gradelettercount);
+            $warnings[] = get_string('notegradeletters', 'tool_courseuplift', $gradelettercount);
         }
         if ($outcomecount > 0) {
-            $warnings[] = get_string('noteoutcomesimported', 'tool_canvasuplifter', $outcomecount);
+            $warnings[] = get_string('noteoutcomesimported', 'tool_courseuplift', $outcomecount);
         }
         if ($outcomebuilder->skippedcount > 0) {
-            $warnings[] = get_string('warnoutcomesskipped', 'tool_canvasuplifter', $outcomebuilder->skippedcount);
+            $warnings[] = get_string('warnoutcomesskipped', 'tool_courseuplift', $outcomebuilder->skippedcount);
         }
         if ($outcomebuilder->malformedfile) {
-            $warnings[] = get_string('warnoutcomesmalformed', 'tool_canvasuplifter');
+            $warnings[] = get_string('warnoutcomesmalformed', 'tool_courseuplift');
         }
         if ($eventcount > 0) {
-            $warnings[] = get_string('noteeventsimported', 'tool_canvasuplifter', $eventcount);
+            $warnings[] = get_string('noteeventsimported', 'tool_courseuplift', $eventcount);
         }
         if ($calendarbuilder->skippedcount > 0) {
-            $warnings[] = get_string('warneventsskipped', 'tool_canvasuplifter', $calendarbuilder->skippedcount);
+            $warnings[] = get_string('warneventsskipped', 'tool_courseuplift', $calendarbuilder->skippedcount);
         }
         if ($calendarbuilder->malformedfile) {
-            $warnings[] = get_string('warneventsmalformed', 'tool_canvasuplifter');
+            $warnings[] = get_string('warneventsmalformed', 'tool_courseuplift');
         }
         if ($gatedsections > 0) {
-            $warnings[] = get_string('notegatingimported', 'tool_canvasuplifter', $gatedsections);
+            $warnings[] = get_string('notegatingimported', 'tool_courseuplift', $gatedsections);
         }
         if ($completionbuilder->sitecompletiondisabled) {
-            $warnings[] = get_string('warngatingsitecompletion', 'tool_canvasuplifter');
+            $warnings[] = get_string('warngatingsitecompletion', 'tool_courseuplift');
         } else if ($completionbuilder->unresolvedprereqs > 0) {
-            $warnings[] = get_string('warngatingunresolved', 'tool_canvasuplifter', $completionbuilder->unresolvedprereqs);
+            $warnings[] = get_string('warngatingunresolved', 'tool_courseuplift', $completionbuilder->unresolvedprereqs);
         }
         if ($coursemodel->canvasboilerplatedropped > 0) {
             $warnings[] = get_string(
                 'notecanvasboilerplate',
-                'tool_canvasuplifter',
+                'tool_courseuplift',
                 $coursemodel->canvasboilerplatedropped
             );
         }
@@ -574,35 +574,35 @@ class course_builder {
         }
         $unlinkedrubrics = count(array_diff_key($coursemodel->rubrics, $linkedrubrics));
         if ($unlinkedrubrics > 0) {
-            $warnings[] = get_string('noterubricsunlinked', 'tool_canvasuplifter', $unlinkedrubrics);
+            $warnings[] = get_string('noterubricsunlinked', 'tool_courseuplift', $unlinkedrubrics);
         }
         // Embedded media the export referenced but did not ship (e.g. a stale
         // cross-course image) is left as-is rather than fabricated or dropped;
         // flag the count so an editor knows some inline assets need re-uploading.
         $unresolvedmedia = $this->mediareport->references();
         if (!empty($unresolvedmedia)) {
-            $warnings[] = get_string('warnunresolvedmedia', 'tool_canvasuplifter', count($unresolvedmedia));
+            $warnings[] = get_string('warnunresolvedmedia', 'tool_courseuplift', count($unresolvedmedia));
         }
         // Links to Canvas pages or items missing from the built course (absent from the export,
         // not imported, or a course page with no Moodle equivalent) keep their token and will not open.
         if ($this->linkrewriter->unresolvedinternal > 0) {
-            $warnings[] = get_string('warnunresolvedlinks', 'tool_canvasuplifter', $this->linkrewriter->unresolvedinternal);
+            $warnings[] = get_string('warnunresolvedlinks', 'tool_courseuplift', $this->linkrewriter->unresolvedinternal);
         }
         // Course-navigation external tools with no launch configuration in the
         // package can't be built, so flag them on the direct Build path too (the
         // analyse report raises the same key via conversion_report).
         if ($coursemodel->navtoolsunimported > 0) {
-            $warnings[] = get_string('warnreportnavtools', 'tool_canvasuplifter');
+            $warnings[] = get_string('warnreportnavtools', 'tool_courseuplift');
         }
         if ($extrashidden) {
-            $warnings[] = get_string('warnreportextrashidden', 'tool_canvasuplifter');
+            $warnings[] = get_string('warnreportextrashidden', 'tool_courseuplift');
         }
         // Assets the parser expected an activity to embed but which no activity actually
         // embedded (its owner was rejected at build time) were recovered as standalone
         // downloads rather than lost; note the count so an editor knows they landed in
         // "Additional resources" instead of inline.
         if ($recoveredassets > 0) {
-            $warnings[] = get_string('noterecoveredassets', 'tool_canvasuplifter', $recoveredassets);
+            $warnings[] = get_string('noterecoveredassets', 'tool_courseuplift', $recoveredassets);
         }
 
         return [
@@ -678,7 +678,7 @@ class course_builder {
             // lands, so a build with nothing to recover gains no empty section.
             if ($orphansection === 0) {
                 $orphansection = $builtsections + 1;
-                $this->prepare_section($course, $orphansection, get_string('additionalresources', 'tool_canvasuplifter'));
+                $this->prepare_section($course, $orphansection, get_string('additionalresources', 'tool_courseuplift'));
             }
             // Every embedded asset is a standalone file by construction (a page-embedded
             // asset keeps KIND_FILE; a dependency asset was relabelled KIND_UNKNOWN when
@@ -739,7 +739,7 @@ class course_builder {
             $cmid = $builder->build($course, $sectionnum, $modelitem);
         } catch (\Throwable $e) {
             if (!defined('PHPUNIT_TEST') || !PHPUNIT_TEST) {
-                mtrace('tool_canvasuplifter: ' . sprintf(
+                mtrace('tool_courseuplift: ' . sprintf(
                     'failed to build standalone quiz "%s": %s',
                     $modelitem->title,
                     $e->getMessage()
@@ -805,7 +805,7 @@ class course_builder {
     private function report_item_progress(int $processed, int $total, string $kind): void {
         $this->report_progress($this->item_percent($processed, $total), get_string(
             'progressitem',
-            'tool_canvasuplifter',
+            'tool_courseuplift',
             ['done' => $processed, 'total' => $total, 'kind' => $kind]
         ));
     }
@@ -876,7 +876,7 @@ class course_builder {
     /**
      * Whether a freshly built course module is one the completion pass can gate on: it is
      * visible and its module can track completion by view. Mirrors
-     * {@see \tool_canvasuplifter\local\build\completion_builder::gateable_cmids()} so a required
+     * {@see \tool_courseuplift\local\build\completion_builder::gateable_cmids()} so a required
      * item that built hidden (a Canvas-unpublished item, or an empty quiz kept as a hidden
      * placeholder) is recognised as non-gateable here — the completion pass would exclude it, so
      * its module's prerequisite must be reported unresolved rather than gated on a sibling alone.
@@ -988,7 +988,7 @@ class course_builder {
                 $result = $builder->build_group($course, $sectionnum, $groupname, $pages);
             } catch (\Throwable $e) {
                 if (!defined('PHPUNIT_TEST') || !PHPUNIT_TEST) {
-                    mtrace('tool_canvasuplifter: ' . sprintf(
+                    mtrace('tool_courseuplift: ' . sprintf(
                         'failed to build %s from "%s": %s',
                         $this->pagegrouping,
                         $groupname,
@@ -1229,7 +1229,7 @@ class course_builder {
                 $threw = true;
                 $msg = sprintf('failed to build %s "%s": %s', $modelitem->kind, $modelitem->title, $e->getMessage());
                 if (!defined('PHPUNIT_TEST') || !PHPUNIT_TEST) {
-                    mtrace('tool_canvasuplifter: ' . $msg);
+                    mtrace('tool_courseuplift: ' . $msg);
                 }
                 $skipreasons[] = $msg;
                 $cmid = null;
@@ -1752,15 +1752,15 @@ class course_builder {
         if (
             $source !== ''
             && $source !== source_detector::GENERIC
-            && get_string_manager()->string_exists($labelkey, 'tool_canvasuplifter')
+            && get_string_manager()->string_exists($labelkey, 'tool_courseuplift')
         ) {
             return get_string(
                 'defaultcoursenamesource',
-                'tool_canvasuplifter',
-                get_string($labelkey, 'tool_canvasuplifter')
+                'tool_courseuplift',
+                get_string($labelkey, 'tool_courseuplift')
             );
         }
-        return get_string('defaultcoursename', 'tool_canvasuplifter');
+        return get_string('defaultcoursename', 'tool_courseuplift');
     }
 
     /**
@@ -1960,12 +1960,12 @@ class course_builder {
             if (empty($levels)) {
                 $levels['NEWID' . (++$levelseq)] = [
                     'score' => 0,
-                    'definition' => get_string('confidence_none', 'tool_canvasuplifter'),
+                    'definition' => get_string('confidence_none', 'tool_courseuplift'),
                     'definitionformat' => FORMAT_HTML,
                 ];
                 $levels['NEWID' . (++$levelseq)] = [
                     'score' => (float) ($criterion['points'] ?? 0),
-                    'definition' => get_string('confidence_full', 'tool_canvasuplifter'),
+                    'definition' => get_string('confidence_full', 'tool_courseuplift'),
                     'definitionformat' => FORMAT_HTML,
                 ];
             }

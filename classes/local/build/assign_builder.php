@@ -14,11 +14,11 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <https://www.gnu.org/licenses/>.
 
-namespace tool_canvasuplifter\local\build;
+namespace tool_courseuplift\local\build;
 
 use stdClass;
-use tool_canvasuplifter\local\model\item;
-use tool_canvasuplifter\local\parser\assignment_settings;
+use tool_courseuplift\local\model\item;
+use tool_courseuplift\local\parser\assignment_settings;
 
 /**
  * Creates a mod_assign activity from a Canvas assignment resource.
@@ -31,7 +31,7 @@ use tool_canvasuplifter\local\parser\assignment_settings;
  *
  * Rubrics and advanced grading are intentionally not carried across.
  *
- * @package    tool_canvasuplifter
+ * @package    tool_courseuplift
  * @copyright  2026 Vernon Spain
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -80,7 +80,7 @@ class assign_builder {
         } else {
             if (!defined('PHPUNIT_TEST') || !PHPUNIT_TEST) {
                 mtrace(sprintf(
-                    'tool_canvasuplifter: assignment "%s" skipped — no assignment_settings.xml,'
+                    'tool_courseuplift: assignment "%s" skipped — no assignment_settings.xml,'
                     . ' inline CC 1.3 profile or assignment XML (files=%s)',
                     $modelitem->title,
                     implode(',', $modelitem->files)

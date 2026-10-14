@@ -19,20 +19,20 @@
  *
  * Folded in from local_chunkupload (2020 Justus Dieckmann WWU).
  *
- * @package    tool_canvasuplifter
+ * @package    tool_courseuplift
  * @copyright  2020 Justus Dieckmann WWU
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-namespace tool_canvasuplifter\task;
+namespace tool_courseuplift\task;
 
-use tool_canvasuplifter\chunkupload\form_element;
-use tool_canvasuplifter\chunkupload\state_type;
+use tool_courseuplift\chunkupload\form_element;
+use tool_courseuplift\chunkupload\state_type;
 
 /**
  * Cleanup task for stale chunked-upload tokens and files.
  *
- * @package    tool_canvasuplifter
+ * @package    tool_courseuplift
  * @copyright  2020 Justus Dieckmann WWU
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -43,7 +43,7 @@ class cleanup_chunks extends \core\task\scheduled_task {
      * @return string
      */
     public function get_name() {
-        return get_string('cleanup_task', 'tool_canvasuplifter');
+        return get_string('cleanup_task', 'tool_courseuplift');
     }
 
     /**
@@ -53,28 +53,28 @@ class cleanup_chunks extends \core\task\scheduled_task {
      */
     public function execute() {
         global $DB;
-        $config = get_config('tool_canvasuplifter');
+        $config = get_config('tool_courseuplift');
         $state0duration = $config->state0duration ?? 3600;
         $state1duration = $config->state1duration ?? 3600;
         $state2duration = $config->state2duration ?? 86400;
 
         // State UNUSED_TOKEN_GENERATED (0): only a row, no file on disk yet.
         $DB->delete_records_select(
-            'tool_canvasuplifter_chunks',
+            'tool_courseuplift_chunks',
             'state = :state AND lastmodified < :time',
             ['time' => time() - $state0duration, 'state' => state_type::UNUSED_TOKEN_GENERATED]
         );
 
         // State UPLOAD_STARTED (1): partial upload abandoned.
         $ids = $DB->get_fieldset_select(
-            'tool_canvasuplifter_chunks',
+            'tool_courseuplift_chunks',
             'id',
             'lastmodified < :time AND state = :state',
             ['time' => time() - $state1duration,
             'state' => state_type::UPLOAD_STARTED,
             ]
         );
-        $DB->delete_records_list('tool_canvasuplifter_chunks', 'id', $ids);
+        $DB->delete_records_list('tool_courseuplift_chunks', 'id', $ids);
         foreach ($ids as $id) {
             $path = form_element::get_path_for_id($id);
             if ($path !== null && file_exists($path)) {
@@ -84,14 +84,14 @@ class cleanup_chunks extends \core\task\scheduled_task {
 
         // State UPLOAD_COMPLETED (2): completed but never consumed.
         $ids = $DB->get_fieldset_select(
-            'tool_canvasuplifter_chunks',
+            'tool_courseuplift_chunks',
             'id',
             'lastmodified < :time AND state = :state',
             ['time' => time() - $state2duration,
             'state' => state_type::UPLOAD_COMPLETED,
             ]
         );
-        $DB->delete_records_list('tool_canvasuplifter_chunks', 'id', $ids);
+        $DB->delete_records_list('tool_courseuplift_chunks', 'id', $ids);
         foreach ($ids as $id) {
             $path = form_element::get_path_for_id($id);
             if ($path !== null && file_exists($path)) {

@@ -14,10 +14,10 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <https://www.gnu.org/licenses/>.
 
-namespace tool_canvasuplifter\local\build;
+namespace tool_courseuplift\local\build;
 
 use stdClass;
-use tool_canvasuplifter\local\model\item;
+use tool_courseuplift\local\model\item;
 
 /**
  * Builds one mod_lesson activity from a run of consecutive Canvas page items,
@@ -28,7 +28,7 @@ use tool_canvasuplifter\local\model\item;
  * build(course, sectionnum, item) signature. course_builder routes maximal runs
  * of pages here when the "combine pages" build option is set to "lesson".
  *
- * @package    tool_canvasuplifter
+ * @package    tool_courseuplift
  * @copyright  2026 Vernon Spain
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -96,7 +96,7 @@ class lesson_builder {
             'course' => $course->id,
             'section' => $sectionnum,
             'visible' => 1,
-            'name' => $name !== '' ? $name : get_string('defaultlessonname', 'tool_canvasuplifter'),
+            'name' => $name !== '' ? $name : get_string('defaultlessonname', 'tool_courseuplift'),
             'intro' => '',
             'introformat' => FORMAT_HTML,
             // The lesson_add_instance() handler reads mediafile as a file-manager

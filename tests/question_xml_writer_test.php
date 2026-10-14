@@ -14,20 +14,20 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <https://www.gnu.org/licenses/>.
 
-namespace tool_canvasuplifter;
+namespace tool_courseuplift;
 
-use tool_canvasuplifter\local\build\question_xml_writer;
-use tool_canvasuplifter\local\model\qti_question;
+use tool_courseuplift\local\build\question_xml_writer;
+use tool_courseuplift\local\model\qti_question;
 use PHPUnit\Framework\Attributes\CoversClass;
 
 /**
  * Tests for the Moodle question XML writer.
  *
- * @package    tool_canvasuplifter
+ * @package    tool_courseuplift
  * @copyright  2026 Vernon Spain
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-#[CoversClass(\tool_canvasuplifter\local\build\question_xml_writer::class)]
+#[CoversClass(\tool_courseuplift\local\build\question_xml_writer::class)]
 final class question_xml_writer_test extends \advanced_testcase {
     /**
      * Make a multiple-choice question model.
@@ -573,7 +573,7 @@ final class question_xml_writer_test extends \advanced_testcase {
         $q = $this->choice();
         $q->questiontext = '<p>See <img src="$IMS-CC-FILEBASE$/missing/fig.jpg"></p>';
 
-        $report = new \tool_canvasuplifter\local\build\media_report();
+        $report = new \tool_courseuplift\local\build\media_report();
         $imagedir = make_request_directory();
         $xml = (new question_xml_writer())->to_moodle_xml([$q], 'cat', $imagedir, $root, $report);
 

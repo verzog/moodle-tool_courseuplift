@@ -14,7 +14,7 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <https://www.gnu.org/licenses/>.
 
-namespace tool_canvasuplifter\local\build;
+namespace tool_courseuplift\local\build;
 
 /**
  * Rewrites and imports the sibling files of a folded lesson bundle.
@@ -29,7 +29,7 @@ namespace tool_canvasuplifter\local\build;
  * mod_lesson page when consecutive pages are combined — so the logic lives here
  * rather than being duplicated in each builder.
  *
- * @package    tool_canvasuplifter
+ * @package    tool_courseuplift
  * @copyright  2026 Vernon Spain
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */

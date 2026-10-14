@@ -14,12 +14,12 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <https://www.gnu.org/licenses/>.
 
-namespace tool_canvasuplifter;
+namespace tool_courseuplift;
 
-use tool_canvasuplifter\launcher;
-use tool_canvasuplifter\local\job_manager;
-use tool_canvasuplifter\task\analyse_package_task;
-use tool_canvasuplifter\task\build_course_task;
+use tool_courseuplift\launcher;
+use tool_courseuplift\local\job_manager;
+use tool_courseuplift\task\analyse_package_task;
+use tool_courseuplift\task\build_course_task;
 use PHPUnit\Framework\Attributes\CoversClass;
 
 /**
@@ -27,11 +27,11 @@ use PHPUnit\Framework\Attributes\CoversClass;
  * adhoc task with the expected custom data, for URL, stored-file and on-disk
  * package sources.
  *
- * @package    tool_canvasuplifter
+ * @package    tool_courseuplift
  * @copyright  2026 Vernon Spain
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-#[CoversClass(\tool_canvasuplifter\launcher::class)]
+#[CoversClass(\tool_courseuplift\launcher::class)]
 final class launcher_test extends \advanced_testcase {
     /**
      * Fetch the single queued adhoc task of a given class, failing if there is
@@ -114,7 +114,7 @@ final class launcher_test extends \advanced_testcase {
         // The stored file lives in this plugin's packages area, owned by the user,
         // and keeps the source basename.
         $stored = $DB->get_record('files', ['id' => $job->fileid]);
-        $this->assertSame('tool_canvasuplifter', $stored->component);
+        $this->assertSame('tool_courseuplift', $stored->component);
         $this->assertSame(launcher::PACKAGE_FILEAREA, $stored->filearea);
         $this->assertEquals($USER->id, $stored->itemid);
         $this->assertSame('History 101.imscc', $stored->filename);
@@ -406,7 +406,7 @@ final class launcher_test extends \advanced_testcase {
     }
 
     /**
-     * A tool_canvasuplifter package file owned by a different user is rejected:
+     * A tool_courseuplift package file owned by a different user is rejected:
      * it would analyse fine but the build-from-report handler only accepts a
      * file owned by the job user, so a successful analyse could never be built.
      *
@@ -421,7 +421,7 @@ final class launcher_test extends \advanced_testcase {
 
         $file = get_file_storage()->create_file_from_string([
             'contextid' => \context_system::instance()->id,
-            'component' => 'tool_canvasuplifter',
+            'component' => 'tool_courseuplift',
             'filearea' => launcher::PACKAGE_FILEAREA,
             'itemid' => (int) $other->id,
             'filepath' => '/',
@@ -526,7 +526,7 @@ final class launcher_test extends \advanced_testcase {
         // Count real package files only: the file API also stores directory
         // placeholder rows (filename '.') that delete() leaves behind.
         $select = "component = :c AND filearea = :a AND filename <> '.'";
-        $params = ['c' => 'tool_canvasuplifter', 'a' => launcher::PACKAGE_FILEAREA];
+        $params = ['c' => 'tool_courseuplift', 'a' => launcher::PACKAGE_FILEAREA];
         $before = $DB->count_records_select('files', $select, $params);
 
         try {

@@ -1,6 +1,6 @@
 # Repository guidance
 
-`tool_canvasuplifter` imports Canvas Common Cartridge (`.imscc`) exports into
+`tool_courseuplift` imports Canvas Common Cartridge (`.imscc`) exports into
 Moodle. This file orients automated contributors; see `README.md` for the
 user-facing overview and roadmap.
 
@@ -22,7 +22,7 @@ register it in `course_builder`'s `$builders` map + `BUILDS_NOW` + `KIND_TO_MOD`
 
 - `classes/chunkupload/` — the bundled chunked uploader (`form_element`,
   `state_type`) for the optional "Large package" upload field, folded in from the
-  former `local_chunkupload`. Backed by the `tool_canvasuplifter_chunks` table,
+  former `local_chunkupload`. Backed by the `tool_courseuplift_chunks` table,
   the `chunkupload_ajax.php` endpoint (one script, `action`=start/proceed/delete),
   the `amd/src/chunkupload.js` module and the `cleanup_chunks` scheduled task.
   After editing `amd/src/chunkupload.js`, rebuild `amd/build/` with `grunt amd`.

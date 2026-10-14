@@ -15,7 +15,7 @@
     along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 }}
 {{!
-    @template tool_canvasuplifter/chunkupload_filepicker
+    @template tool_courseuplift/chunkupload_filepicker
 
     Chunked-upload field for a large package. Folded in from
     local_chunkupload (2020 Justus Dieckmann WWU).
@@ -33,9 +33,9 @@
 }}
 <input type="hidden" name="{{elname}}" id="{{elid}}" value="{{value}}" class=""/>
 
-<div class="tool_canvasuplifter-chunkupload">
+<div class="tool_courseuplift-chunkupload">
     <span class="chunkupload-filesize">
-        {{#str}}maxsize, tool_canvasuplifter, {{filesize}}{{/str}}
+        {{#str}}maxsize, tool_courseuplift, {{filesize}}{{/str}}
     </span>
     <div class="custom-file">
         <input type="file" class="custom-file-input" id="{{elid}}_file">
@@ -43,7 +43,7 @@
             <span class="chunkupload-browse btn-secondary">{{#str}}browse, core_editor{{/str}}</span>
             <span class="chunkupload-left">
                 <span class="chunkupload-icon" {{^showicon}}hidden{{/showicon}}>
-                    {{#pix}}i/checked, core,{{#str}} uploaded, tool_canvasuplifter {{/str}}{{/pix}}
+                    {{#pix}}i/checked, core,{{#str}} uploaded, tool_courseuplift {{/str}}{{/pix}}
                 </span>
                 <span class="chunkupload-progress"></span>
                 <span class="chunkupload-filename">{{filenamestring}}</span>
@@ -51,7 +51,7 @@
             </span>
         </label>
         <span class="chunkupload-delete" {{^showdelete}}hidden{{/showdelete}}>
-            {{#pix}}i/delete, core,{{#str}} deletefile, tool_canvasuplifter {{/str}}{{/pix}}
+            {{#pix}}i/delete, core,{{#str}} deletefile, tool_courseuplift {{/str}}{{/pix}}
         </span>
     </div>
 </div>

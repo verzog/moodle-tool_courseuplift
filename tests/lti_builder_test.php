@@ -14,21 +14,21 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <https://www.gnu.org/licenses/>.
 
-namespace tool_canvasuplifter;
+namespace tool_courseuplift;
 
-use tool_canvasuplifter\local\build\lti_builder;
+use tool_courseuplift\local\build\lti_builder;
 use PHPUnit\Framework\Attributes\CoversMethod;
 use PHPUnit\Framework\Attributes\DataProvider;
 
 /**
  * Tests for reading the launch URL out of a Common Cartridge LTI link.
  *
- * @package    tool_canvasuplifter
+ * @package    tool_courseuplift
  * @copyright  2026 Vernon Spain
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-#[CoversMethod(\tool_canvasuplifter\local\build\lti_builder::class, 'parse_cartridge_xml')]
-#[CoversMethod(\tool_canvasuplifter\local\build\lti_builder::class, 'is_blank_html')]
+#[CoversMethod(\tool_courseuplift\local\build\lti_builder::class, 'parse_cartridge_xml')]
+#[CoversMethod(\tool_courseuplift\local\build\lti_builder::class, 'is_blank_html')]
 final class lti_builder_test extends \basic_testcase {
     /**
      * A plain cartridge yields its title, launch URL and custom parameters.

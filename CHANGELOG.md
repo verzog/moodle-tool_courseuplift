@@ -6,6 +6,11 @@ before 1.0.0 were unpublished `MATURITY_ALPHA` (`0.x`) development builds under 
 working name `tool_canvasuplifter`; 1.0.0 is the first `MATURITY_BETA` release and
 1.3.0 the first public one.
 
+## [Unreleased]
+
+- **Docs:** the bulk-migration how-to PDF now asks for Automate 1.4.2 or later, which looks
+  for CourseUplift alone.
+
 ## [1.3.0] - 2026-10-15
 
 - **New: Maximum simultaneous conversions** setting (*Site administration > Plugins > Admin

@@ -40,7 +40,7 @@ from reportlab.platypus import (HRFlowable, KeepTogether, PageBreak, Paragraph, 
                                 TableStyle)
 
 # What this edition of the guide covers: both plugins support Moodle 5.0-5.3 LTS from these releases.
-APPLIES_TO = 'CourseUplift 1.3.0+ and Automate 1.4.1+, on Moodle 5.0&#8211;5.3 LTS'
+APPLIES_TO = 'CourseUplift 1.3.0+ and Automate 1.4.2+, on Moodle 5.0&#8211;5.3 LTS'
 TITLE = 'Bulk Canvas to Moodle Migration'
 FOOTER_LEFT = 'tool_courseuplift &#183; tool_automate'
 
@@ -354,7 +354,7 @@ def cli_and_monitor():
             ('"Site is being upgraded"', 'A plugin install or upgrade is running through <i>Notifications</i>. Use '
                                          'the command-line upgrade in section 2 to avoid locking the site.'),
             ('Feature missing', 'Confirm both plugins are installed and <b>Allow bulk Canvas import</b> is ticked. '
-                                'Use Automate 1.4.1+ with CourseUplift 1.3.0+.'),
+                                'Use Automate 1.4.2+ with CourseUplift 1.3.0+.'),
         ]),
         Spacer(1, 6),
         HRFlowable(width='100%', thickness=0.5, color=LINE),

@@ -257,6 +257,8 @@ A printable, step-by-step walkthrough of this whole flow — enabling the
 feature, preparing packages, running a bulk import, and reviewing/building the
 staged jobs — is in
 [`docs/bulk-canvas-migration-howto.pdf`](docs/bulk-canvas-migration-howto.pdf).
+Maintainers rebuild it with `python3 tooling/build-howto-pdf.py` (needs
+ReportLab) after changing the bulk workflow.
 
 ### Integration API — `\tool_courseuplift\launcher`
 

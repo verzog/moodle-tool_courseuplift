@@ -5,6 +5,14 @@ loosely based on [Keep a Changelog](https://keepachangelog.com/). Releases
 before 1.0.0 were `MATURITY_ALPHA` (`0.x`); 1.0.0 is the first `MATURITY_BETA`
 release.
 
+## [Unreleased]
+
+- **Docs:** regenerated the bulk-migration how-to PDF for CourseUplift 1.3.0 and Automate 1.4.0:
+  the new name and capability, the *Maximum simultaneous conversions* setting, the
+  *Conversion jobs* page and printable error log, `cli/jobs.php`, and installing or upgrading
+  without locking the site. Its source is now `tooling/build-howto-pdf.py`, so it can be
+  rebuilt rather than hand-edited.
+
 ## [1.3.0] - 2026-10-15
 
 - **New: Maximum simultaneous conversions** setting (*Site administration > Plugins > Admin

@@ -3,9 +3,9 @@
 **A Canvas to Moodle Course Converter.** Imports Canvas LMS course exports (IMS Common
 Cartridge `.imscc`) into Moodle.
 
-> Formerly *Canvas Uplifter* (`tool_canvasuplifter`). The plugin was renamed in 1.0.0 so
-> its name doesn't use the Canvas trademark; see the CHANGELOG for what that means for a
-> site that installed it under the old name.
+> CourseUplift is an independent interoperability tool. "Canvas" is a trademark of
+> Instructure, Inc.; CourseUplift is not affiliated with, sponsored by or endorsed by
+> Instructure.
 
 > **Status: beta (1.0), Phases 0–8 complete.** This release can both *analyse* a
 > Canvas package (report what it contains and how cleanly each part maps to

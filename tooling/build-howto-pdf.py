@@ -354,9 +354,7 @@ def cli_and_monitor():
             ('"Site is being upgraded"', 'A plugin install or upgrade is running through <i>Notifications</i>. Use '
                                          'the command-line upgrade in section 2 to avoid locking the site.'),
             ('Feature missing', 'Confirm both plugins are installed and <b>Allow bulk Canvas import</b> is ticked. '
-                                'Automate 1.4.0+ works with CourseUplift 1.0.0+ (or the former Canvas Uplifter '
-                                '0.40.0+); the <i>Conversion jobs</i> page needs CourseUplift 1.2.0+ and the '
-                                'simultaneous-conversions limit 1.3.0+.'),
+                                'Use Automate 1.4.1+ with CourseUplift 1.3.0+.'),
         ]),
         Spacer(1, 6),
         HRFlowable(width='100%', thickness=0.5, color=LINE),

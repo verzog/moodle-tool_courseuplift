@@ -1,9 +1,10 @@
 # Changelog
 
-All notable changes to `tool_canvasuplifter` are documented here. The format is
-loosely based on [Keep a Changelog](https://keepachangelog.com/). Releases
-before 1.0.0 were `MATURITY_ALPHA` (`0.x`); 1.0.0 is the first `MATURITY_BETA`
-release.
+All notable changes to `tool_courseuplift` are documented here. The format is
+loosely based on [Keep a Changelog](https://keepachangelog.com/). Versions
+before 1.0.0 were unpublished `MATURITY_ALPHA` (`0.x`) development builds under the
+working name `tool_canvasuplifter`; 1.0.0 is the first `MATURITY_BETA` release and
+1.3.0 the first public one.
 
 ## [1.3.0] - 2026-10-15
 
@@ -58,13 +59,7 @@ non-Canvas Common Cartridge exports and an outcomes-heavy course.
   carried the old name changed with it: the namespace, database tables, the
   `tool/courseuplift:use` capability, settings, language strings, the JavaScript module
   and the install folder (`admin/tool/courseuplift`).
-  - **A site that installed Canvas Uplifter (`tool_canvasuplifter`)** sees this as a new
-    plugin. Install CourseUplift, give the new capability to the roles that had the old
-    one, re-enter any settings you changed, then uninstall Canvas Uplifter. Courses it
-    already built are ordinary Moodle courses and are not affected (their content keeps
-    its styling, because CourseUplift's stylesheet also matches the old wrapper class).
-    Staged analyses and job history from the old plugin are not carried across.
-  - Entries below this one describe releases made under the old name.
+  - Entries below this one describe development builds made under the working name.
 
 - **Plugin maturity is now beta** (`MATURITY_BETA`), ready to submit to the Moodle
   Plugins directory.

@@ -11,7 +11,8 @@ release.
   the new name and capability, the *Maximum simultaneous conversions* setting, the
   *Conversion jobs* page and printable error log, `cli/jobs.php`, and installing or upgrading
   without locking the site. Its source is now `tooling/build-howto-pdf.py`, so it can be
-  rebuilt rather than hand-edited.
+  rebuilt rather than hand-edited. It applies to Moodle 5.0–5.3 LTS now that Automate 1.4.1
+  supports 5.3.
 
 ## [1.3.0] - 2026-10-15
 

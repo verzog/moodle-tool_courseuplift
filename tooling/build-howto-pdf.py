@@ -39,8 +39,8 @@ from reportlab.lib.units import mm
 from reportlab.platypus import (HRFlowable, KeepTogether, PageBreak, Paragraph, Preformatted, SimpleDocTemplate, Spacer, Table,
                                 TableStyle)
 
-# What this edition of the guide covers. Automate's supported range is the narrower one.
-APPLIES_TO = 'CourseUplift 1.3.0+ and Automate 1.4.0+, on Moodle 5.0&#8211;5.2'
+# What this edition of the guide covers: both plugins support Moodle 5.0-5.3 LTS from these releases.
+APPLIES_TO = 'CourseUplift 1.3.0+ and Automate 1.4.1+, on Moodle 5.0&#8211;5.3 LTS'
 TITLE = 'Bulk Canvas to Moodle Migration'
 FOOTER_LEFT = 'tool_courseuplift &#183; tool_automate'
 

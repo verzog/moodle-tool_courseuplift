@@ -175,9 +175,9 @@ export function init(elementid, acceptedTypes, maxBytes, wwwroot, chunksize, bro
      * @return {Promise} Resolves once the upload finishes or fails terminally.
      */
     async function uploadFile(file) {
-        let confirmed = 0;      // Bytes the server has confirmed stored.
+        let confirmed = 0; // Bytes the server has confirmed stored.
         let retries = 0;
-        let started = false;    // A chunk for THIS file has been accepted by the server.
+        let started = false; // A chunk for THIS file has been accepted by the server.
         while (confirmed < file.size) {
             let start = confirmed;
             let end = Math.min(start + chunkSize, file.size);

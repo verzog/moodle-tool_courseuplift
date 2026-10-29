@@ -19,20 +19,12 @@ jobs:
   ci:
     uses: verzog/moodle-ci-workflows/.github/workflows/moodle-plugin-ci.yml@v1
     with:
-      # The plugin supports Moodle 5.0 to 5.3 LTS ($plugin->supported = [500, 503]): every PHP each branch supports,
-      # on PostgreSQL, MariaDB and MySQL. Moodle 5.2 and later dropped PHP 8.2. Moodle main is deliberately not
-      # tested: the plugin only declares support up to 5.3 LTS.
+      # The plugin supports Moodle 5.1 to 5.3 LTS ($plugin->supported = [501, 503]): every PHP each branch supports,
+      # on PostgreSQL, MariaDB and MySQL. Moodle 5.2 and later dropped PHP 8.2. MOODLE_500_STABLE is deliberately
+      # excluded: it is below the 5.1 baseline in version.php. Moodle main is the next version: the shared workflow
+      # reports it but lets it fail.
       matrix: >-
         [
-          {"moodle-branch": "MOODLE_500_STABLE", "php": "8.2", "database": "pgsql"},
-          {"moodle-branch": "MOODLE_500_STABLE", "php": "8.2", "database": "mariadb"},
-          {"moodle-branch": "MOODLE_500_STABLE", "php": "8.2", "database": "mysqli"},
-          {"moodle-branch": "MOODLE_500_STABLE", "php": "8.3", "database": "pgsql"},
-          {"moodle-branch": "MOODLE_500_STABLE", "php": "8.3", "database": "mariadb"},
-          {"moodle-branch": "MOODLE_500_STABLE", "php": "8.3", "database": "mysqli"},
-          {"moodle-branch": "MOODLE_500_STABLE", "php": "8.4", "database": "pgsql"},
-          {"moodle-branch": "MOODLE_500_STABLE", "php": "8.4", "database": "mariadb"},
-          {"moodle-branch": "MOODLE_500_STABLE", "php": "8.4", "database": "mysqli"},
           {"moodle-branch": "MOODLE_501_STABLE", "php": "8.2", "database": "pgsql"},
           {"moodle-branch": "MOODLE_501_STABLE", "php": "8.2", "database": "mariadb"},
           {"moodle-branch": "MOODLE_501_STABLE", "php": "8.2", "database": "mysqli"},
@@ -53,9 +45,10 @@ jobs:
           {"moodle-branch": "MOODLE_503_STABLE", "php": "8.3", "database": "mysqli"},
           {"moodle-branch": "MOODLE_503_STABLE", "php": "8.4", "database": "pgsql"},
           {"moodle-branch": "MOODLE_503_STABLE", "php": "8.4", "database": "mariadb"},
-          {"moodle-branch": "MOODLE_503_STABLE", "php": "8.4", "database": "mysqli"}
+          {"moodle-branch": "MOODLE_503_STABLE", "php": "8.4", "database": "mysqli"},
+          {"moodle-branch": "main", "php": "8.4", "database": "pgsql"}
         ]
       # The lowest supported branch, where amd/build is made.
-      grunt-branch: MOODLE_500_STABLE
+      grunt-branch: MOODLE_501_STABLE
       # The plugin has no Behat features.
       behat: false

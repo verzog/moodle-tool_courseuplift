@@ -8,10 +8,21 @@ working name `tool_canvasuplifter`; 1.0.0 is the first `MATURITY_BETA` release a
 
 ## [Unreleased]
 
+## [1.3.1] - 2026-10-29
+
 - **Moodle 5.1 is now the minimum.** The plugin supports Moodle 5.1 to 5.3 LTS; Moodle 5.0
   is no longer supported or tested. CI also reports on Moodle `main` (allowed to fail).
 - **Docs:** the bulk-migration how-to PDF now asks for Automate 1.4.2 or later, which looks
   for CourseUplift alone.
+- **Packaging: "Release zip" workflow.** A new `.github/workflows/release.yml` builds the
+  installable zip through the shared `moodle-ci-workflows` workflow when a GitHub release is
+  published, named `tool_courseuplift-<tag>.zip` with a `courseuplift/` root folder, so it
+  installs without renaming.
+- **Packaging:** added `.gitattributes` to normalise line endings to LF and keep
+  development-only files (`/.github`, `/tests`, `/.gitattributes`, `/.gitignore`) out of the
+  release and "Source code" zips.
+- **Fix:** corrected the Australian spelling of "categorisation" in a conversion-report
+  warning string.
 
 ## [1.3.0] - 2026-10-15
 

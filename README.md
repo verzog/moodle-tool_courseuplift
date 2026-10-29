@@ -41,7 +41,7 @@ landing pages it derives further API URLs from the fetched HTML. All of these
 requests go through Moodle's `\curl` wrapper, so they are subject to the site's
 **cURL security settings** at *Site administration > Security > HTTP security*.
 
-On the Moodle versions this plugin supports (5.0+), those settings are **secure
+On the Moodle versions this plugin supports (5.1+), those settings are **secure
 by default**: `curlsecurityblockedhosts` ships blocking loopback and private
 ranges (`127.0.0.0/8`, `10.0.0.0/8`, `172.16.0.0/12`, `192.168.0.0/16`),
 `localhost`, the cloud-metadata address (`169.254.169.254`) and IPv6 loopback

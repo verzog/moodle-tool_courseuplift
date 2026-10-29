@@ -354,7 +354,7 @@ $string['warnquizbankincomplete'] = '{$a} bank-backed quiz(zes) are missing part
 $string['warnquizplaceholders'] = '{$a} quiz(zes) were imported as hidden placeholders because Canvas '
     . 'did not export their questions (e.g. New Quizzes backed by an item bank). Their settings carried '
     . 'over; add questions and unhide them.';
-$string['warnreportcategorization'] = 'Some categorization questions use Canvas "all or nothing" scoring, but they '
+$string['warnreportcategorization'] = 'Some categorisation questions use Canvas "all or nothing" scoring, but they '
     . 'import as Moodle matching questions, which award partial credit per correct item; review those questions\' grading '
     . 'if exact score parity matters.';
 $string['warnreportduplicates'] = 'Some resources look like duplicate copies of other files in the package '

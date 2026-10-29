@@ -1,0 +1,10 @@
+# Normalise line endings to LF on checkout and in the repository, so Windows
+# checkouts do not introduce CRLF that fails the Moodle coding-style checks.
+* text=auto eol=lf
+
+# Leave development-only files out of release zips (git archive and GitHub's
+# "Source code" downloads), so a site gets only what the plugin needs.
+/.github export-ignore
+/tests export-ignore
+/.gitattributes export-ignore
+/.gitignore export-ignore

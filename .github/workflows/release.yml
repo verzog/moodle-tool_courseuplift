@@ -1,0 +1,15 @@
+name: Release zip
+
+# When a release is published, build an installable zip and attach it to the
+# release. The zip holds the plugin under a "courseuplift/" folder, which is the
+# name Moodle's "Install plugins" page expects, so no renaming is needed.
+on:
+  release:
+    types: [published]
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    uses: verzog/moodle-ci-workflows/.github/workflows/release-zip.yml@v1

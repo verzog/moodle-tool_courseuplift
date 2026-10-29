@@ -74,8 +74,8 @@ includes or calls the other's code — so each stays a separate work.
 
 ## Requirements
 
-- Moodle 5.0 to 5.3 LTS (question banks are `mod_qbank` activity modules from 5.0).
-- PHP 8.2, 8.3 or 8.4 (Moodle 5.0's minimum is 8.2, and 5.2 onwards needs 8.3+; the
+- Moodle 5.1 to 5.3 LTS (it relies on question banks being `mod_qbank` activity modules, as they are from 5.0).
+- PHP 8.2, 8.3 or 8.4 (Moodle 5.1's minimum is 8.2, and 5.2 onwards needs 8.3+; the
   `sodium` extension is required by Moodle)
 
 ## Install
@@ -462,7 +462,7 @@ Plugins directory.
 ## Releasing (maintainers)
 
 The GitHub Actions workflow (`.github/workflows/moodle-ci.yml`) runs
-`moodle-plugin-ci` across every supported Moodle branch (5.0–5.3 LTS) on the PHP
+`moodle-plugin-ci` across every supported Moodle branch (5.1–5.3 LTS, plus Moodle `main`, allowed to fail) on the PHP
 versions each supports (8.2–8.4; 8.3+ from 5.2), against PostgreSQL 17, MariaDB
 11.4 and MySQL 8.4. The
 **blocking** checks are PHP lint, `phpcs` (the Moodle Code Checker), PHPDoc,

@@ -13,12 +13,12 @@
 #   tooling/local-ci.sh --reinstall     # force a clean Moodle reinstall, then all checks
 #   MOODLE_BRANCH=MOODLE_502_STABLE tooling/local-ci.sh   # pick a branch
 #
-# Env overrides: MOODLE_BRANCH (default MOODLE_500_STABLE), WORKSPACE, PGPORT.
+# Env overrides: MOODLE_BRANCH (default MOODLE_501_STABLE, the lowest supported branch), WORKSPACE, PGPORT.
 set -euo pipefail
 
 PLUGIN_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 WORKSPACE="${WORKSPACE:-$HOME/.moodle-plugin-ci}"
-MOODLE_BRANCH="${MOODLE_BRANCH:-MOODLE_500_STABLE}"
+MOODLE_BRANCH="${MOODLE_BRANCH:-MOODLE_501_STABLE}"
 PGPORT="${PGPORT:-5432}"
 PGUSER="postgres"
 PGPASS="postgres"
@@ -45,10 +45,10 @@ db_up() {
 }
 
 # Lowest PostgreSQL major version the chosen Moodle branch installs on: 5.3
-# (main, and MOODLE_503_STABLE onwards) needs 17+; 5.0-5.2 accept what CI runs.
+# (main, and MOODLE_503_STABLE onwards) needs 17+; 5.1 and 5.2 accept what CI runs.
 min_pg_major() {
   case "$MOODLE_BRANCH" in
-    MOODLE_500_STABLE|MOODLE_501_STABLE|MOODLE_502_STABLE) echo 0 ;;
+    MOODLE_501_STABLE|MOODLE_502_STABLE) echo 0 ;;
     *) echo 17 ;;
   esac
 }
@@ -173,14 +173,25 @@ install_moodle() {
         --db-user="$PGUSER" --db-pass="$PGPASS" )
 }
 
+# Moodle's docroot: from Moodle 5.1 the code (admin/tool included) lives under public/.
+docroot() {
+  if [ -d "$WORKSPACE/moodle/public" ]; then
+    echo "$WORKSPACE/moodle/public"
+  else
+    echo "$WORKSPACE/moodle"
+  fi
+}
+
 # Keep the installed copy of the plugin in sync with the working tree so a
 # code-only change can be retested without a full reinstall.
 sync_plugin() {
-  local dest="$WORKSPACE/moodle/admin/tool/courseuplift"
   [ -d "$WORKSPACE/moodle" ] || return 0
+  local dest
+  dest="$(docroot)/admin/tool/courseuplift"
   # A workspace provisioned before the rename to CourseUplift still holds the plugin
   # under its old name; remove it so Moodle sees one clean copy of the plugin.
-  local legacy="$WORKSPACE/moodle/admin/tool/canvasuplifter"
+  local legacy
+  legacy="$(docroot)/admin/tool/canvasuplifter"
   if [ -e "$legacy" ] || [ -L "$legacy" ]; then
     log "Removing the pre-rename copy at admin/tool/canvasuplifter."
     rm -rf "$legacy"
@@ -199,7 +210,7 @@ sync_plugin() {
 # version or schema changes.
 reinit_phpunit() {
   log "Re-initialising the PHPUnit environment."
-  ( cd "$WORKSPACE/moodle" && php admin/tool/phpunit/cli/init.php >/dev/null ) || true
+  ( cd "$WORKSPACE/moodle" && php "$(docroot)/admin/tool/phpunit/cli/init.php" >/dev/null ) || true
 }
 
 run_step() {

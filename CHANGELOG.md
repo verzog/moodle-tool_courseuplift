@@ -8,6 +8,8 @@ working name `tool_canvasuplifter`; 1.0.0 is the first `MATURITY_BETA` release a
 
 ## [Unreleased]
 
+- **Moodle 5.1 is now the minimum.** The plugin supports Moodle 5.1 to 5.3 LTS; Moodle 5.0
+  is no longer supported or tested. CI also reports on Moodle `main` (allowed to fail).
 - **Docs:** the bulk-migration how-to PDF now asks for Automate 1.4.2 or later, which looks
   for CourseUplift alone.
 

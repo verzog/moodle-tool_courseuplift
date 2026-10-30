@@ -128,8 +128,7 @@ if ($print) {
         ),
         'tool_courseuplift-noprint mt-3'
     );
-    $PAGE->requires->js_amd_inline("document.querySelector('.tool_courseuplift-printbutton')"
-        . ".addEventListener('click', () => window.print());");
+    $PAGE->requires->js_call_amd('tool_courseuplift/printbutton', 'init', ['.tool_courseuplift-printbutton']);
     echo $OUTPUT->footer();
     exit;
 }

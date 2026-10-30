@@ -69,12 +69,17 @@ $string['detectedsource'] = 'Detected source: {$a}';
 $string['errorbadmanifestxml'] = 'The imsmanifest.xml file could not be parsed as XML.';
 $string['errorbadurl'] = 'The download URL must start with http:// or https://.';
 $string['errorbothsources'] = 'Provide just one package source, not several.';
+$string['errorchunklengthmismatch'] = 'Filechunk is not as long as it should be.';
 $string['errorchunktoolarge'] = 'The server rejected an upload chunk as too large. Ask an administrator to lower the '
     . '"Chunk size (MB)" setting, then upload the package again.';
+$string['errorchunktoolong'] = 'Chunk is longer than specified length';
+$string['errorcontextnotfound'] = 'Context for that id not found.';
 $string['errordownloadfailed'] = 'The Canvas package could not be downloaded from that URL.';
 $string['errordownloadjspage'] = 'That page builds its download links with JavaScript (a DSpace repository), so the file link is not in the page we receive, and the repository\'s API did not return a Common Cartridge file. Open the page in your browser, then copy the direct file link under "Files" (it looks like .../bitstreams/<id>/download) and paste that here.';
 $string['errordownloadnopackage'] = 'That URL did not return a Common Cartridge package. If it is a repository landing page, link directly to the .imscc download.';
 $string['errordownloadtoobig'] = 'The downloaded file is larger than the site upload limit.';
+$string['erroremptylength'] = 'Must not be empty!';
+$string['errorfiletoolong'] = 'File is too long';
 $string['errorjobnotfound'] = 'That build job no longer exists.';
 $string['errorlog'] = 'Printable error log';
 $string['errorlogback'] = 'Back to conversion jobs';
@@ -84,12 +89,17 @@ $string['errorloggenerated'] = 'Generated {$a->date} on {$a->site}, for jobs cha
 $string['errorlogheading'] = 'Conversion error log';
 $string['errorlognone'] = 'No errors or warnings for these jobs.';
 $string['errorlogprint'] = 'Print';
+$string['errormissingend'] = 'Param end is missing';
+$string['errormissingid'] = 'Parameter id is missing.';
+$string['errormissingstart'] = 'Param start is missing';
 $string['errornomanifest'] = 'No imsmanifest.xml was found, so this is not a valid Canvas package.';
 $string['errornosource'] = 'Provide a Canvas export file or a download URL.';
 $string['errornotzip'] = 'That file could not be opened as a Common Cartridge (zip) package.';
 $string['errorpackagetoolarge'] = 'That package is too large to extract safely (it expands past the allowed size or file count).';
+$string['errorunknownaction'] = 'Unknown action.';
 $string['erroruploadfailed'] = 'The upload could not be completed after several attempts. Check your connection and try '
     . 'uploading the package again.';
+$string['errorwronguser'] = 'Request was made by a different user!';
 $string['eventsheading'] = 'Calendar events';
 $string['eventsmalformed'] = 'The events.xml file is present but could not be read (it appears truncated or malformed), '
     . 'so its calendar events will not be imported.';

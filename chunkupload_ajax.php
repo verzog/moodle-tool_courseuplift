@@ -47,7 +47,7 @@ $senderror = function (string $message): void {
 if (!$id) {
     $PAGE->set_context(context_system::instance());
     echo $OUTPUT->header();
-    $senderror('Parameter id is missing.');
+    $senderror(get_string('errormissingid', 'tool_courseuplift'));
 }
 
 $record = $DB->get_record('tool_courseuplift_chunks', ['id' => $id]);
@@ -61,7 +61,7 @@ $context = context::instance_by_id($record->contextid, IGNORE_MISSING);
 if (!$context) {
     $PAGE->set_context(context_system::instance());
     echo $OUTPUT->header();
-    $senderror('Context for that id not found.');
+    $senderror(get_string('errorcontextnotfound', 'tool_courseuplift'));
 }
 
 $PAGE->set_context($context);
@@ -69,7 +69,7 @@ echo $OUTPUT->header();
 require_login();
 
 if ($USER->id != $record->userid) {
-    $senderror('Request was made by a different user!');
+    $senderror(get_string('errorwronguser', 'tool_courseuplift'));
 }
 
 // The session lock is deliberately held for the rest of the request: it
@@ -84,25 +84,25 @@ switch ($action) {
         $filename = optional_param('filename', null, PARAM_FILE);
 
         if ($length == 0) {
-            $senderror('Must not be empty!');
+            $senderror(get_string('erroremptylength', 'tool_courseuplift'));
         }
         if ($start === null) {
-            $senderror('Param start is missing');
+            $senderror(get_string('errormissingstart', 'tool_courseuplift'));
         }
         if ($end === null) {
-            $senderror('Param end is missing');
+            $senderror(get_string('errormissingend', 'tool_courseuplift'));
         }
         if ($record->maxlength != -1 && $length > $record->maxlength) {
-            $senderror('File is too long');
+            $senderror(get_string('errorfiletoolong', 'tool_courseuplift'));
         }
         if ($end > $length) {
-            $senderror('Chunk is longer than specified length');
+            $senderror(get_string('errorchunktoolong', 'tool_courseuplift'));
         }
 
         $path = form_element::get_path_for_id($id);
         $content = file_get_contents('php://input', false, null, 0, $end);
         if (strlen($content) != $end) {
-            $senderror('Filechunk is not as long as it should be.');
+            $senderror(get_string('errorchunklengthmismatch', 'tool_courseuplift'));
         }
 
         if (!file_exists($dirpath = form_element::get_base_folder())) {
@@ -123,10 +123,10 @@ switch ($action) {
         $end = optional_param('end', null, PARAM_INT);
 
         if ($start === null) {
-            $senderror('Param start is missing');
+            $senderror(get_string('errormissingstart', 'tool_courseuplift'));
         }
         if ($end === null) {
-            $senderror('Param end is missing');
+            $senderror(get_string('errormissingend', 'tool_courseuplift'));
         }
         // Reject a malformed or replayed range from the token's stored state
         // alone, before buffering the request body.
@@ -167,7 +167,7 @@ switch ($action) {
         die(json_encode((object) ($progress ?? ['error' => get_string('tokenexpired', 'tool_courseuplift')])));
 
     default:
-        $senderror('Unknown action.');
+        $senderror(get_string('errorunknownaction', 'tool_courseuplift'));
 }
 
 die(json_encode(new stdClass()));

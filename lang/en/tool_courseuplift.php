@@ -32,16 +32,12 @@ $string['buildcourse'] = 'Build course';
 $string['buildsnow_later'] = 'Later phase';
 $string['buildsnow_no'] = 'No';
 $string['buildsnow_yes'] = 'Yes';
-$string['buildsnowsummary'] = '{$a->now} items will be built into the course now; '
-    . '{$a->later} are reported for a later phase and will be skipped.';
+$string['buildsnowsummary'] = '{$a->now} items will be built into the course now; {$a->later} are reported for a later phase and will be skipped.';
 $string['buildsnowsummarynotbuilt'] = '{$a} contain no questions (empty Canvas quizzes) and will not be created.';
 $string['buildstatusheading'] = 'Build status';
-$string['builtcoursesummary'] = 'Built {$a->created} of {$a->itemcount} content items across '
-    . '{$a->sectioncount} sections ({$a->skipped} skipped).';
-$string['chosenbuildoptions'] = 'Page grouping (fixed when the package was analysed) — combine consecutive '
-    . 'pages: {$a->grouping}.';
-$string['chunkuploadactive'] = 'For a very large package, use the optional "Large package (chunked upload)" '
-    . 'field below — it uploads in chunks and isn\'t limited by this server\'s PHP upload size.';
+$string['builtcoursesummary'] = 'Built {$a->created} of {$a->itemcount} content items across {$a->sectioncount} sections ({$a->skipped} skipped).';
+$string['chosenbuildoptions'] = 'Page grouping (fixed when the package was analysed) — combine consecutive pages: {$a->grouping}.';
+$string['chunkuploadactive'] = 'For a very large package, use the optional "Large package (chunked upload)" field below — it uploads in chunks and isn\'t limited by this server\'s PHP upload size.';
 $string['cleanup_task'] = 'Clean up stale chunked uploads';
 $string['colbuildsnow'] = 'Builds now';
 $string['colconfidence'] = 'Mapping';
@@ -70,8 +66,7 @@ $string['errorbadmanifestxml'] = 'The imsmanifest.xml file could not be parsed a
 $string['errorbadurl'] = 'The download URL must start with http:// or https://.';
 $string['errorbothsources'] = 'Provide just one package source, not several.';
 $string['errorchunklengthmismatch'] = 'Filechunk is not as long as it should be.';
-$string['errorchunktoolarge'] = 'The server rejected an upload chunk as too large. Ask an administrator to lower the '
-    . '"Chunk size (MB)" setting, then upload the package again.';
+$string['errorchunktoolarge'] = 'The server rejected an upload chunk as too large. Ask an administrator to lower the "Chunk size (MB)" setting, then upload the package again.';
 $string['errorchunktoolong'] = 'Chunk is longer than specified length';
 $string['errorcontextnotfound'] = 'Context for that id not found.';
 $string['errordownloadfailed'] = 'The Canvas package could not be downloaded from that URL.';
@@ -97,14 +92,11 @@ $string['errornosource'] = 'Provide a Canvas export file or a download URL.';
 $string['errornotzip'] = 'That file could not be opened as a Common Cartridge (zip) package.';
 $string['errorpackagetoolarge'] = 'That package is too large to extract safely (it expands past the allowed size or file count).';
 $string['errorunknownaction'] = 'Unknown action.';
-$string['erroruploadfailed'] = 'The upload could not be completed after several attempts. Check your connection and try '
-    . 'uploading the package again.';
+$string['erroruploadfailed'] = 'The upload could not be completed after several attempts. Check your connection and try uploading the package again.';
 $string['errorwronguser'] = 'Request was made by a different user!';
 $string['eventsheading'] = 'Calendar events';
-$string['eventsmalformed'] = 'The events.xml file is present but could not be read (it appears truncated or malformed), '
-    . 'so its calendar events will not be imported.';
-$string['eventssummary'] = '{$a->total} Canvas calendar event(s) found; {$a->importable} will import as course '
-    . 'calendar events, {$a->skipped} skipped (no usable start time).';
+$string['eventsmalformed'] = 'The events.xml file is present but could not be read (it appears truncated or malformed), so its calendar events will not be imported.';
+$string['eventssummary'] = '{$a->total} Canvas calendar event(s) found; {$a->importable} will import as course calendar events, {$a->skipped} skipped (no usable start time).';
 $string['eventuntitled'] = 'Untitled event';
 $string['extraquizzesbuilt'] = 'Also built {$a} runnable quiz(zes) from standalone question banks (in "Additional resources").';
 $string['itemcount'] = 'Content items';
@@ -139,15 +131,11 @@ $string['jobstotalskipped'] = 'Items skipped';
 $string['jobstotalwarnings'] = 'Warnings';
 $string['kind_analyse'] = 'Analyse';
 $string['kind_build'] = 'Build';
-$string['largefilerepositoryhint'] = 'For a large package file, choose "Large file" in the file picker above: '
-    . 'it uploads the file in chunks and resumes if the upload is interrupted.';
+$string['largefilerepositoryhint'] = 'For a large package file, choose "Large file" in the file picker above: it uploads the file in chunks and resumes if the upload is interrupted.';
 $string['lti_placeholder_note'] = 'Imported as a hidden placeholder from a Canvas LTI link. Configure or replace the external tool (set the consumer key and shared secret, or pick a preconfigured tool) and unhide the activity before students use it.';
 $string['matrixcolsupported'] = 'Converts';
 $string['matrixcoltype'] = 'Question type';
-$string['matrixexplain'] = '{$a->supported} of {$a->total} questions will convert. '
-    . 'Questions of a supported type that are missing data Moodle needs (for example a single-option '
-    . 'question we could not complete) are listed by type; types we cannot map are listed by their '
-    . 'Canvas profile. Both are skipped.';
+$string['matrixexplain'] = '{$a->supported} of {$a->total} questions will convert. Questions of a supported type that are missing data Moodle needs (for example a single-option question we could not complete) are listed by type; types we cannot map are listed by their Canvas profile. Both are skipped.';
 $string['matrixheading'] = 'Question-type matrix';
 $string['matrixskippedfrom'] = 'from {$a}';
 $string['matrixsupported_incomplete'] = 'Skipped (incomplete)';
@@ -155,72 +143,45 @@ $string['matrixsupported_no'] = 'Skipped';
 $string['matrixsupported_yes'] = 'Yes';
 $string['maxsize'] = 'Maximum file size: {$a}';
 $string['note_assessment_empty'] = 'Contains no questions (an empty Canvas quiz) and nothing links to it, so it is not created.';
-$string['note_assessment_placeholder'] = 'Contains no questions (its only item-bank draws take none), so the '
-    . '"Also build a quiz" option creates it as a hidden placeholder quiz; no question bank is created.';
+$string['note_assessment_placeholder'] = 'Contains no questions (its only item-bank draws take none), so the "Also build a quiz" option creates it as a hidden placeholder quiz; no question bank is created.';
 $string['note_assignment'] = 'Name, instructions, due dates and Canvas rubrics (including per-rating long descriptions) convert. CC 1.3 IMS assignment-profile packages from non-Canvas exporters are also recognised. Outcome links do not carry across.';
 $string['note_discussion'] = 'Discussion topics become forums with the prompt as the opening post; Canvas does not export the replies, so existing threads do not carry across.';
 $string['note_file'] = 'Files convert directly to file resources.';
-$string['note_file_obsolete'] = 'Imported as a file, but this is a Flash (.swf) resource that modern '
-    . 'browsers no longer play, so it will not function.';
+$string['note_file_obsolete'] = 'Imported as a file, but this is a Flash (.swf) resource that modern browsers no longer play, so it will not function.';
 $string['note_lti'] = 'Imported as a hidden placeholder; the admin must reconfigure the consumer key and shared secret (or pick a preconfigured tool) and unhide the activity before students use it.';
-$string['note_page'] = 'Pages convert, including embedded images and internal links to other '
-    . 'pages, files and URLs. Links to content types that are not built yet are left unchanged.';
-$string['note_page_grouped_book'] = 'Combined with their neighbouring pages into a single book (mod_book), '
-    . 'one chapter per page, because you chose to combine consecutive pages.';
-$string['note_page_grouped_lesson'] = 'Combined with their neighbouring pages into a single lesson (mod_lesson), '
-    . 'one page per page, because you chose to combine consecutive pages.';
+$string['note_page'] = 'Pages convert, including embedded images and internal links to other pages, files and URLs. Links to content types that are not built yet are left unchanged.';
+$string['note_page_grouped_book'] = 'Combined with their neighbouring pages into a single book (mod_book), one chapter per page, because you chose to combine consecutive pages.';
+$string['note_page_grouped_lesson'] = 'Combined with their neighbouring pages into a single lesson (mod_lesson), one page per page, because you chose to combine consecutive pages.';
 $string['note_questionbank'] = 'Imported as question bank (mod_qbank) activities.';
-$string['note_quiz'] = 'Becomes a Moodle quiz; the Canvas time limit, attempts, scoring, availability dates, '
-    . 'navigation and password carry over, and questions convert where the QTI question type is supported.';
+$string['note_quiz'] = 'Becomes a Moodle quiz; the Canvas time limit, attempts, scoring, availability dates, navigation and password carry over, and questions convert where the QTI question type is supported.';
 $string['note_subheader'] = 'Canvas module subheaders become Moodle labels with the heading as the body.';
 $string['note_unknown'] = 'Resource type not recognised; these are skipped.';
 $string['note_url'] = 'External links convert directly.';
-$string['notecanvasboilerplate'] = 'Dropped {$a} Canvas platform item(s) with no Moodle equivalent (help-guide '
-    . 'links to Canvas\'s documentation, and leftover ANGEL migration objects).';
+$string['notecanvasboilerplate'] = 'Dropped {$a} Canvas platform item(s) with no Moodle equivalent (help-guide links to Canvas\'s documentation, and leftover ANGEL migration objects).';
 $string['noteeventsimported'] = 'Imported {$a} Canvas calendar event(s) as course calendar events.';
-$string['notegatingimported'] = 'Applied Canvas module prerequisites to {$a} section(s) as "Restrict access" rules, with '
-    . 'activity completion enabled on the required activities. Course completion has been turned on.';
-$string['notegradeletters'] = 'Imported {$a} letter-grade boundaries from the Canvas grading scheme as this '
-    . 'course\'s grade letters.';
-$string['notemoodleltidetected'] = 'Detected {$a} external tool link(s) that appear to launch Moodle-hosted content '
-    . 'over LTI (e.g. an activity published from another Moodle). They import as hidden tool placeholders; the real '
-    . 'content — and its native source — lives in that Moodle, not in this package.';
-$string['noteoutcomesimported'] = 'Imported {$a} Canvas learning outcome(s) as course grade outcomes, each with a '
-    . 'scale built from its mastery ratings. Outcomes stay hidden until the site\'s "Enable outcomes" advanced '
-    . 'setting is turned on.';
-$string['notequizbankdraw'] = 'Populated {$a} New Quiz(zes) by drawing random questions from their Canvas item '
-    . 'bank(s); each such quiz selects its questions from the imported bank rather than carrying a fixed set.';
-$string['noterecoveredassets'] = 'Imported {$a} embedded asset(s) as standalone downloads in "Additional resources": '
-    . 'the activity each was meant to be embedded in could not be built, so the asset was kept as a file rather than lost.';
-$string['noterubricsunlinked'] = 'Found {$a} rubric(s) in the package not linked to any activity, so they could '
-    . 'not be imported; recreate them on the relevant activities if needed.';
-$string['notestackltidetected'] = 'Detected {$a} external tool link(s) that appear to deliver Moodle STACK questions '
-    . 'over LTI. They import as hidden tool placeholders — the package cannot carry the STACK question source, so the '
-    . 'native questions remain in the Moodle that hosts them.';
+$string['notegatingimported'] = 'Applied Canvas module prerequisites to {$a} section(s) as "Restrict access" rules, with activity completion enabled on the required activities. Course completion has been turned on.';
+$string['notegradeletters'] = 'Imported {$a} letter-grade boundaries from the Canvas grading scheme as this course\'s grade letters.';
+$string['notemoodleltidetected'] = 'Detected {$a} external tool link(s) that appear to launch Moodle-hosted content over LTI (e.g. an activity published from another Moodle). They import as hidden tool placeholders; the real content — and its native source — lives in that Moodle, not in this package.';
+$string['noteoutcomesimported'] = 'Imported {$a} Canvas learning outcome(s) as course grade outcomes, each with a scale built from its mastery ratings. Outcomes stay hidden until the site\'s "Enable outcomes" advanced setting is turned on.';
+$string['notequizbankdraw'] = 'Populated {$a} New Quiz(zes) by drawing random questions from their Canvas item bank(s); each such quiz selects its questions from the imported bank rather than carrying a fixed set.';
+$string['noterecoveredassets'] = 'Imported {$a} embedded asset(s) as standalone downloads in "Additional resources": the activity each was meant to be embedded in could not be built, so the asset was kept as a file rather than lost.';
+$string['noterubricsunlinked'] = 'Found {$a} rubric(s) in the package not linked to any activity, so they could not be imported; recreate them on the relevant activities if needed.';
+$string['notestackltidetected'] = 'Detected {$a} external tool link(s) that appear to deliver Moodle STACK questions over LTI. They import as hidden tool placeholders — the package cannot carry the STACK question source, so the native questions remain in the Moodle that hosts them.';
 $string['nowarnings'] = 'No warnings. The package looks straightforward to convert.';
 $string['openbuiltcourse'] = 'Open the built course';
-$string['orphansexplain'] = 'These resources are in the package but are not linked from any module. '
-    . 'Each is still imported, so nothing is lost; the "Placed in" column shows where each one goes in the course.';
+$string['orphansexplain'] = 'These resources are in the package but are not linked from any module. Each is still imported, so nothing is lost; the "Placed in" column shows where each one goes in the course.';
 $string['orphansexplainnone'] = 'The exception is an empty Canvas quiz marked "Not created": it has no questions to import.';
 $string['orphansheading'] = 'Unreferenced resources';
 $string['outcomesheading'] = 'Learning outcomes';
-$string['outcomesmalformed'] = 'The learning_outcomes.xml file is present but could not be read (it appears truncated '
-    . 'or malformed), so no outcomes can be imported from it. Re-export the package if the outcomes matter.';
-$string['outcomessummary'] = '{$a->total} Canvas learning outcome(s) found; {$a->importable} will import as course '
-    . 'grade outcomes and {$a->skipped} will be skipped (their ratings do not form a usable scale). Imported '
-    . 'outcomes stay hidden until the site\'s "Enable outcomes" advanced setting is turned on.';
+$string['outcomesmalformed'] = 'The learning_outcomes.xml file is present but could not be read (it appears truncated or malformed), so no outcomes can be imported from it. Re-export the package if the outcomes matter.';
+$string['outcomessummary'] = '{$a->total} Canvas learning outcome(s) found; {$a->importable} will import as course grade outcomes and {$a->skipped} will be skipped (their ratings do not form a usable scale). Imported outcomes stay hidden until the site\'s "Enable outcomes" advanced setting is turned on.';
 $string['outcomeuntitled'] = 'Untitled outcome';
 $string['packagefile'] = 'Canvas export (.imscc)';
-$string['packagefile_help'] = 'Upload a course exported from Canvas as a Common Cartridge file. '
-    . 'Analyse-only inspects the file; Build course creates a new Moodle course.';
+$string['packagefile_help'] = 'Upload a course exported from Canvas as a Common Cartridge file. Analyse-only inspects the file; Build course creates a new Moodle course.';
 $string['packagelargefile'] = 'Large package (chunked upload)';
-$string['packagelargefile_help'] = 'Optional. For a package larger than this server\'s upload limit, '
-    . 'use this field instead of the file picker above — it uploads the file in small chunks, so PHP\'s '
-    . 'per-request upload size doesn\'t apply. Leave it empty to use the file picker or a download URL.';
+$string['packagelargefile_help'] = 'Optional. For a package larger than this server\'s upload limit, use this field instead of the file picker above — it uploads the file in small chunks, so PHP\'s per-request upload size doesn\'t apply. Leave it empty to use the file picker or a download URL.';
 $string['packageurl'] = 'Download URL';
-$string['packageurl_help'] = 'Alternatively, paste an HTTPS link to a Canvas .imscc file '
-    . '(for example a signed S3 link or a direct download URL). The site upload limit applies. '
-    . 'Note: signed CloudFront / S3 URLs are often IP-pinned and will fail when fetched server-side.';
+$string['packageurl_help'] = 'Alternatively, paste an HTTPS link to a Canvas .imscc file (for example a signed S3 link or a direct download URL). The site upload limit applies. Note: signed CloudFront / S3 URLs are often IP-pinned and will fail when fetched server-side.';
 $string['pagegrouping'] = 'Combine consecutive pages';
 $string['pagegrouping_book'] = 'Into a book (mod_book)';
 $string['pagegrouping_help'] = 'Canvas wiki pages normally build as one Page activity (mod_page) each, which can leave a long run of separate pages. Choose Book or Lesson to combine each run of two or more consecutive pages into a single activity — one book chapter or lesson page per Canvas page — named after its section. A lone page between other activities stays a Page. Links between the combined pages are rewritten to point at the right chapter/page. Choose this before analysing and the report reflects it, showing those pages building into a book or lesson.';
@@ -256,11 +217,9 @@ $string['progressextract'] = 'Extracting package…';
 $string['progressfetch'] = 'Downloading package…';
 $string['progressitem'] = 'Built {$a->done} of {$a->total} items ({$a->kind})…';
 $string['progressparse'] = 'Parsing manifest…';
-$string['qtype_canvaserror'] = 'Canvas conversion error (Canvas could not convert this question when it was imported '
-    . 'into Canvas, so the export holds only a placeholder)';
+$string['qtype_canvaserror'] = 'Canvas conversion error (Canvas could not convert this question when it was imported into Canvas, so the export holds only a placeholder)';
 $string['qtype_essay'] = 'Essay';
-$string['qtype_matching_answer_too_long'] = 'Matching with an answer over 255 characters (Moodle cannot store it, '
-    . 'and the answers could not be swapped with the prompts)';
+$string['qtype_matching_answer_too_long'] = 'Matching with an answer over 255 characters (Moodle cannot store it, and the answers could not be swapped with the prompts)';
 $string['qtype_multianswer'] = 'Multiple response';
 $string['qtype_multichoice'] = 'Multiple choice';
 $string['qtype_omitted'] = 'Question body not present in the package';
@@ -270,32 +229,18 @@ $string['qtype_truefalse'] = 'True/false';
 $string['quizbankname'] = 'Imported question bank';
 $string['quizfrombank'] = 'Also build a runnable quiz from each standalone question bank';
 $string['quizfrombank_help'] = 'Standalone assessments (not linked anywhere in the Canvas course) import as reusable question banks. Tick this to also create a runnable quiz from each one, placed in the "Additional resources" section. Quizzes linked within the course are always built as quizzes regardless of this setting.';
-$string['quizplaceholderintro'] = '<div class="alert alert-warning">This quiz was imported from Canvas '
-    . '<strong>without its questions</strong>. Canvas exported the quiz settings but not the questions — '
-    . 'usually because they live in a New Quizzes item bank that the Common Cartridge export leaves out. '
-    . 'Add the questions here, then make this activity visible to students. To recover the originals, '
-    . 're-export from Canvas with item banks included, or convert the New Quiz to a Classic Quiz first.</div>';
-$string['readytobuildexplain'] = 'The package has been analysed and is held ready. '
-    . 'Choose a category and click Build course to create the course in Moodle.';
+$string['quizplaceholderintro'] = '<div class="alert alert-warning">This quiz was imported from Canvas <strong>without its questions</strong>. Canvas exported the quiz settings but not the questions — usually because they live in a New Quizzes item bank that the Common Cartridge export leaves out. Add the questions here, then make this activity visible to students. To recover the originals, re-export from Canvas with item banks included, or convert the New Quiz to a Classic Quiz first.</div>';
+$string['readytobuildexplain'] = 'The package has been analysed and is held ready. Choose a category and click Build course to create the course in Moodle.';
 $string['readytobuildheading'] = 'Build this course';
 $string['reportheading'] = 'Conversion report';
 $string['sectioncount'] = 'Sections';
 $string['sectionitemscount'] = '{$a->title} ({$a->count} items)';
 $string['setting:chunksize'] = 'Chunk size (MB)';
-$string['setting:chunksize_desc'] = 'Size of each chunk sent to the server when uploading a large package, in megabytes. '
-    . 'Lower this if large uploads fail — some web servers, reverse proxies and firewalls reject large request bodies.';
+$string['setting:chunksize_desc'] = 'Size of each chunk sent to the server when uploading a large package, in megabytes. Lower this if large uploads fail — some web servers, reverse proxies and firewalls reject large request bodies.';
 $string['setting:ltimoodlepatterns'] = 'Moodle/STACK LTI link patterns';
-$string['setting:ltimoodlepatterns_desc'] = 'Extra patterns for recognising external tool links that launch '
-    . 'Moodle-hosted content (such as STACK questions delivered over LTI), so the conversion report can flag them. '
-    . 'One pattern per line, matched case-insensitively against the launch URL, title and custom parameters. '
-    . 'Prefix a line with "stack:" or "moodle:" to set how it is reported (default "moodle"); e.g. '
-    . '"stack:stackassessment.example.edu" or "moodle:/enrol/lti/". Links whose URL already points at a Moodle '
-    . 'enrol_lti or mod/lti endpoint, or that mention "stack", are detected without any configuration here.';
+$string['setting:ltimoodlepatterns_desc'] = 'Extra patterns for recognising external tool links that launch Moodle-hosted content (such as STACK questions delivered over LTI), so the conversion report can flag them. One pattern per line, matched case-insensitively against the launch URL, title and custom parameters. Prefix a line with "stack:" or "moodle:" to set how it is reported (default "moodle"); e.g. "stack:stackassessment.example.edu" or "moodle:/enrol/lti/". Links whose URL already points at a Moodle enrol_lti or mod/lti endpoint, or that mention "stack", are detected without any configuration here.';
 $string['setting:maxconcurrent'] = 'Maximum simultaneous conversions';
-$string['setting:maxconcurrent_desc'] = 'How many conversion jobs of each type (analyse, build) may run at the same time. '
-    . 'Lower values leave more of the site\'s background task capacity for other work, such as sending notifications, '
-    . 'during a bulk import; higher values finish a large batch sooner on a server with spare capacity. Jobs beyond the '
-    . 'limit wait in the queue and start as others finish.';
+$string['setting:maxconcurrent_desc'] = 'How many conversion jobs of each type (analyse, build) may run at the same time. Lower values leave more of the site\'s background task capacity for other work, such as sending notifications, during a bulk import; higher values finish a large batch sooner on a server with spare capacity. Jobs beyond the limit wait in the queue and start as others finish.';
 $string['setting:state0duration'] = 'Keep unused upload tokens for';
 $string['setting:state0duration_desc'] = 'How long an upload token that was generated but never used is kept before the cleanup task removes it.';
 $string['setting:state1duration'] = 'Keep unfinished uploads for';
@@ -303,10 +248,7 @@ $string['setting:state1duration_desc'] = 'How long a partially uploaded file is 
 $string['setting:state2duration'] = 'Keep completed uploads for';
 $string['setting:state2duration_desc'] = 'How long a completed upload that was never consumed is kept before the cleanup task removes it.';
 $string['setting:transferstall'] = 'Stall a package download after';
-$string['setting:transferstall_desc'] = 'A URL import of a large package is aborted only when it goes '
-    . 'this long without any bytes arriving (below one kilobyte per second). Do not confuse this with the '
-    . 'total time the download is allowed to take — a big, slow-but-progressing package is fine. Bounded '
-    . 'between 30 seconds and one hour.';
+$string['setting:transferstall_desc'] = 'A URL import of a large package is aborted only when it goes this long without any bytes arriving (below one kilobyte per second). Do not confuse this with the total time the download is allowed to take — a big, slow-but-progressing package is fine. Bounded between 30 seconds and one hour.';
 $string['settings'] = 'Chunked upload settings';
 $string['severity_error'] = 'Error';
 $string['severity_warning'] = 'Warning';
@@ -324,74 +266,41 @@ $string['status_queued'] = 'Queued';
 $string['status_running'] = 'Running';
 $string['syllabuspage'] = 'Syllabus';
 $string['targetcategory'] = 'Target course category';
-$string['targetcategory_help'] = 'The new course will be created in this category. '
-    . 'You need the "create courses" capability in the chosen category.';
+$string['targetcategory_help'] = 'The new course will be created in this category. You need the "create courses" capability in the chosen category.';
 $string['taskanalyse'] = 'Analyse Canvas package';
 $string['taskbuild'] = 'Build course from Canvas package';
 $string['tokenexpired'] = 'The upload token has expired. Try refreshing the page to receive a new one.';
-$string['trustedsourcewarning'] = 'Only import Common Cartridge packages from a source you trust. '
-    . 'Imported page and description HTML is stored and shown as authored (Moodle does not re-clean it), '
-    . 'so a package from an untrusted source could contain active content that runs for anyone viewing the course.';
+$string['trustedsourcewarning'] = 'Only import Common Cartridge packages from a source you trust. Imported page and description HTML is stored and shown as authored (Moodle does not re-clean it), so a package from an untrusted source could contain active content that runs for anyone viewing the course.';
 $string['unknownheading'] = 'Unclassified resource types (debug)';
 $string['unresolvedmediaheading'] = 'Missing embedded assets';
 $string['unresolvedmediatruncated'] = '... and {$a} more not listed here.';
 $string['untitledsection'] = 'Untitled section';
 $string['uploaded'] = 'File uploaded';
 $string['uploadnotfinished'] = 'Upload did not finish!';
-$string['warnblackboardnative'] = 'This looks like a Blackboard Learn native export rather than a Common Cartridge '
-    . 'package, so most of its content — Blackboard\'s proprietary resources — cannot be imported (any Common Cartridge '
-    . 'items it does contain are still imported). To bring the whole course across, export it from Blackboard as Common '
-    . 'Cartridge (IMSCC) and import that package instead.';
+$string['warnblackboardnative'] = 'This looks like a Blackboard Learn native export rather than a Common Cartridge package, so most of its content — Blackboard\'s proprietary resources — cannot be imported (any Common Cartridge items it does contain are still imported). To bring the whole course across, export it from Blackboard as Common Cartridge (IMSCC) and import that package instead.';
 $string['warnbuildemptyassessments'] = 'Unlinked Canvas quizzes not created because they contain no questions: {$a}.';
 $string['warneventsmalformed'] = 'The Canvas calendar events file could not be read, so its events were not imported.';
 $string['warneventsskipped'] = 'Skipped {$a} Canvas calendar event(s) that carried no usable start time.';
-$string['warngatingsitecompletion'] = 'Canvas module prerequisites were not applied because completion tracking is '
-    . 'disabled site-wide. Ask an administrator to enable "Enable completion tracking" (Advanced features), then set up '
-    . 'the "Restrict access" rules, or re-import.';
-$string['warngatingunresolved'] = 'Could not apply {$a} Canvas module prerequisite(s): the required module had no built, '
-    . 'visible activity to gate on. Set up any needed "Restrict access" rules by hand.';
+$string['warngatingsitecompletion'] = 'Canvas module prerequisites were not applied because completion tracking is disabled site-wide. Ask an administrator to enable "Enable completion tracking" (Advanced features), then set up the "Restrict access" rules, or re-import.';
+$string['warngatingunresolved'] = 'Could not apply {$a} Canvas module prerequisite(s): the required module had no built, visible activity to gate on. Set up any needed "Restrict access" rules by hand.';
 $string['warningsheading'] = 'Notes and warnings';
 $string['warningskippedfornow'] = '{$a} content items were not created (their content type is not yet supported by the builder).';
 $string['warningunclassified'] = '{$a} unclassified resources will be skipped.';
-$string['warnoutcomesmalformed'] = 'The package\'s learning_outcomes.xml could not be read (it appears truncated or '
-    . 'malformed), so no learning outcomes were imported from it. Re-export the package if the outcomes matter.';
-$string['warnoutcomesskipped'] = 'Skipped {$a} Canvas learning outcome(s) whose mastery ratings did not form a '
-    . 'usable scale (Moodle scales need at least two distinct rating labels); recreate those outcomes by hand '
-    . 'if needed.';
-$string['warnquizbankincomplete'] = '{$a} bank-backed quiz(zes) are missing part of their questions because a '
-    . 'referenced Canvas item bank was not in the package (or held fewer questions than the quiz asked for); '
-    . 'review those quizzes and add the missing questions.';
-$string['warnquizplaceholders'] = '{$a} quiz(zes) were imported as hidden placeholders because Canvas '
-    . 'did not export their questions (e.g. New Quizzes backed by an item bank). Their settings carried '
-    . 'over; add questions and unhide them.';
-$string['warnreportcategorization'] = 'Some categorisation questions use Canvas "all or nothing" scoring, but they '
-    . 'import as Moodle matching questions, which award partial credit per correct item; review those questions\' grading '
-    . 'if exact score parity matters.';
-$string['warnreportduplicates'] = 'Some resources look like duplicate copies of other files in the package '
-    . '(for example "name (2)" or "name-1"); all are imported, so review the resource list for repeats.';
-$string['warnreportemptyassessments'] = 'Some unlinked Canvas quizzes contain no questions. They will not be created; '
-    . 'add questions in Canvas and re-export if they are needed.';
-$string['warnreportextrashidden'] = 'This Canvas course hid its Pages menu, so students could only reach content '
-    . 'through modules. The "Additional resources" section, which collects content no module links to, is therefore '
-    . 'hidden from students; show it in Moodle if they should see it.';
+$string['warnoutcomesmalformed'] = 'The package\'s learning_outcomes.xml could not be read (it appears truncated or malformed), so no learning outcomes were imported from it. Re-export the package if the outcomes matter.';
+$string['warnoutcomesskipped'] = 'Skipped {$a} Canvas learning outcome(s) whose mastery ratings did not form a usable scale (Moodle scales need at least two distinct rating labels); recreate those outcomes by hand if needed.';
+$string['warnquizbankincomplete'] = '{$a} bank-backed quiz(zes) are missing part of their questions because a referenced Canvas item bank was not in the package (or held fewer questions than the quiz asked for); review those quizzes and add the missing questions.';
+$string['warnquizplaceholders'] = '{$a} quiz(zes) were imported as hidden placeholders because Canvas did not export their questions (e.g. New Quizzes backed by an item bank). Their settings carried over; add questions and unhide them.';
+$string['warnreportcategorization'] = 'Some categorisation questions use Canvas "all or nothing" scoring, but they import as Moodle matching questions, which award partial credit per correct item; review those questions\' grading if exact score parity matters.';
+$string['warnreportduplicates'] = 'Some resources look like duplicate copies of other files in the package (for example "name (2)" or "name-1"); all are imported, so review the resource list for repeats.';
+$string['warnreportemptyassessments'] = 'Some unlinked Canvas quizzes contain no questions. They will not be created; add questions in Canvas and re-export if they are needed.';
+$string['warnreportextrashidden'] = 'This Canvas course hid its Pages menu, so students could only reach content through modules. The "Additional resources" section, which collects content no module links to, is therefore hidden from students; show it in Moodle if they should see it.';
 $string['warnreportlti'] = 'External (LTI) tools need their keys reconfigured by hand after import.';
-$string['warnreportmoodlelti'] = 'Some external (LTI) tool links appear to launch Moodle-hosted content (e.g. an activity '
-    . 'published from another Moodle). They import as tool placeholders; the real content — and its native source — '
-    . 'lives in that Moodle, not in this package.';
-$string['warnreportnavtools'] = 'This Canvas course had external tools in its course navigation that carry no launch '
-    . 'configuration in the package, so they could not be imported; add them by hand in Moodle if the course needs them.';
-$string['warnreportobsolete'] = 'Some resources are Flash (.swf) or other obsolete formats that modern browsers '
-    . 'no longer play; they are imported but will not function.';
+$string['warnreportmoodlelti'] = 'Some external (LTI) tool links appear to launch Moodle-hosted content (e.g. an activity published from another Moodle). They import as tool placeholders; the real content — and its native source — lives in that Moodle, not in this package.';
+$string['warnreportnavtools'] = 'This Canvas course had external tools in its course navigation that carry no launch configuration in the package, so they could not be imported; add them by hand in Moodle if the course needs them.';
+$string['warnreportobsolete'] = 'Some resources are Flash (.swf) or other obsolete formats that modern browsers no longer play; they are imported but will not function.';
 $string['warnreportquiz'] = 'Quiz questions depend on type support; check the question-type matrix.';
 $string['warnreportquizfrombank'] = 'Some assessments are not linked anywhere in the course, so they import as reusable question banks only. To also create a runnable quiz from each, tick "Also build a runnable quiz from each standalone question bank" before building.';
-$string['warnreportstacklti'] = 'Some external (LTI) tool links appear to deliver Moodle STACK questions. They import as '
-    . 'tool placeholders — this package cannot carry the STACK question source, so the native questions remain in the '
-    . 'Moodle that hosts them.';
+$string['warnreportstacklti'] = 'Some external (LTI) tool links appear to deliver Moodle STACK questions. They import as tool placeholders — this package cannot carry the STACK question source, so the native questions remain in the Moodle that hosts them.';
 $string['warnreportunclassified'] = 'Some resources could not be classified and will be skipped.';
-$string['warnunresolvedlinks'] = '{$a} link(s) in page or activity content point to Canvas pages or items that are '
-    . 'not in the built course (for example a page missing from the export, an item that was not imported, or a '
-    . 'Canvas page with no Moodle equivalent), so they were left as-is and will not open. Search the course for '
-    . '"WIKI_REFERENCE" or "CANVAS_" to find and fix them.';
-$string['warnunresolvedmedia'] = '{$a} embedded asset(s) referenced in page or activity content are not present in '
-    . 'the package (for example a stale cross-course image copied from another course), so those references were '
-    . 'left as-is and will show as broken. See the list below and re-upload the files if the content needs them.';
+$string['warnunresolvedlinks'] = '{$a} link(s) in page or activity content point to Canvas pages or items that are not in the built course (for example a page missing from the export, an item that was not imported, or a Canvas page with no Moodle equivalent), so they were left as-is and will not open. Search the course for "WIKI_REFERENCE" or "CANVAS_" to find and fix them.';
+$string['warnunresolvedmedia'] = '{$a} embedded asset(s) referenced in page or activity content are not present in the package (for example a stale cross-course image copied from another course), so those references were left as-is and will show as broken. See the list below and re-upload the files if the content needs them.';
